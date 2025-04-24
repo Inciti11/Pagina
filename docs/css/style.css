@@ -2,7 +2,7 @@
 @font-face {
     font-family: 'NewYorkFont'; /* Nombre que usaremos en el CSS */
     /* Ruta ajustada para reflejar que style.css está en la carpeta css/ */
-    src: url('../assets/Font/NewYork PERSONAL USE.otf') format('opentype'); /* Ajustado a '../assets/...' */
+    src: url('../assets/Font/DREAM\ GLORY.ttf') format('opentype'); /* Ajustado a '../assets/...' */
     font-weight: normal; /* O el peso correspondiente al archivo */
     font-style: normal; /* O el estilo correspondiente */
     font-display: swap; /* Mejora la carga percibida */
@@ -10,9 +10,9 @@
   
   /* --- Variables y Estilos Globales --- */
   :root {
-      --primary-color: #013f33;
-      --secondary-color: #28b098;
-      --tertiary-color: #008d76;
+      --primary-color: #bfa08f;
+      --secondary-color: #bfa08f;
+      --tertiary-color: #bfa08f;
       --accent-color: #b38b59;
       --light-bg: #f4f8f7;
       --white-color: #ffffff;
@@ -156,8 +156,8 @@
   }
   #main-header .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
   .logo { display: inline-flex; align-items: center; text-decoration: none; }
-  .logo img { display: block; height: 50px; width: auto; max-width: 100%; transition: height var(--transition-main); }
-  #main-header.scrolled .logo img { height: 40px; }
+  .logo img { display: block; height: 25px; width: auto; max-width: 100%; transition: height var(--transition-main); }
+  #main-header.scrolled .logo img { height: 25px; }
   #main-nav ul { list-style: none; display: flex; margin: 0; padding: 0; }
   #main-nav ul li { margin-left: 3rem; }
   #main-nav ul li a {
@@ -196,9 +196,9 @@
    #pre-hero-banner .btn-secondary:hover { background-color: var(--white-color); color: var(--primary-color); border-color: var(--white-color); }
   @keyframes fadeBackground { 0% { opacity: 0; } 8.33% { opacity: 1; } 33.33% { opacity: 1; } 41.66% { opacity: 0; } 100% { opacity: 0; } }
   /* --- AJUSTA LAS RUTAS DE LAS IMÁGENES DEL SLIDER --- */
-  .slide:nth-child(1) { background-image: url('../assets/imagenes/Consultorio/Esscence1 CO.png'); animation-delay: 0s; } /* Ajustado a ../assets/... */
-  .slide:nth-child(2) { background-image: url('../assets/imagenes/Consultorio/RoofTop CO.png'); animation-delay: 6s; } /* Ajustado a ../assets/... */
-  .slide:nth-child(3) { background-image: url('../assets/imagenes/Consultorio/Serenity 1 CO.png'); animation-delay: 12s; } /* Ajustado a ../assets/... */
+  .slide:nth-child(1) { background-image: url('../assets/imagenes/Consultorio/Copia\ de\ TEXTOS\ CIUDAD\ DEL\ RÍO\ \(1\).png'); animation-delay: 0s; } 
+  .slide:nth-child(2) { background-image: url('../assets/imagenes/Consultorio/Render\ Gastro\ Río\ \(Vertical\).jpg'); animation-delay: 6s; } 
+  .slide:nth-child(3) { background-image: url('../assets/imagenes/Consultorio/Noche2.png'); animation-delay: 12s; } 
   
   .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 5; color: rgba(255,255,255,0.8); font-size: 1rem; text-align: center; animation: bounce 2s infinite; cursor: pointer; }
   .scroll-down i { font-size: 1.5rem; margin-bottom: 5px; }
