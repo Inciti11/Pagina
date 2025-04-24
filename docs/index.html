@@ -1,580 +1,703 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovation lab robotics</title>
+    <title>Ciudad Del Rio</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/imagenes/Logo/Logo Torre Médica Aurora-04.png">
+
+    <!-- Google Fonts - Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
-    <style>
-        /* --- Variables de Color y Fuentes (Estilo Original Restaurado) --- */
-        :root {
-            --color-white: #FFFFFF;
-            --color-blue: #0047AB; /* Azul Rey Principal */
-            --color-blue-darker: #003b8e; /* Azul más oscuro */
-            --color-blue-lighter: #e6f0ff; /* Azul muy claro para fondos sutiles */
-            --color-salmon: #FA8072;
-            --color-salmon-darker: #e56b5a;
-            --color-text-primary: #212529; /* Casi negro para texto principal */
-            --color-text-secondary: #6c757d; /* Gris para texto secundario */
-            --color-light-gray: #f8f9fa; /* Gris claro para fondos alternos */
-            --color-border: #dee2e6; /* Gris para bordes sutiles */
-            --color-whatsapp: #25D366;
-            --color-whatsapp-darker: #1DAE54;
+    <!-- AOS Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-            --font-primary: 'Poppins', sans-serif;
-            --base-font-size: 16px;
-            --line-height-base: 1.7;
-            --border-radius-base: 8px; /* Radio de borde consistente */
-            --box-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.07); /* Sombra suave */
-            --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada en hover */
-            --transition-base: all 0.3s ease-in-out; /* Transición estándar */
-        }
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-        /* --- Reseteo Básico y Estilos Globales --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <!-- === TU HOJA DE ESTILOS PERSONALIZADA === -->
+    <link rel="stylesheet" href="css/style.css">
 
-        html {
-            scroll-behavior: smooth;
-            font-size: var(--base-font-size);
-        }
-
-        body {
-            font-family: var(--font-primary);
-            color: var(--color-text-primary);
-            line-height: var(--line-height-base);
-            background-color: var(--color-white);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--color-blue);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1px; }
-        h2 { font-size: 2.2rem; text-align: center; margin-bottom: 2.5rem; }
-        h3 { font-size: 1.4rem; }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--color-text-secondary);
-        }
-        section p:last-of-type {
-            margin-bottom: 0;
-        }
-
-        a {
-            color: var(--color-salmon);
-            text-decoration: none;
-            transition: var(--transition-base);
-        }
-
-        a:hover {
-            color: var(--color-salmon-darker);
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            vertical-align: middle;
-            /* border-radius: var(--border-radius-base); quitado globalmente para img */
-        }
-        /* Aplicar border-radius específicamente donde se necesite */
-        .service-item img, .blog-post img, .map-container {
-             border-radius: var(--border-radius-base);
-        }
-
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .bg-light {
-            background-color: var(--color-light-gray);
-        }
-        .bg-blue-lighter {
-             background-color: var(--color-blue-lighter);
-        }
-
-        /* --- Header / Navegación --- */
-        header {
-            background-color: var(--color-white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-            padding: 15px 0;
-            transition: var(--transition-base);
-        }
-        header.scrolled {
-             box-shadow: var(--box-shadow-soft);
-        }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--color-blue);
-            text-decoration: none;
-        }
-         .logo:hover {
-             color: var(--color-blue-darker);
-         }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            align-items: center;
-            margin: 0;
-        }
-        .nav-links li { margin-left: 30px; }
-        .nav-links a {
-            color: var(--color-text-primary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            position: relative;
-            padding-bottom: 5px;
-            text-decoration: none;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: var(--color-salmon); transition: width 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--color-blue); }
-        .nav-links a:hover::after { width: 100%; }
-        .menu-toggle {
-            display: none; background: none; border: none; font-size: 1.8rem;
-            color: var(--color-blue); cursor: pointer; padding: 5px;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-darker) 100%);
-            color: var(--color-white); padding: 120px 0; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .hero-content { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
-        .hero h1 { color: var(--color-white); margin-bottom: 1.5rem; font-size: 3.2rem; }
-        .hero p {
-            font-size: 1.25rem; margin-bottom: 2.5rem; color: rgba(255, 255, 255, 0.85);
-            font-weight: 300;
-        }
-        .cta-button {
-            display: inline-block; background: var(--color-salmon); color: var(--color-white);
-            padding: 14px 35px; border-radius: 50px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none;
-            transition: var(--transition-base), transform 0.2s ease; border: none;
-            cursor: pointer; font-family: var(--font-primary); font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(250, 128, 114, 0.3);
-            margin-top: 35px;
-        }
-        .cta-button:hover {
-            background-color: var(--color-salmon-darker); color: var(--color-white);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 15px rgba(250, 128, 114, 0.4);
-        }
-
-        /* --- Sección Quiénes Somos --- */
-        #quienes-somos .container { max-width: 800px; text-align: center; }
-        #quienes-somos h2 { margin-bottom: 1.5rem; }
-        #quienes-somos p { font-size: 1.1rem; color: var(--color-text-primary); }
-
-        /* --- Sección Servicios --- */
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; margin-top: 40px;
-        }
-        .service-item {
-            background-color: var(--color-white); padding: 35px 30px;
-            border-radius: var(--border-radius-base); box-shadow: var(--box-shadow-soft);
-            text-align: center; transition: var(--transition-base);
-            border: 1px solid var(--color-border); display: flex; flex-direction: column;
-            align-items: center;
-        }
-        .service-item:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); }
-        .service-item h3 { margin-top: 1rem; margin-bottom: 0.75rem; font-size: 1.3rem; }
-        .service-item p { font-size: 0.95rem; color: var(--color-text-secondary); flex-grow: 1; }
-        .service-icon-placeholder {
-             font-size: 2.8rem; color: var(--color-salmon); margin-bottom: 1.2rem; line-height: 1;
-        }
-
-        /* --- Sección Registrarse (Contenedor del botón) --- */
-        .form-section-container {
-            max-width: 650px; margin: 40px auto 0 auto; text-align: center;
-            background-color: var(--color-white); padding: 40px;
-            border-radius: var(--border-radius-base);
-        }
-        #clase-gratis.bg-light .form-section-container { box-shadow: var(--box-shadow-soft); }
-        #clase-gratis h2 { margin-bottom: 1rem; }
-        .form-section-container .cta-button { margin-top: 1rem; width: 100%; }
-        .whatsapp-link-text {
-            margin-top: 2.5rem; font-weight: 400; color: var(--color-text-secondary);
-            font-size: 0.95rem; margin-bottom: 0.5rem;
-        }
-        .whatsapp-button {
-            display: inline-flex; align-items: center; background-color: var(--color-whatsapp);
-            color: var(--color-white); padding: 10px 25px; border-radius: 50px;
-            font-weight: 600; text-decoration: none; margin-top: 1rem;
-            transition: var(--transition-base), transform 0.2s ease; font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); border: none;
-        }
-        .whatsapp-button img { /* Estilo para IMG dentro del botón WhatsApp */
-            width: 18px; height: 18px; /* Tamaño fijo */
-            margin-right: 10px;
-            border-radius: 0; /* Sin borde redondeado para el icono */
-            vertical-align: middle;
-            object-fit: contain; /* Asegurar que se vea bien */
-        }
-        .whatsapp-button:hover {
-            background-color: var(--color-whatsapp-darker); color: var(--color-white);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-        }
-
-        /* --- Sección Blog --- */
-        .blog-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-top: 40px;
-        }
-        .blog-post {
-            background-color: var(--color-white); border-radius: var(--border-radius-base);
-            box-shadow: var(--box-shadow-soft); overflow: hidden; transition: var(--transition-base);
-            border: 1px solid var(--color-border); display: flex; flex-direction: column;
-        }
-        .blog-post:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); }
-        .blog-post img.featured-image {
-             width: 100%; height: 200px; object-fit: cover;
-             border-radius: var(--border-radius-base) var(--border-radius-base) 0 0; margin-bottom: 0;
-        }
-        .blog-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .blog-post h3 { margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--color-blue); }
-        .blog-post p { font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 0; flex-grow: 1; }
-
-        /* --- Sección Contacto --- */
-        #contacto .container > h2 { margin-bottom: 3rem; }
-        .contact-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: flex-start;
-        }
-        .contact-info h3 { font-size: 1.6rem; margin-bottom: 1.5rem; color: var(--color-blue); }
-        .contact-info p {
-            margin-bottom: 1.5rem; font-size: 1rem; color: var(--color-text-primary);
-            display: flex; align-items: flex-start; line-height: 1.6;
-        }
-        .contact-info p::before {
-             font-size: 1.3rem; color: var(--color-salmon); margin-right: 15px;
-             min-width: 20px; text-align: center; line-height: inherit; margin-top: 2px;
-        }
-        .contact-info p.address::before { content: '📍'; }
-        .contact-info p.phone::before   { content: '📞'; }
-        .contact-info p.email::before   { content: '✉️'; }
-        .contact-info p.hours::before   { content: '🕒'; }
-        .contact-info strong { font-weight: 600; color: var(--color-blue); }
-        .contact-info a { word-break: break-word; text-decoration: none; }
-        .contact-info a:hover {  text-decoration: underline; }
-        .contact-info .whatsapp-button { margin-top: 1.5rem; }
-        .map-container {
-             position: relative; padding-bottom: 75%; height: 0; overflow: hidden;
-             border-radius: var(--border-radius-base); box-shadow: var(--box-shadow-soft);
-             border: 1px solid var(--color-border);
-        }
-        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        /* --- Footer --- */
-        footer {
-            background-color: var(--color-blue-darker); color: rgba(255, 255, 255, 0.7);
-            text-align: center; padding: 40px 0; margin-top: 80px; font-size: 0.9rem;
-        }
-        footer p { margin-bottom: 0.5rem; color: inherit; }
-
-        /* --- Botón Flotante de WhatsApp (Usando IMG) --- */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--color-whatsapp);
-            color: var(--color-white); /* El color del texto no aplica a la img directamente */
-            border-radius: 50%;
-            text-align: center;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-base), transform 0.2s ease;
-            text-decoration: none;
-            overflow: hidden; /* Para asegurar que la img no se salga si es grande */
-        }
-        .whatsapp-float:hover {
-            background-color: var(--color-whatsapp-darker);
-            transform: scale(1.1);
-        }
-        .whatsapp-float img { /* Estilo para la imagen dentro del botón flotante */
-            width: 55%; /* Ajusta el tamaño relativo al contenedor */
-            height: 55%;
-            object-fit: contain; /* Para que no se deforme */
-            /* No necesita color, fill, ni vertical-align */
-             border-radius: 0; /* Asegurar que la imagen no sea redondeada si hereda */
-        }
-
-        /* --- Responsividad --- */
-        @media (max-width: 992px) {
-             h1 { font-size: 2.5rem; } h2 { font-size: 2rem; }
-             .hero { padding: 100px 0; } .contact-section { gap: 30px; }
-             .map-container { padding-bottom: 65%; }
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; }
-             .section-padding { padding: 60px 0; }
-            header .container { position: relative; }
-            .nav-links {
-                display: none; flex-direction: column; width: 100%; position: absolute;
-                top: 100%; left: 0; background-color: var(--color-white);
-                box-shadow: var(--box-shadow-soft); text-align: center; padding: 15px 0;
-                border-top: 1px solid var(--color-border); align-items: stretch; z-index: 1020;
-            }
-            .nav-links.active { display: flex; }
-            .nav-links li { margin: 0; width: 100%; }
-            .nav-links a { display: block; padding: 12px 15px; border-bottom: 1px solid var(--color-blue-lighter); width: 100%; }
-            .nav-links li:last-child a { border-bottom: none; }
-            .nav-links a::after { display: none; }
-            .nav-links a:hover { background-color: var(--color-blue-lighter); color: var(--color-blue); }
-            .menu-toggle { display: block; }
-            .hero { padding: 80px 0; } .hero h1 { font-size: 2.4rem; } .hero p { font-size: 1.1rem; }
-            .services-grid, .blog-grid { grid-template-columns: 1fr; gap: 25px; }
-            .contact-section { grid-template-columns: 1fr; gap: 40px; }
-            .map-container { order: 1; padding-bottom: 80%; }
-            .contact-info { order: 2; text-align: left; }
-            .contact-info p { justify-content: flex-start; }
-            .contact-info .whatsapp-button { display: flex; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto; }
-            /* Ajuste botón flotante en móvil */
-            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
-            /* No se necesita ajustar el tamaño de la img aquí si usa % */
-        }
-         @media (max-width: 480px) {
-             h1 { font-size: 2rem; } h2 { font-size: 1.6rem; }
-             .hero { padding: 60px 0; }
-             .cta-button { padding: 12px 25px; font-size: 0.85rem;}
-             .whatsapp-button { padding: 9px 20px; font-size: 0.85rem;}
-             .form-section-container { padding: 30px 20px; }
-             .contact-info p { font-size: 0.95rem; }
-             footer { padding: 30px 0; }
-         }
-
-    </style>
 </head>
+
 <body>
 
-    <header id="header">
-        <nav class="container">
-            <a href="#inicio" class="logo">Innovation lab robotics</a>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#quienes-somos">Quiénes Somos</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#clase-gratis">Registrarse</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
-        </nav>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container">
+            <a href="#pre-hero-banner" class="logo">
+                <img src="./assets/imagenes/Logo/Aura torre medica_01.png" alt="AURA Logo">
+            </a>
+            <nav id="main-nav">
+                <ul>
+                    <!-- Los enlaces del menú no se reordenan automáticamente, reflejan el orden original -->
+                    <li><a href="#pre-hero-banner" class="active">Inicio</a></li>
+                    <li><a href="#location">Ubicación</a></li> <!-- Enlace a Ubicación -->
+                    <li><a href="#gallery">Consultorios</a></li> <!-- Enlace a Consultorios -->
+                    <!-- Opcional: Añadir enlace a Quirofanos -> <li><a href="#quirofanos">Quirófanos</a></li> -->
+                    <li><a href="#contact">Contacto</a></li>
+                    <li><a href="https://hubs.ly/Q02C72330" target="_blank" rel="noopener noreferrer">Brochure</a></li>
+                </ul>
+            </nav>
+            <button id="mobile-nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+                <i class="fas fa-bars"></i>
+                <span class="sr-only">Abrir/Cerrar menú</span>
+            </button>
+        </div>
     </header>
 
+    <!-- Pre-Hero Banner Section -->
+    <section id="pre-hero-banner">
+        <!-- Contenido existente -->
+        <div class="background-slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="banner-overlay"></div>
+        <div class="banner-content" data-aos="fade-in" data-aos-delay="100">
+            <h1>
+                <span class="decorative-font">EL LUJO DE ESTAR A PASOS DE TODO </span>
+            </h1>
+            <p class="lead">Es el lugar que estará a la altura de tu calidad profesional</p>
+            <a href="#contact" class="btn btn-primary">Agéndate Aqui</a>
+            <a href="#about" class="btn btn-secondary" style="margin-left: 1rem;">Conoce Más</a>
+        </div>
+        <a href="#about" class="scroll-down" aria-label="Scroll Down">
+            <i class="fas fa-chevron-down"></i> Descubre
+        </a>
+    </section>
+
     <main>
-        <!-- Sección Inicio -->
-        <section id="inicio" class="hero">
-            <div class="container hero-content">
-                <h1>Educando para el futuro, innovando desde hoy.</h1>
-                <p>Transformamos la curiosidad en conocimiento a través de la robótica, la tecnología y el mindfulness.</p>
-                <!-- Botón Hero actualizado -->
-                <a href="https://forms.gle/Wysre9hi8Cmifux89" target="_blank" class="cta-button">Inscríbete Ahora</a>
+        <!-- ========================== -->
+        <!-- === ORDEN MODIFICADO === -->
+        <!-- ========================== -->
+
+        <!-- 1. About Section (Innovación y Calidad) -->
+        <section id="about" class="section-bg">
+            <div class="angled-divider-top" style="color: var(--light-bg);">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
+                </svg>
+            </div>
+            <div class="container">
+                <div class="about-content" data-aos="fade-left" data-aos-delay="300" data-aos-duration="1000">
+                    <h2>INNOVACIÓN Y CALIDAD MÉDICA</h2>
+                    <p>Imagina un lugar donde la excelencia médica se encuentra con la comodidad y la innovación, donde
+                        cada detalle esta diseñado para elevar tu práctica médica.</p>
+                    <ul>
+                        <li><i class="fas fa-procedures"></i> 63 Consultorios diseñados con acabados premium entre 48 y 74 m²</li>
+                        <li><i class="fas fa-location-arrow"></i> Ubicación estratégica con doble conectividad por las calles 86 y 87.</li>
+                        <li>
+                            <i class="fas fa-seedling"></i>
+                            Diseño sostenible integrado en todas las áreas para el beneficio de los inversionistas.
+                        </li>
+                        <li>
+                            <i class="fas fa-microscope"></i> 
+                            Aura contará con pabellón de quirófanos para cirugías de mediana y baja complejidad.
+                        </li>
+                    </ul>
+                    <div class="contenedor">
+                        <a href="https://hubs.ly/Q02C72330" class="btn btn-secondary" style="margin-top: 1.5rem;">Ver
+                            brochure</a>
+                    </div>
+                </div>
+                <div class="about-image" data-aos="slide-right" data-aos-duration="1000">
+                    <img src="./assets/imagenes/Front/Web-aura.jpg" alt="Render Arquitectónico de AURA Torre Médica">
+                </div>
             </div>
         </section>
 
-        <!-- Sección Quiénes Somos -->
-        <section id="quienes-somos" class="section-padding">
+        <!-- 2. Features Section (Por qué invertir) -->
+        <section id="features">
             <div class="container">
-                <h2>Nuestra Inspiración</h2>
-                <p>S.M.G. Innovation Lab nació de una historia personal de amor y superación. Inspirados por [La experiencia con mi hermano con autismo y ver cómo la tecnología podía ser una herramienta increíble para su desarrollo y comunicación], nuestra misión es crear un espacio inclusivo donde cada niño y joven pueda descubrir su potencial a través de la tecnología y el bienestar.</p>
-                <p>Combinamos la vanguardia educativa con un enfoque humano, preparando a las nuevas generaciones no solo con habilidades técnicas, sino también con inteligencia emocional y resiliencia.</p>
+                <h2 data-aos="fade-up">POR QUÉ INVERTIR EN AURA</h2>
+                <div class="features-grid">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon"><i class="fas fa-plus-square"></i></div>
+                        <h3>Creciente Turismo en Salud</h3>
+                        <p>A Colombia ingresan entre 50 mil y 90 mil turistas de este sector anualmente.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <h3>Ubicación Estratégica</h3>
+                        <p>La mejor ubicación en el clúster médico de la ciudad, cerca de barrios exclusivos, hoteles y
+                            centros comerciales.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon"><i class="fas fa-hospital"></i></div>
+                        <h3>Diseño Exclusivo para Salud</h3>
+                        <p>Proyecto con uso exclusivo en salud, con zona de quirófanos para reducir tiempos y facilitar
+                            la habilitación de consultorios.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon"><i class="fas fa-leaf"></i></div>
+                        <h3>Proyecto Sostenible</h3>
+                        <p>Un proyecto ambiental y sostenible financieramente, que se verá reflejado en ahorros para los
+                            inversores propietarios.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="500">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3>Ciudad en Crecimiento</h3>
+                        <p>Barranquilla se destaca como líder en atracción de inversiones. La disponibilidad de oficinas
+                            bajó al 5.03% en el primer trimestre de 2024.</p>
+                    </div>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="600">
+                        <div class="icon"><i class="fas fa-check-circle"></i></div>
+                        <h3 style="color: var(--tertiary-color);">Resumen: Inversión Estratégica</h3>
+                        <p>AURA ofrece una inversión sólida impulsada por el turismo en salud, una ubicación
+                            privilegiada, diseño especializado, sostenibilidad y el dinamismo de Barranquilla.</p>
+                    </div>
+                </div>
             </div>
         </section>
-
-        <!-- Sección Servicios / Programas -->
-        <section id="servicios" class="section-padding bg-light">
+        <section class="aura-block">
+            <div class="content-wrapper">
+                <div class="text-content-block">
+                    <h2>DESCUBRE TODO SOBRE LA SALUD, EL BIENESTAR Y TU NUEVA EXPERIENCIA MÉDICA EN UN SOLO LUGAR</h2>
+                </div>
+                <div class="action-content">
+                    <!-- Puedes poner un botón como en tu ejemplo o cualquier otro contenido -->
+                    <a href="#" class="aura-button">Más Información</a>
+                </div>
+            </div>
+        </section>
+        <!-- Fin del Bloque 1 -->
+    
+        <!-- 3. Quirófanos Section -->
+        <section id="quirofanos" class="section-bg">
             <div class="container">
-                <h2>Explora Nuestros Programas</h2>
-                <div class="services-grid">
-                    <div class="service-item">
-                        <div class="service-icon-placeholder">🤖</div>
-                        <h3>Robótica Creativa</h3>
-                        <p>Diseña, construye y programa robots. Fomentamos la lógica, la resolución de problemas y el trabajo en equipo.</p>
+                <h2 data-aos="fade-up">EL LUJO DE TENERLO TODO, EN UN MISMO LUGAR</h2>
+        
+                <!-- Two-column grid for content and main image -->
+                <div class="quirofanos-grid">
+                    <div class="quirofanos-content" data-aos="fade-right" data-aos-delay="200">
+                        <h3>Aura contará con zona de Quirófanos</h3>
+                        <ul>
+                            <li>
+                                <!-- Make sure Font Awesome is linked in your project for the icon -->
+                                <i class="fas fa-procedures"></i> 
+                                Pabellón de cirugía equipado para mediana y alta complejidad.
+                            </li>
+                            <!-- Add more list items here if needed -->
+                        </ul>
+                        <h3>¿Deseas agendar una cita?</h3>
+                        <div class="contenedor-boton"> <!-- Changed class for clarity -->
+                            <a href="https://meetings.hubspot.com/maicol-navarro/aura-cita-por-pagina-web" target="_blank" rel="noopener noreferrer"
+                                class="btn btn-secondary">Agéndate Aqui</a>
+                        </div>
                     </div>
-                    <div class="service-item">
-                         <div class="service-icon-placeholder">🧠</div>
-                        <h3>Mindfulness Tech</h3>
-                        <p>Integramos herramientas digitales con prácticas de atención plena para mejorar la concentración y reducir el estrés.</p>
+                    <div class="quirofanos-image" data-aos="fade-left" data-aos-delay="200">
+                        <img src="./assets/imagenes/quirofanos/Quirofanos.jpg" 
+                             alt="Quirófanos modernos en Aura Torre Médica">
                     </div>
-                    <div class="service-item">
-                         <div class="service-icon-placeholder">☀️</div>
-                        <h3>Talleres Vacacionales</h3>
-                        <p>Inmersiones temáticas llenas de diversión y aprendizaje en tecnología, ciencia y arte durante las vacaciones.</p>
+                </div> 
+                <!-- End of two-column grid -->
+        
+                <div class="premium-gallery-container">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorio/Serenity 3 CO.png"
+                                        alt="Cafe Bar">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Quirofanos</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorio/Esscence1 CO.png"
+                                        alt="Sala de espera">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Quirofanos</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorio/Esscence2 CO2.png"
+                                        alt="Recepcion">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Quirofanos</h4>
+                            </div>
+                        </div>
                     </div>
-                     <div class="service-item">
-                          <div class="service-icon-placeholder">💻</div>
-                        <h3>Clases Online</h3>
-                        <p>Participa en nuestros innovadores programas desde cualquier lugar con nuestras clases virtuales interactivas.</p>
+                </div>
+        
+            </div> <!-- End of container -->
+        </section>
+
+        <!-- 4. Location Section -->
+        <section id="location" class="section-bg">
+            <div class="container">
+                <div class="location-info" data-aos="fade-right" data-aos-duration="900">
+                    <h2>UBICACIÓN</h2>
+                    <p class="lead" style="color: var(--tertiary-color);">Ubicados estratégicamente donde la salud y el
+                        futuro convergen.</p>
+                    <p>AURA se sitúa en el corazón del clúster médico de Barranquilla, un enclave consolidado con acceso
+                        inmejorable. Rodeado de hospitales, laboratorios, centros comerciales y servicios clave.</p>
+                    <ul>
+                        <li><i class="fas fa-map-pin"></i> Dirección: Calle 86 # 50 - 87</li>
+                        <li><i class="fas fa-car-alt"></i> Acceso rápido por las calles 86 y 87.</li>
+                        <li><i class="fas fa-hospital-alt"></i> Cerca a Clínica Iberoamérica</li>
+                        <li><i class="fas fa-shopping-cart"></i> Cercanía a centros comerciales como Viva y Plaza 51</li>
+                    </ul>
+                    <div class="contenedor-boton">
+                        <a href="https://maps.app.goo.gl/s5ePusAs4yLLKjkG7" target="_blank" rel="noopener noreferrer"
+                            class="btn btn-secondary">Ver en Google Maps</a>
+                    </div>
+                </div>
+                <div class="image-map-row" data-aos="fade-left" data-aos-delay="100" data-aos-duration="900">
+                    <div class="location-image">
+                        <img src="./assets/imagenes/Front/Ubicacion-02.jpg" alt="Ubicación del edificio Aura">
+                    </div>
+                    <div class="location-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3941.9273226121118!2d-74.82340072497148!3d11.0063492549107!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d29b5189fff%3A0x1418bb7c14d9c465!2sAurora%20Torre%20M%C3%A9dica!5e1!3m2!1ses!2sco!4v1743707657262!5m2!1ses!2sco"
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            title="Mapa de Ubicación Aura Torre Médica">
+                        </iframe>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Registrarse -->
-        <section id="clase-gratis" class="section-padding">
+        <!-- 5. Nearby Places Section (MOVIDA AQUÍ, DESPUÉS DE UBICACIÓN) -->
+        <section id="nearby-places" class="section-bg">
             <div class="container">
-                 <h2>¡Regístrate y Descubre!</h2>
-                <div class="form-section-container">
-                    <p>¿Listo para empezar la aventura de la robótica? Haz clic en el botón para ir al formulario de registro.</p>
-                    <!-- Botón que redirige al Google Form -->
-                    <a href="https://forms.gle/Wysre9hi8Cmifux89" target="_blank" class="cta-button">Ir al Formulario de Registro</a>
-                    <p class="whatsapp-link-text">¿Tienes preguntas? Escríbenos directamente:</p>
-                    <!-- Botón de WhatsApp Actualizado -->
-                    <a href="https://wa.link/pnce4s" target="_blank" class="whatsapp-button">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon"> Chatear por WhatsApp
-                    </a>
+                <h2 data-aos="fade-up">SABEMOS QUE EL TIEMPO ES VALIOSO PARA TI <br> EN AURA ESTARÁS CERCA A:</h2>
+
+                <h2 class="text-center" data-aos="fade-up" style="margin-top: 3rem; color: var(--tertiary-color);">
+                    CENTROS COMERCIALES</h2>
+                <div class="contenedor-img" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Centro Comercial Viva-min.png"
+                            alt="Centro Comercial Viva" class="imagen">
+                        <div class="texto-base">VIVA</div>
+                        <div class="texto-hover"> A 1 minuto </div>
+                    </div>
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Plaza 51-min.png" alt="Plaza 51" class="imagen">
+                        <div class="texto-base">Plaza 51</div>
+                        <div class="texto-hover">A 1 minuto</div>
+                    </div>
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Centro Comercial Buenavista-min.png"
+                            alt="Centro Comercial Buenavista" class="imagen">
+                        <div class="texto-base">Buenavista</div>
+                        <div class="texto-hover"> A 8 minutos</div>
+                    </div>
+                </div>
+
+                <h2 class="text-center" data-aos="fade-up" style="margin-top: 4rem; color: var(--tertiary-color);">
+                    CLÍNICAS Y HOTELES</h2>
+                <div class="contenedor-img" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Clinica Iberoamerica-min.png" alt="Clínica Iberoamérica"
+                            class="imagen">
+                        <div class="texto-base">Clínica Iberoamerica</div>
+                        <div class="texto-hover">A 1 minuto </div>
+                    </div>
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Hotel Hampton-min.png" alt="Hotel Hampton"
+                            class="imagen">
+                        <div class="texto-base">Hotel Hampton</div>
+                        <div class="texto-hover">A 3 minutos</div>
+                    </div>
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Hotel Ibis-min.png" alt="Hotel Ibis" class="imagen">
+                        <div class="texto-base">Hotel Ibis</div>
+                        <div class="texto-hover">A 1 minuto</div>
+                    </div>
+                </div>
+
+                <h2 class="text-center" data-aos="fade-up" style="margin-top: 4rem; color: var(--tertiary-color);">MÁS
+                    CERCA DE TUS PACIENTES</h2>
+                <div class="contenedor-img" data-aos="fade-up" data-aos-delay="100">
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Riomar.jpeg" alt="Barrio Riomar" class="imagen">
+                        <div class="texto-base">Riomar</div>
+                        <div class="texto-hover"> A 2 MINUTOS </div>
+                    </div>
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Golf-min.png" alt="Barrio El Golf" class="imagen">
+                        <div class="texto-base">El Golf</div>
+                        <div class="texto-hover">A 5 minutos</div>
+                    </div>
+                    <div class="tarjeta">
+                        <img src="./assets/imagenes/Ubicaciones/Alto prado-min.png" alt="Barrio Alto Prado"
+                            class="imagen">
+                        <div class="texto-base">Alto prado</div>
+                        <div class="texto-hover">A 6 minutos</div>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- Sección Blog / Noticias -->
-        <section id="blog" class="section-padding bg-light">
+        <section class="aura-block">
+            <div class="content-wrapper">
+                <div class="text-content-block">
+                    <h2>DESCUBRE TODO SOBRE LA SALUD, EL BIENESTAR Y TU NUEVA EXPERIENCIA MÉDICA EN UN SOLO LUGAR</h2>
+                </div>
+                <div class="action-content">
+                    <!-- Puedes poner un botón como en tu ejemplo o cualquier otro contenido -->
+                    <a href="#" class="aura-button">Más Información</a>
+                </div>
+            </div>
+        </section>
+        <!-- Fin del Bloque 1 -->
+    
+        <!-- 6. Gallery Section (Consultorios) -->
+        <section id="gallery" class="section-bg">
             <div class="container">
-                <h2>Últimas Noticias y Consejos</h2>
-                <div class="blog-grid">
-                    <article class="blog-post">
-                         <div class="blog-content">
-                             <h3>S.M.G. Lab brilla en la Feria de Ciencia Escolar</h3>
-                             <p>Nuestros pequeños inventores presentaron sus proyectos de robótica, demostrando creatividad y trabajo en equipo. ¡Una experiencia inolvidable!</p>
+                <h2 data-aos="fade-up">NUESTROS CONSULTORIOS</h2>
+                <p class="lead text-center" data-aos="fade-up" data-aos-delay="100">Explora los renders que capturan la
+                    esencia y sofisticación de AURA.</p>
+
+                <!-- Consultorio VITALY -->
+                <div class="premium-gallery-container">
+                    <div class="features-grid" data-aos="fade-right" data-aos-delay="100">
+                        <div class="feature-item">
+                            <div class="icon"><i class="fas fa-heartbeat"></i></div>
+                            <h3>VITALY</h3>
+                            <p><strong>Espacios óptimos</strong><br><i class="fas fa-ruler-combined"
+                                    style="margin-right: 5px;"></i> Área: 26 m² A 31 m²<br><i class="fas fa-car"
+                                    style="margin-right: 5px;"></i> 1 parqueadero<br><br>Ideal si estás buscando lo
+                                vital.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorios/Vitaly-1.jpg" alt="Vitaly 1">
+                                    <img src="./assets/imagenes/Consultorios/Vitaly-2.jpg" alt="Vitaly 2">
+                                    <img src="./assets/imagenes/Consultorios/Vitaly-3.jpg" alt="Vitaly 3">
+                                </div>
+                                <div class="slider-nav"><button class="prev-btn" aria-label="Anterior"><i
+                                            class="fas fa-chevron-left"></i></button><button class="next-btn"
+                                        aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button></div>
+                                <div class="slider-indicators"></div>
+                                <button class="zoom-btn" aria-label="Ampliar imagen"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Consultorio Vitaly</h4>
+                                <p>Espacio eficiente.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorio/Vitaly CO.png" alt="Vitaly Example 1">
+                                </div>
+                                <button class="zoom-btn" aria-label="Ampliar imagen"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Consultorio Vitaly</h4>
+                                <p>Práctica individual.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consultorio ESSENCE -->
+                <div class="premium-gallery-container">
+                    <div class="features-grid" data-aos="fade-right" data-aos-delay="100">
+                        <div class="feature-item">
+                            <div class="icon"><i class="fas fa-droplet"></i></div>
+                            <h3>ESSENCE</h3>
+                            <p><strong>Espacios amplios</strong><br><i class="fas fa-ruler-combined"
+                                    style="margin-right: 5px;"></i> Área: 45 m² a 65 m²<br><i class="fas fa-car"
+                                    style="margin-right: 5px;"></i> 1 parqueadero<br><br>Ideal para más comodidad.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorios/Essence-1.jpg" alt="Essence 1">
+                                    <img src="./assets/imagenes/Consultorios/Essence-2.jpg" alt="Essence 2">
+                                    <img src="./assets/imagenes/Consultorios/Essence 3.jpg" alt="Essence 3">
+                                </div>
+                                <div class="slider-nav"><button class="prev-btn" aria-label="Anterior"><i
+                                            class="fas fa-chevron-left"></i></button><button class="next-btn"
+                                        aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button></div>
+                                <div class="slider-indicators"></div>
+                                <button class="zoom-btn" aria-label="Ampliar imagen"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Consultorio Essence</h4>
+                                <p>Amplitud y confort.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorio/Esscence1 CO.png" alt="Essence Example 1">
+                                </div>
+                                <button class="zoom-btn" aria-label="Ampliar imagen"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Consultorio Essence</h4>
+                                <p>Comodidad para pacientes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Consultorio SERENITY -->
+                <div class="premium-gallery-container">
+                    <div class="features-grid" data-aos="fade-right" data-aos-delay="100">
+                        <div class="feature-item">
+                            <div class="icon"><i class="fas fa-spa"></i></div>
+                            <h3>SERENITY</h3>
+                            <p><strong>Consultorios dobles</strong><br><i class="fas fa-ruler-combined"
+                                    style="margin-right: 5px;"></i> Área: 58 m² a 90 m²<br><i class="fas fa-car"
+                                    style="margin-right: 5px;"></i> 2 pq. (uds. ≥ 74 m²)<br><br>Ideal para socios.</p>
+                        </div>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorios/Serenity-1.jpg" alt="Serenity 1">
+                                    <img src="./assets/imagenes/Consultorios/Serenity-2.jpg" alt="Serenity 2">
+                                    <img src="./assets/imagenes/Consultorios/Serenity-3.jpg" alt="Serenity 3">
+                                </div>
+                                <div class="slider-nav"><button class="prev-btn" aria-label="Anterior"><i
+                                            class="fas fa-chevron-left"></i></button><button class="next-btn"
+                                        aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button></div>
+                                <div class="slider-indicators"></div>
+                                <button class="zoom-btn" aria-label="Ampliar imagen"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Consultorio Serenity</h4>
+                                <p>Espacios para compartir.</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Consultorio/Serenity 1 CO.png" alt="Serenity Example 1">
+                                </div>
+                                <button class="zoom-btn" aria-label="Ampliar imagen"><i
+                                        class="fas fa-search-plus"></i></button>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Consultorio Serenity</h4>
+                                <p>Ideal para socios.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Contenedor Zoomed compartido -->
+            <div class="zoomed-container">
+                <img src="" alt="Imagen Ampliada" class="zoomed-image">
+                <button class="close-zoom" aria-label="Cerrar zoom"><i class="fas fa-times"></i></button>
+            </div>
+        </section>
+
+
+        <!-- 7. Amenities Section (En Aura contarás con) -->
+        <section id="amenities" class="section-bg">
+            <div class="container">
+                <h2 data-aos="fade-up" style="margin-bottom: 3rem;">EN AURA CONTARÁS CON</h2>
+
+                <div class="amenity-top-row">
+                    <div class="about-image" data-aos="slide-right" data-aos-duration="1000">
+                        <img src="./assets/imagenes/Consultorio/RoofTop CO.png" alt="Rooftop Cáfe Aura">
+                    </div>
+                    <div class="about-content" data-aos="fade-left" data-aos-delay="200" data-aos-duration="1000">
+                        <ul>
+                            <li><i class="fas fa-building"></i> Lobby doble altura.</li>
+                            <li><i class="fas fa-couch"></i> Sala de estar para pacientes.</li>
+                            <li><i class="fas fa-tv"></i> Lounge médico para reuniones.</li>
+                            <li><i class="fas fa-coffee"></i> Café rooftop.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="premium-gallery-container">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Zonas Comunes/V2 CAFÉ BAR (corrección).jpg"
+                                        alt="Cafe Bar">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Cáfe Bar</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Zonas Comunes/V2 SALA DE ESPERA (corrección1).jpg"
+                                        alt="Sala de espera">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Lounge Aura</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Zonas Comunes/V2 RECEPCIÓN (corrección).jpg"
+                                        alt="Recepcion">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4>Recepción</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="aura-block">
+            <div class="content-wrapper">
+                <div class="text-content-block">
+                    <h2>DESCUBRE TODO SOBRE LA SALUD, EL BIENESTAR Y TU NUEVA EXPERIENCIA MÉDICA EN UN SOLO LUGAR</h2>
+                </div>
+                <div class="action-content">
+                    <!-- Puedes poner un botón como en tu ejemplo o cualquier otro contenido -->
+                    <a href="#" class="aura-button">Más Información</a>
+                </div>
+            </div>
+        </section>
+        <!-- Fin del Bloque 1 -->
+        <!-- 8. Our Team Section -->
+        <section id="our-team" class="section-bg">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>NUESTRO EQUIPO</h2>
+                </div>
+                <div class="row team-members-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-4 col-md-6 team-member">
+                         <div class="member-content">
+                            <div class="member-logo">
+                                <img src="./assets/imagenes/Logo/Inciti (Isotipo).png" alt="Logo Inciti">
+                            </div>
+                            <h4>Inciti</h4>
+                            <p>Desarrollamos proyectos que transforman ciudades creando comunidades inteligentes y sostenibles.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 team-member">
+                        <div class="member-content">
+                            <div class="member-logo">
+                                <img src="./assets/imagenes/Logo/logo pubenza.png" alt="Logo Pubenza">
+                            </div>
+                            <h4>Pubenza</h4>
+                            <p>Constructor con más de 30 años de experiencia en la edificación, construcción de vivienda, edificaciones institucionales y obras civiles.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 team-member">
+                         <div class="member-content">
+                            <div class="member-logo">
+                                <img src="./assets/imagenes/Logo/LOGO ALIANZA FIDUCIARIA_POSITIVO.png" alt="Logo Alianza Fiduciaria">
+                            </div>
+                            <h4>Alianza Fiduciaria</h4>
+                            <p>Alianza Fiduciaria y Alianza Valores son compañías líderes en el mercado colombiano en fiducia e inversiones</p>
                          </div>
-                    </article>
-                    <article class="blog-post">
-                          <div class="blog-content">
-                              <h3>Tecnología Consciente: 5 Apps de Mindfulness para Niños</h3>
-                              <p>Descubre aplicaciones que ayudan a tus hijos a desarrollar la atención plena de forma divertida y adaptada a su edad.</p>
-                          </div>
-                    </article>
-                    <article class="blog-post">
-                         <div class="blog-content">
-                             <h3>¿Por qué la Robótica es Clave para el Futuro Profesional?</h3>
-                             <p>Exploramos las habilidades esenciales que la robótica desarrolla y su creciente importancia en el mercado laboral del mañana.</p>
-                         </div>
-                    </article>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Contáctanos -->
-        <section id="contacto" class="section-padding">
-             <div class="container">
-                <h2>Ponte en Contacto</h2>
-                <div class="contact-section">
-                    <div class="contact-info">
-                        <p class="address"><strong>Dirección:</strong> [Tu Dirección Completa o "Modalidad Principalmente Online"], Barranquilla, Colombia</p>
-                        <p class="phone"><strong>Teléfono:</strong> <a href="tel:+573001234567">+57 300 123 4567</a></p>
-                        <p class="email"><strong>Email:</strong> <a href="mailto:info@innovationlabrobotics.com">info@innovationlabrobotics.com</a></p>
-                        <p class="hours"><strong>Horario:</strong> Lunes a Viernes: 9:00 AM - 6:00 PM</p>
-                        <!-- Botón WhatsApp en Contacto - Actualizado -->
-                        <a href="https://wa.link/pnce4s" target="_blank" class="whatsapp-button"  target="_blank" style="margin-top: 1rem;">
-                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon"> Contáctanos por WhatsApp
-                        </a>
-                    </div>
-                    <div class="map-container">
-                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125326.19865595768!2d-74.83979473830686!3d11.00066823163631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d44d12ae075%3A0x9125c49633448dc!2sBarranquilla%2C%20Atl%C3%A1ntico!5e0!3m2!1ses-419!2sco!4v1700000000000!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación en Google Maps"></iframe>
-                    </div>
+        <!-- 9. Contact Section -->
+        <section id="contact" class="section-dark">
+            <div class="container text-center">
+                <h2 data-aos="fade-up">FORMA PARTE DEL FUTURO DE LA SALUD</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">
+                    Regístrate y sé de los primeros en recibir información exclusiva sobre AURA Torre Médica.
+                </p>
+                <div class="contact-form-wrapper" data-aos="fade-up" data-aos-delay="200">
+                    <!-- HubSpot Form Embed Code -->
+                    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                    <script>
+                        hbspt.forms.create({
+                            region: "na1",
+                            portalId: "8678656",
+                            formId: "2ecd5589-5769-47f0-b1d2-dd5850926e7d"
+                        });
+                    </script>
+                    <!-- End HubSpot Form Embed Code -->
                 </div>
             </div>
+            <div class="angled-divider-bottom">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill-footer"></path>
+                </svg>
+            </div>
         </section>
+
     </main>
 
-    <footer>
+
+    <!-- Footer -->
+    <footer id="main-footer">
         <div class="container">
-            <p>© 2024 Innovation lab robotics. Todos los derechos reservados.</p>
-            <p>Creado por Sharif y su equipo  y tecnología en Barranquilla.</p>
+            <a href="#pre-hero-banner" class="footer-logo">
+                <img src="./assets/imagenes/Logo/Aura torre medica-02.png" alt="AURA Logo Footer">
+            </a>
+            <div class="container-footer">
+                <p>© <span id="current-year"></span> Aura Torre Médica. Desarrollado por <a href="https://inciti.co"
+                        target="_blank" rel="noopener noreferrer"> Inciti.co</a>. Todos los derechos reservados.</p>
+                        <div class="social-icons">
+                            <a href="https://www.instagram.com/auratorremedica?igsh=cmtiMWZjemd6cDg0" aria-label="Instagram de AURA"
+                                target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        </div>
+                <p style="font-size: 0.6em; line-height: 1.4;"> 
+                    Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los inmuebles ofertados.
+                    El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños, elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados y están sujetos a las variaciones pertinentes.
+                    Las vistas actuales pueden variar y no deben tomarse como una reproducción precisa del proyecto final. Cualquier diseño u acabado podría ser diferente. El constructor y/o su comercializador no garantiza la disponibilidad de todos los inmuebles ofertados.
+                    Todos los precios están sujetos a cambios sin previo aviso, mientras que El constructor y/o su comercializador hace el esfuerzo por mantener la información actualizada en todo momento en el sitio, no garantiza su representación exacta o su precisión.
+                    El Webmaster no asume responsabilidad alguna por cualquier omisión o errores tipográficos en el contenido del sitio.
+                    Toda la información aquí publicada, deberá ser verificada por usted mismo.</p>
+            </div>
+            <!-- <div class="social-icons">
+                <a href="https://www.instagram.com/auratorremedica?igsh=cmtiMWZjemd6cDg0" aria-label="Instagram de AURA"
+                    target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+            </div> -->
         </div>
     </footer>
+        <!-- === BOTÓN FLOTANTE DE WHATSAPP === -->
+        <a href="https://wa.link/hnuduc" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
 
-    <!-- Botón Flotante de WhatsApp (Usando IMG) -->
-    <a href="https://wa.link/pnce4s" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon">
-    </a>
+    <!-- AOS Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Menú Hamburguesa para Móvil ---
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            const header = document.getElementById('header');
-
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', () => {
-                    const isActive = navLinks.classList.toggle('active');
-                    menuToggle.setAttribute('aria-expanded', isActive);
-                    menuToggle.innerHTML = isActive ? '✕' : '☰';
-                    menuToggle.setAttribute('aria-label', isActive ? 'Cerrar menú' : 'Abrir menú');
-                });
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (navLinks.classList.contains('active')) {
-                            navLinks.classList.remove('active');
-                            menuToggle.setAttribute('aria-expanded', 'false');
-                            menuToggle.innerHTML = '☰';
-                            menuToggle.setAttribute('aria-label', 'Abrir menú');
-                        }
-                    });
-                });
-                document.addEventListener('click', (event) => {
-                    const isClickInsideNav = navLinks.contains(event.target);
-                    const isClickOnToggle = menuToggle.contains(event.target);
-                    if (navLinks.classList.contains('active') && !isClickInsideNav && !isClickOnToggle) {
-                         navLinks.classList.remove('active');
-                         menuToggle.setAttribute('aria-expanded', 'false');
-                         menuToggle.innerHTML = '☰';
-                         menuToggle.setAttribute('aria-label', 'Abrir menú');
-                    }
-                });
-            }
-
-            // --- Añadir clase 'scrolled' al header al hacer scroll ---
-             if(header) {
-                 const scrollThreshold = 50;
-                 const handleScroll = () => {
-                     header.classList.toggle('scrolled', window.scrollY > scrollThreshold);
-                 };
-                 window.addEventListener('scroll', handleScroll, { passive: true });
-                 handleScroll(); // Ejecutar una vez al cargar
-            }
-        });
-    </script>
+    <!-- === TU SCRIPT PERSONALIZADO === -->
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>
