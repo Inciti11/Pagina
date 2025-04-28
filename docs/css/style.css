@@ -1,12 +1,41 @@
-/* --- @font-face para la fuente local NewYork --- */
-@font-face {
-    font-family: 'NewYorkFont'; /* Nombre que usaremos en el CSS */
-    src: url('../assets/Font/DREAM\ GLORY.ttf') format('opentype'); /* Ajustado a '../assets/...' */
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+/* --- AJUSTES ESPECÍFICOS PARA SECCIÓN "RECONOCIMIENTOS" (.aura-block) --- */
+
+/* Asegurar que el H2 principal de la sección sea blanco */
+.aura-block h2 {
+    color: var(--white-color); /* Heredado de .aura-block pero lo ponemos explícito */
 }
 
+/* Asegurar que los H3 dentro del contenido específico sean blancos */
+.aura-block .quirofanos-content h3 {
+    color: var(--white-color);
+}
+
+/* Asegurar que los párrafos dentro del contenido específico sean blancos */
+.aura-block .quirofanos-content p {
+    color: var(--white-color);
+    opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
+}
+
+/* Asegurar que los elementos de lista sean blancos */
+.aura-block .quirofanos-content ul li {
+    color: var(--white-color);
+    opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
+}
+
+/* Asegurar que los iconos de la lista sean blancos y el fondo contraste */
+.aura-block .quirofanos-content ul li i {
+    color: var(--white-color); /* Color del icono en sí */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente blanco */
+}
+
+/* Mantener los estilos base de .aura-block que ya ponían color blanco general */
+.aura-block {
+    /* ... (otros estilos existentes para .aura-block) ... */
+    color: #ffffff; /* Esto ya estaba, pero lo dejamos como base */
+    /* ... (asegúrate que los estilos de fondo y animación se mantienen) ... */
+}
+
+/* --- (El resto de tu archivo CSS existente va aquí) --- */
 /* --- Variables y Estilos Globales --- */
 :root {
     --primary-color: #bfa08f;
@@ -34,18 +63,34 @@
     --header-height-current: var(--header-height-initial); /* JS Updated */
 }
 
+/* --- @font-face para la fuente local NewYork --- */
+@font-face {
+    font-family: 'NewYorkFont'; /* Nombre que usaremos en el CSS */
+    src: url('../assets/Font/DREAM\ GLORY.ttf') format('opentype'); /* Ajustado a '../assets/...' */
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* --- Reseteo y Base --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; font-size: 16px; }
+/* Solución para overflow horizontal potencial */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
 body {
     font-family: var(--font-body);
     color: var(--dark-text);
     line-height: 1.75;
     background-color: var(--white-color);
-    overflow-x: hidden;
+    /* overflow-x: hidden; ya está arriba */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative; /* Añadido por si acaso */
 }
+
 
 /* --- Tipografía --- */
 h1, h2 {
@@ -67,7 +112,16 @@ h1 { font-size: clamp(3rem, 6vw, 5rem); letter-spacing: -1.5px; }
 h2 { font-size: clamp(2.2rem, 4.5vw, 3rem); margin-bottom: 3.5rem; text-align: center; }
 h3 { font-size: 1.6rem; }
 p { margin-bottom: 1.5rem; color: var(--grey-text); max-width: 68ch; }
-p.lead { font-size: 1.15rem; color: var(--dark-text); text-align: center; font-weight: 400; margin-bottom: 2rem; }
+p.lead {
+    font-size: 1.15rem;
+    color: var(--dark-text);
+    text-align: center; /* Para centrar el texto dentro del párrafo */
+    font-weight: 400;
+    margin-bottom: 2rem;
+    width: 80%; /* Define un ancho para el párrafo (ajusta el valor según necesites) */
+    margin-left: auto; /* Centra el párrafo horizontalmente */
+    margin-right: auto; /* Centra el párrafo horizontalmente */
+  }
 a { color: var(--tertiary-color); text-decoration: none; transition: color var(--transition-fast); }
 a:hover { color: var(--secondary-color); }
 
@@ -77,7 +131,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 .section-bg { background-color: var(--light-bg); } /* Fondo claro por defecto */
 #desarrollo-barranquilla,
 #our-team,
-#proyectos { background-color: #fff; } /* Fondo blanco específico */
+#proyectos /* Ajustado: Proyectos ahora tiene fondo claro */ { background-color: #fff; } /* Fondo blanco específico */
 #mapa-lotes { background-color: var(--light-bg);} /* Fondo claro para mapa */
 .section-dark { background-color: var(--primary-color); color: var(--light-text); }
 .section-dark h1, .section-dark h2, .section-dark h3 { color: var(--white-color); }
@@ -161,9 +215,9 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 #pre-hero-banner .btn-secondary { background-color: rgba(255, 255, 255, 0.9); border-color: transparent; color: var(--primary-color); }
 #pre-hero-banner .btn-secondary:hover { background-color: var(--white-color); color: var(--primary-color); border-color: var(--white-color); }
 @keyframes fadeBackground { 0% { opacity: 0; } 8.33% { opacity: 1; } 33.33% { opacity: 1; } 41.66% { opacity: 0; } 100% { opacity: 0; } }
-.slide:nth-child(1) { background-image: url('../assets/imagenes/Consultorio/Copia\ de\ TEXTOS\ CIUDAD\ DEL\ RÍO\ \(1\).png'); animation-delay: 0s; }
-.slide:nth-child(2) { background-image: url('../assets/imagenes/Consultorio/Render\ Gastro\ Río\ \(Vertical\).jpg'); animation-delay: 6s; }
-.slide:nth-child(3) { background-image: url('../assets/imagenes/Consultorio/Noche2.png'); animation-delay: 12s; }
+.slide:nth-child(1) { background-image: url('../assets/imagenes/Consultorio/Gran\ Malecon.png'); animation-delay: 0s; }
+.slide:nth-child(2) { background-image: url('../assets/imagenes/Consultorio/Malecon\ 1.png'); animation-delay: 6s; }
+.slide:nth-child(3) { background-image: url('../assets/imagenes/Consultorio/Vive\ Rio\ 1.jpg'); animation-delay: 12s; }
 .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 5; color: rgba(255,255,255,0.8); font-size: 1rem; text-align: center; animation: bounce 2s infinite; cursor: pointer; }
 .scroll-down i { font-size: 1.5rem; margin-bottom: 5px; }
 @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-15px); } 60% { transform: translateX(-50%) translateY(-8px); } }
@@ -176,7 +230,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 @media (max-width: 576px) {
     #pre-hero-banner { min-height: 65vh; }
     #pre-hero-banner .btn { display: block; margin: 1rem auto; width: fit-content; }
-    #pre-hero-banner .btn-secondary { margin-left: auto !important; }
+    #pre-hero-banner .btn-secondary { margin-left: auto !important; } /* Ajuste específico para el botón secundario en móvil */
 }
 
 /* --- Divisores de Sección Creativos --- */
@@ -230,6 +284,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     font-family: var(--font-body); /* Usar Poppins para este H2 */
     font-weight: 600;
     letter-spacing: 0px;
+    text-align: left; /* Asegurar alineación izquierda */
 }
 .cta-banner .action-content {
     flex-basis: 35%;
@@ -262,8 +317,11 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     }
     .cta-banner .text-content-block {
         flex-basis: 100%;
-        text-align: center;
+        text-align: center; /* Centro en móvil */
         margin-bottom: 20px;
+    }
+    .cta-banner .text-content-block h2 {
+        text-align: center; /* Centro en móvil */
     }
     .cta-banner .action-content {
         flex-basis: 100%;
@@ -279,7 +337,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     gap: 4rem;
     align-items: center;
 }
-.quirofanos-content, .ciudad-rio-content { }
+.quirofanos-content, .ciudad-rio-content { /* No necesita CSS específico aquí */ }
 .quirofanos-content ul, .ciudad-rio-content ul { list-style: none; padding-left: 0; margin-top: 1.5rem; }
 .quirofanos-content ul li, .ciudad-rio-content ul li { padding-left: 40px; position: relative; margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--dark-text); line-height: 1.6; }
 .quirofanos-content ul li i, .ciudad-rio-content ul li i { position: absolute; left: 0; top: 6px; color: var(--secondary-color); font-size: 1.2rem; width: 25px; height: 25px; background-color: rgba(191, 160, 143, 0.1); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
@@ -317,17 +375,18 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 .close-zoom:hover { background: rgba(255, 255, 255, 0.3); }
 @media (max-width: 992px) { .gallery-item { height: 300px; } }
 @media (max-width: 768px) { .gallery-grid { grid-template-columns: 1fr; } .gallery-item { height: 280px; } }
-/* Estilos para el bloque con efecto aurora MÁS REALISTA */
+
+/* --- Estilos para el bloque con efecto aurora MÁS REALISTA --- */
 .aura-block {
     margin-bottom: 30px; /* Espacio entre bloques */
     border-radius: 15px; /* Bordes redondeados */
     padding: 40px 30px; /* Espaciado interno */
-    color: #ffffff; /* Color del texto para buen contraste */
+    color: #ffffff; /* Color del texto por defecto para buen contraste */
     overflow: hidden; /* Asegura que el fondo no se salga */
     position: relative; /* Necesario para la animación del fondo */
 
     /* --- Fondo Aurora Boreal con Múltiples Capas --- */
-    background-color: #BFA08F; /* Nuevo color base sólido */
+    background-color: var(--primary-color); /* Usar el color primario como base sólida */
 
     /* Capas de Gradiente (la primera está arriba) */
     background-image:
@@ -356,8 +415,6 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     animation: aura-flow 20s ease-in-out infinite; /* Más lenta y suave */
 }
 
-
-
 /* Keyframes para la animación de flujo tipo aurora */
 @keyframes aura-flow {
     0% {
@@ -377,69 +434,52 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     }
 }
 
-
-
-/* --- El resto de los estilos (content-wrapper, text-content, etc.) --- */
-/* ---              pueden permanecer igual que antes               --- */
-
-/* Contenedor interno para el contenido (Flexbox para alinear) */
-.content-wrapper {
+/* --- Contenedor interno y estilos de texto/acción para el bloque aurora --- */
+.aura-block .content-wrapper { /* Seleccionado dentro de .aura-block */
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Centrado para el caso general */
     align-items: center;
     flex-wrap: wrap;
     gap: 20px;
     position: relative;
     z-index: 1;
     align-content: center;
-    flex-direction: column;    /* Asegura que esté por encima del background */
+    flex-direction: column; /* Apilar por defecto */
 }
 
-/* Estilos para la parte del texto */
-.text-content {
-    flex-basis: 60%;
-    min-width: 250px;
+/* Estilos para la parte del texto dentro de .aura-block */
+.aura-block .text-content-block { /* Seleccionado dentro de .aura-block */
+    flex-basis: 100%; /* Ocupa todo el ancho por defecto */
+    text-align: center; /* Centrado por defecto */
 }
 
-.text-content h2 {
+.aura-block .text-content-block h2 {
     margin-top: 0;
     margin-bottom: 15px;
-    font-size: 2em;
+    font-size: 2em; /* Ajusta según necesidad */
     font-weight: bold;
+    color: var(--white-color); /* Asegurar color blanco */
 }
-.text-content-block h2 {
-    margin-top: 0;
-    margin-bottom: 15px;
-    font-size: 2em;
-    font-weight: bold;
-    color: #FFF;
-}
-.text-content-block p {
-    font-size: 1.1em;
+
+.aura-block .text-content-block p {
+    font-size: 1.1em; /* Ajusta según necesidad */
     line-height: 1.6;
-    color: #FFF;
-    text-align: center;
+    color: var(--white-color); /* Asegurar color blanco */
+    opacity: 0.9; /* Ligera transparencia */
+    max-width: 60ch; /* Limitar ancho de línea */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-
-.text-content p {
-    font-size: 1.1em;
-    line-height: 1.6;
+/* Estilos para la parte de acción (botón/imagen) dentro de .aura-block */
+.aura-block .action-content { /* Seleccionado dentro de .aura-block */
+    flex-basis: 100%; /* Ocupa todo el ancho por defecto */
+    text-align: center; /* Centrado por defecto */
+    margin-top: 20px; /* Espacio sobre el botón */
 }
 
-/* Estilos para la parte de acción (botón/imagen) */
-.action-content {
-    flex-basis: 35%;
-    text-align: right;
-    min-width: 150px;
-
-    .a:hover {
-        color: #FFF;
-    }
-}
-
-/* Estilos para el botón (opcional, si usas uno) */
-.aura-button {
+/* Estilos para el botón dentro de .aura-block */
+.aura-block .aura-button { /* Seleccionado dentro de .aura-block */
     display: inline-block;
     padding: 12px 25px;
     background-color: rgba(255, 255, 255, 0.15);
@@ -451,43 +491,44 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.aura-button:hover {
+.aura-block .aura-button:hover {
     background-color: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
-    color: #FFF;
+    color: #FFF; /* Asegurar color blanco al hacer hover */
 }
 
-
-
-
-/* --- Responsividad básica --- */
-@media (max-width: 768px) {
-    .content-wrapper {
-        flex-direction: column;
-        text-align: left;
+/* --- Responsividad básica para el bloque aurora --- */
+@media (min-width: 769px) { /* En pantallas más grandes, poner lado a lado */
+    .aura-block .content-wrapper {
+        justify-content: space-between; /* Espacio entre texto y acción */
+        text-align: left; /* Alinear texto a la izquierda */
     }
-
-    .action-content {
-        text-align: left;
-        margin-top: 20px;
-        
+    .aura-block .text-content-block {
+        flex-basis: 60%; /* Más espacio para el texto */
+        min-width: 250px;
+        text-align: left; /* Alinear texto a la izquierda */
     }
-    
-
-    .text-content h2 {
-        font-size: 1.6em;
+    .aura-block .text-content-block p {
+        margin-left: 0; /* Quitar centrado auto */
+        margin-right: 0;
     }
-    .text-content-block h2 {
-        font-size: 1.6em;
-    }
-    .text-content-block p {
-        font-size: 1em;
-    }
-
-    .text-content p {
-        font-size: 1em;
+    .aura-block .action-content {
+        flex-basis: 35%; /* Espacio para la acción */
+        text-align: right; /* Alinear acción a la derecha */
+        min-width: 150px;
+        margin-top: 0; /* Quitar margen superior */
     }
 }
+
+@media (max-width: 768px) { /* Ajustes específicos para móvil si es necesario */
+    .aura-block .text-content-block h2 {
+        font-size: 1.6em; /* Reducir tamaño de fuente en móvil */
+    }
+    .aura-block .text-content-block p {
+        font-size: 1em; /* Reducir tamaño de fuente en móvil */
+    }
+}
+
 /* --- Mapa Lotes Section --- */
 #mapa-lotes { z-index: 5; }
 #mapa-lotes p.lead { margin-bottom: 3rem; } /* Más espacio entre texto y mapa */
@@ -497,30 +538,29 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 
 /* --- Our Team Section --- */
 #our-team { z-index: 5; }
-.section-title { text-align: center; margin-bottom: 30px; }
+.section-title { text-align: center; margin-bottom: 30px; } /* Asumiendo una clase .section-title */
 .team-members-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 2rem; }
 .team-member { flex: 1; min-width: 280px; max-width: 350px; text-align: center; padding: 25px 20px; background-color: #fff; box-shadow: 0 5px 20px rgba(0,0,0,0.08); border-radius: var(--border-radius); display: flex; flex-direction: column; justify-content: flex-start; }
-.member-content { }
-.member-logo img { height: 100px; width: 100px; object-fit: contain; object-position: center; margin-bottom: 20px; }.member-content h4 { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; color: var(--dark-text); }
-.member-logo-casa-verde img { height: 100px; width: 225px; object-fit: contain; object-position: center; margin-bottom: 40px; }.member-content h4 { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; color: var(--dark-text); }
-
+.member-content { /* Contenedor para texto */ }
+.member-logo img { height: 100px; width: 100px; object-fit: contain; object-position: center; margin: 0 auto 20px auto; display: block; } /* Centrado y margen */
+.member-logo-casa-verde img { height: 100px; width: 225px; object-fit: contain; object-position: center; margin: 0 auto 40px auto; display: block; } /* Centrado y margen */
+.member-content h4 { font-size: 1.25rem; margin-bottom: 10px; font-weight: 600; color: var(--dark-text); }
 .member-content p { font-size: 0.95rem; line-height: 1.6; color: var(--grey-text); margin-bottom: 0; }
 
 /* --- Proyectos Section --- */
 #proyectos { z-index: 5; }
 .project-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 4rem; }
-.project-column-media { }
+.project-column-media { /* No necesita CSS específico aquí */ }
 .project-column-media .gallery-item { height: auto; margin-bottom: 1.5rem; box-shadow: 0 10px 30px var(--shadow-light); border-radius: var(--border-radius); overflow: hidden; cursor: default; }
 .project-column-media .gallery-item img { display: block; width: 100%; height: auto; border-radius: var(--border-radius); max-height: 400px; object-fit: cover; }
-.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; width: 100%; border-radius: var(--border-radius); box-shadow: 0 8px 25px var(--shadow-light); }
+.video-container { position: relative; padding-bottom: 56.25%; /* 16:9 Aspect Ratio */ height: 0; overflow: hidden; width: 100%; border-radius: var(--border-radius); box-shadow: 0 8px 25px var(--shadow-light); }
 .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-.project-column-text { }
-.project-column-text .feature-item {  border: 1px solid var(--border-color); box-shadow: 0 8px 25px var(--shadow-light); padding: 2.5rem; background: var(--white-color); height: 100%; display: flex; flex-direction: column; justify-content: center; }
+.project-column-text { /* No necesita CSS específico aquí */ }
+.project-column-text .feature-item { border: 1px solid var(--border-color); box-shadow: 0 8px 25px var(--shadow-light); padding: 2.5rem; background: var(--white-color); height: 100%; display: flex; flex-direction: column; justify-content: center }
 .project-column-text .feature-item .icon {
-    /* AJUSTE 1: Quitado margin-left y margin-right para heredar alineación del padre */
-    /* margin-left: 0; */
-    /* margin-right: auto; */
     margin-bottom: 1.5rem;
+    margin-left: 0; /* Alineado a la izquierda por defecto */
+    margin-right: auto; /* Alineado a la izquierda por defecto */
  }
 .project-column-text .feature-item h3 { text-align: left; margin-bottom: 1rem; }
 .project-column-text .feature-item p { text-align: left; font-size: 1rem; color: var(--grey-text); margin-bottom: 0; }
@@ -530,52 +570,93 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 @media (max-width: 992px) {
     .project-container { grid-template-columns: 1fr; gap: 2.5rem; }
     .project-column-media {
-        /* AJUSTE 2.1: Media abajo en móvil */
-        order: 0 !important; /* Default order */
-        max-width: 600px; margin: 0 auto;
+        order: 0; /* Orden por defecto, visualmente abajo si el texto está arriba */
+        max-width: 600px; margin: 0 auto 2rem auto; /* Centrado y margen inferior */
     }
     .project-column-text {
-        /* AJUSTE 2.1: Texto arriba en móvil */
-        order: -1 !important; /* Texto primero */
+        order: -1; /* Texto primero en móvil */
     }
-    .project-column-text .feature-item { text-align: center; }
-    .project-column-text .feature-item .icon { margin-left: auto; margin-right: auto; /* Centrar icono en móvil */ }
-    .project-column-text .feature-item h3 { text-align: center; }
-    .project-column-text .feature-item p { text-align: center; }
+    .project-column-text .feature-item {
+        text-align: center; /* Centrar todo el contenido del feature item */
+        height: auto; /* Altura automática en móvil */
+    }
+    .project-column-text .feature-item .icon {
+        margin-left: auto; /* Centrar icono en móvil */
+        margin-right: auto;
+    }
+    .project-column-text .feature-item h3 {
+        text-align: center; /* Centrar H3 en móvil */
+    }
+    .project-column-text .feature-item p {
+        text-align: center; /* Centrar P en móvil */
+    }
 }
 
+
 /* --- Contact Section --- */
-#contact { position: relative; z-index: 5; padding-top: 10rem; padding-bottom: 10rem; }
-#contact .container { }
+#contact { position: relative; z-index: 5; padding-top: 10rem; padding-bottom: 10rem; background-color: var(--primary-color); /* Fondo para la sección oscura */ }
+#contact .container { /* No necesita CSS específico aquí */ }
 #contact h2 { color: var(--white-color); margin-bottom: 1.5rem; }
-#contact .section-subtitle { color: var(--light-text); opacity: 0.8; max-width: 700px; margin: 0 auto 4rem auto; }
+#contact .section-subtitle { color: var(--light-text); opacity: 0.8; max-width: 700px; margin: 0 auto 4rem auto; text-align: center; } /* Centrado */
 .contact-form-wrapper {
     max-width: 700px;
     margin: 0 auto;
-    /* --- CAMBIO AQUÍ --- */
-    background: #FFFFFF; /* Fondo blanco sólido */
-    /* --- FIN CAMBIO --- */
+    background: var(--white-color); /* Fondo blanco sólido */
     padding: 2.5rem;
     border-radius: var(--border-radius);
-    border: 1px solid rgba(255, 255, 255, 0.15); /* Considera cambiar el color del borde si no se ve bien sobre blanco */
-    /* backdrop-filter y -webkit-backdrop-filter eliminados */
-    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+    /* border: 1px solid rgba(255, 255, 255, 0.15); Considera quitar o cambiar el borde si no se ve bien */
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2); /* Sombra más oscura para contraste */
     position: relative;
     z-index: 2;
-  }
-#contact .angled-divider-bottom .shape-fill-footer { fill: var(--dark-text); }
+}
+/* Asegúrate de que los elementos del formulario tengan estilos si es necesario */
+.contact-form-wrapper input,
+.contact-form-wrapper textarea,
+.contact-form-wrapper button {
+    /* Estilos básicos para inputs y botón del formulario */
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--border-color);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--dark-text);
+}
+.contact-form-wrapper input:focus,
+.contact-form-wrapper textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(191, 160, 143, 0.2);
+}
+.contact-form-wrapper textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+.contact-form-wrapper button {
+    /* Usar estilos de .btn si quieres consistencia */
+    cursor: pointer;
+    background: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    transition: background var(--transition-fast);
+}
+.contact-form-wrapper button:hover {
+    background: var(--secondary-color); /* O un color más oscuro/claro */
+}
 
 /* --- Footer --- */
-#main-footer { background-color: var(--dark-text); color: var(--grey-text); padding: 6rem 0 4rem 0; text-align: center; position: relative; z-index: 9; margin-top: -1px; }
+#main-footer { background-color: var(--dark-text); color: var(--grey-text); padding: 6rem 0 4rem 0; text-align: center; position: relative; z-index: 9; margin-top: -1px; /* Solapa ligeramente el divisor si existe */ }
 #main-footer p { margin: 0.5rem 0; color: rgba(232, 243, 241, 0.6); font-size: 0.9rem; }
 #main-footer a { color: var(--tertiary-color); font-weight: 500; }
-#main-footer a:hover { color:#233521; text-decoration: underline; }
+#main-footer a:hover { color: var(--white-color); text-decoration: underline; } /* Cambiado hover a blanco */
 .footer-logo { display: block; margin-bottom: 1.5rem; text-decoration: none; }
 .footer-logo img { display: block; width: auto; max-width: 180px; margin: 0 auto 1.5rem auto; }
 .social-icons { margin-top: 2rem; margin-bottom: 1.5rem; }
 .social-icons a { color: var(--grey-text); margin: 0 1rem; font-size: 1.4rem; transition: color var(--transition-fast), transform var(--transition-fast); display: inline-block; }
 .social-icons a:hover { color: var(--secondary-color); transform: translateY(-3px); }
-.container-footer { text-align: center; display: flex; flex-direction: column; align-items: center; }
+.container-footer { text-align: center; display: flex; flex-direction: column; align-items: center; } /* Asegura centrado */
 #main-footer p[style*="font-size: 0.6em"] { max-width: 800px; margin: 1.5rem auto 0 auto; color: rgba(232, 243, 241, 0.4); }
 
 /* --- Whatsapp --- */
@@ -589,7 +670,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     section { padding: 6.5rem 0; }
     :root { --header-height-initial: 65px; --header-height-scrolled: 55px; }
     #our-team .team-members-container { gap: 25px; }
-    #our-team .team-member { max-width: calc(50% - 15px); min-width: calc(50% - 15px); }
+    #our-team .team-member { max-width: calc(50% - 12.5px); min-width: calc(50% - 12.5px); } /* Ajuste para gap */
     #main-nav { display: none; position: fixed; top: var(--header-height-current); left: 0; width: 100%; background-color: var(--white-color); box-shadow: 0 10px 20px rgba(0,0,0,0.1); padding: 1rem 0; border-top: 1px solid var(--border-color); max-height: calc(100vh - var(--header-height-current)); overflow-y: auto; transition: top var(--transition-main), max-height var(--transition-main), opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; opacity: 0; visibility: hidden; transform: translateY(-10px); z-index: 1001; }
     #main-nav.active { display: block; opacity: 1; visibility: visible; transform: translateY(0); }
     #main-nav ul { flex-direction: column; align-items: center; }
@@ -615,7 +696,65 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     .btn { padding: 0.8rem 2rem; font-size: 0.85rem; letter-spacing: 0.8px;}
     #main-footer { padding: 4rem 0 2rem 0; }
     .social-icons a { margin: 0 0.7rem; font-size: 1.3rem;}
+    /* Asegurar que el botón secundario del hero no tenga margen izquierdo forzado */
+    #pre-hero-banner .btn-secondary { margin-left: auto !important; /* Sobreescribe el style inline */ }
 }
 /* Utilidades */
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
-body.mobile-nav-active { overflow: hidden; }
+body.mobile-nav-active { overflow: hidden; } /* Evita scroll del body cuando el menú móvil está abierto */
+
+/* --- AJUSTES ESPECÍFICOS PARA SECCIÓN "RECONOCIMIENTOS" (.aura-block) --- */
+
+/* Asegurar que el H2 principal de la sección sea blanco */
+.aura-block h2 {
+    color: var(--white-color); /* Heredado de .aura-block pero lo ponemos explícito */
+}
+
+/* Asegurar que los H3 dentro del contenido específico sean blancos */
+.aura-block .quirofanos-content h3 {
+    color: var(--white-color);
+}
+
+/* Asegurar que los párrafos dentro del contenido específico sean blancos */
+.aura-block .quirofanos-content p {
+    color: var(--white-color);
+    opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
+}
+
+/* Asegurar que los elementos de lista sean blancos */
+.aura-block .quirofanos-content ul li {
+    color: var(--white-color);
+    opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
+}
+
+/* Asegurar que los iconos de la lista sean blancos y el fondo contraste */
+.aura-block .quirofanos-content ul li i {
+    color: var(--white-color); /* Color del icono en sí */
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente blanco */
+}
+#gran-malecon .logos-container {
+    display: flex; /* Distribuye los logos en una fila */
+    justify-content: space-around; /* Espacio igualitario entre los logos */
+    align-items: center; /* Alinea verticalmente los logos (si fuera necesario) */
+    margin-top: 30px; /* Espacio entre el título y los logos */
+    padding: 20px; /* Espacio alrededor de los logos */
+}
+
+#gran-malecon .logo-item {
+    display: flex;
+    flex-direction: column; /* Apila la imagen y el texto */
+    align-items: center; /* Centra horizontalmente la imagen y el texto */
+    text-align: center; /* Centra el texto */
+    max-width: 150px; /* Ancho máximo para cada logo (ajusta según necesites) */
+}
+
+#gran-malecon .logo-item img {
+    max-width: 100%; /* Asegura que la imagen no se desborde de su contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+    margin-bottom: 10px; /* Espacio entre el logo y el texto */
+}
+
+#gran-malecon .logo-item .logo-text {
+    font-size: 0.85em; /* Tamaño del texto descriptivo */
+    color: #555; /* Color del texto (gris suave) */
+}
