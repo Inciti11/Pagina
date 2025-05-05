@@ -1,36 +1,36 @@
-/* --- AJUSTES ESPECÍFICOS PARA SECCIÓN "RECONOCIMIENTOS" (.aura-block) --- */
+/* --- AJUSTES ESPECÍFICOS PARA SECCIÓN "RECONOCIMIENTOS" (.block) --- */
 
 /* Asegurar que el H2 principal de la sección sea blanco */
-.aura-block h2 {
-    color: var(--white-color); /* Heredado de .aura-block pero lo ponemos explícito */
+.block h2 {
+    color: var(--white-color); /* Heredado de .block pero lo ponemos explícito */
 }
 
 /* Asegurar que los H3 dentro del contenido específico sean blancos */
-.aura-block .quirofanos-content h3 {
+.block .view-content h3 {
     color: var(--white-color);
 }
 
 /* Asegurar que los párrafos dentro del contenido específico sean blancos */
-.aura-block .quirofanos-content p {
+.block .view-content p {
     color: var(--white-color);
     opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
 }
 
 /* Asegurar que los elementos de lista sean blancos */
-.aura-block .quirofanos-content ul li {
+.block .view-content ul li {
     color: var(--white-color);
     opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
 }
 
 /* Asegurar que los iconos de la lista sean blancos y el fondo contraste */
-.aura-block .quirofanos-content ul li i {
+.block .view-content ul li i {
     color: var(--white-color); /* Color del icono en sí */
     background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente blanco */
 }
 
-/* Mantener los estilos base de .aura-block que ya ponían color blanco general */
-.aura-block {
-    /* ... (otros estilos existentes para .aura-block) ... */
+/* Mantener los estilos base de .block que ya ponían color blanco general */
+.block {
+    /* ... (otros estilos existentes para .block) ... */
     color: #ffffff; /* Esto ya estaba, pero lo dejamos como base */
     /* ... (asegúrate que los estilos de fondo y animación se mantienen) ... */
 }
@@ -62,6 +62,110 @@
     --header-height-scrolled: 60px;
     --header-height-current: var(--header-height-initial); /* JS Updated */
 }
+/* --- Estilos Base (Desktop - Dos Columnas) --- */
+.adaptive-layout {
+    display: flex;
+    flex-wrap: wrap; /* Importante para que funcione bien en diferentes anchos */
+    align-items: center; /* Alinea verticalmente los contenedores */
+    gap: 2rem; /* Espacio entre texto e imagen */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .adaptive-text-content {
+    flex: 1 1 50%; /* Ocupa aprox 50%, flexible */
+    order: 1; /* Texto a la izquierda por defecto */
+    /* Estilos para los textos internos */
+  }
+  
+  .adaptive-image-content {
+    flex: 1 1 45%; /* Ocupa aprox 45%, flexible */
+    order: 2; /* Imagen a la derecha por defecto */
+  }
+  
+  .adaptive-image-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+  }
+  
+  /* Estilos específicos para los textos (igual que antes) */
+  .adaptive-text-content .text-pretitle { /* H3 */
+    color: #888;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+  }
+  .adaptive-text-content .text-headline { /* H2 */
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.3;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
+  .adaptive-text-content .text-paragraph { /* P */
+    font-size: clamp(0.95rem, 2.5vw, 1rem);
+    line-height: 1.65;
+    margin: 0;
+    color: #FFF;
+  }
+
+  
+  /* --- Media Query (Móvil - Apilado y REORDENADO) --- */
+  @media (max-width: 991px) { /* Usamos un breakpoint más común como 991px o 768px */
+  
+    .adaptive-layout {
+      /* Cambiamos a Grid para facilitar el reordenamiento complejo */
+      display: grid;
+      grid-template-columns: 1fr; /* Una sola columna */
+      gap: 1.5rem; /* Espacio vertical */
+      text-align: center; /* Centrar todo en móvil */
+    }
+  
+    /* Clave: Hacemos que los hijos del contenedor de texto sean */
+    /* tratados como hijos directos del grid para poder reordenarlos */
+    .adaptive-text-content {
+      display: contents; /* Permite reordenar h3, h2, p individualmente */
+    }
+  
+    /* REORDENAMIENTO VISUAL para Móvil */
+    .text-pretitle { order: 1; }  /* 1. Pre-título (H3) */
+    .text-headline { order: 2; }  /* 2. Título (H2) */
+    .adaptive-image-content { order: 3; } /* 3. Imagen */
+    .text-paragraph { order: 4; } /* 4. Párrafo (P) */
+  
+    /* Asegurar que los elementos ocupen el ancho y se centren */
+     .adaptive-text-content, /* Ya no es necesario porque es 'contents' */
+     .adaptive-image-content,
+     .text-pretitle,
+     .text-headline,
+     .text-paragraph {
+         width: 100%;
+         max-width: 100%; /* Evitar desbordamiento */
+         text-align: center;
+     }
+     .adaptive-image-content img {
+         margin-left: auto;
+         margin-right: auto; /* Centrar imagen explícitamente */
+     }
+  }
+  
+  /* Ajustes menores opcionales para pantallas aún más pequeñas */
+  @media (max-width: 576px) {
+      .adaptive-layout {
+          gap: 1rem;
+          padding-left: 1rem;
+          padding-right: 1rem;
+      }
+      .adaptive-text-content .text-headline {
+          font-size: 1.6rem; /* Título un poco más pequeño */
+      }
+       .adaptive-text-content .text-paragraph {
+          font-size: 0.9rem; /* Párrafo un poco más pequeño */
+      }
+  }
 
 /* --- @font-face para la fuente local NewYork --- */
 @font-face {
@@ -90,6 +194,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
     position: relative; /* Añadido por si acaso */
 }
+
 
 
 /* --- Tipografía --- */
@@ -182,7 +287,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 #main-nav ul li { margin-left: 3rem; }
 #main-nav ul li a {
     font-family: var(--font-body); color: var(--dark-text); font-weight: 500;
-    position: relative; padding-bottom: 10px; font-size: 0.9rem;
+    position: relative; padding-bottom: 10px; font-size: 0.8rem;
     text-transform: uppercase; letter-spacing: 1px; transition: color var(--transition-fast);
 }
 #main-nav ul li a::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 2px; background-color: var(--secondary-color); transition: width var(--transition-main); }
@@ -215,9 +320,9 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 #pre-hero-banner .btn-secondary { background-color: rgba(255, 255, 255, 0.9); border-color: transparent; color: var(--primary-color); }
 #pre-hero-banner .btn-secondary:hover { background-color: var(--white-color); color: var(--primary-color); border-color: var(--white-color); }
 @keyframes fadeBackground { 0% { opacity: 0; } 8.33% { opacity: 1; } 33.33% { opacity: 1; } 41.66% { opacity: 0; } 100% { opacity: 0; } }
-.slide:nth-child(1) { background-image: url('../assets/imagenes/Consultorio/Gran\ Malecon.png'); animation-delay: 0s; }
-.slide:nth-child(2) { background-image: url('../assets/imagenes/Consultorio/Malecon\ 1.png'); animation-delay: 6s; }
-.slide:nth-child(3) { background-image: url('../assets/imagenes/Consultorio/Vive\ Rio\ 1.jpg'); animation-delay: 12s; }
+.slide:nth-child(1) { background-image: url('../assets/imagenes/Vistas/Gran\ Malecon.png'); animation-delay: 0s; }
+.slide:nth-child(2) { background-image: url('../assets/imagenes/Vistas/Malecon\ 1.png'); animation-delay: 6s; }
+.slide:nth-child(3) { background-image: url('../assets/imagenes/Vistas/Vive\ Rio\ 1.jpg'); animation-delay: 12s; }
 .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 5; color: rgba(255,255,255,0.8); font-size: 1rem; text-align: center; animation: bounce 2s infinite; cursor: pointer; }
 .scroll-down i { font-size: 1.5rem; margin-bottom: 5px; }
 @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-15px); } 60% { transform: translateX(-50%) translateY(-8px); } }
@@ -270,6 +375,95 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     padding: 0 2rem; /* Consistente con .container */
     position: relative;
     z-index: 2;
+}
+/* --- Corrección para el header --- */
+
+/* En lugar de forzar content-box, usemos una solución más limpia */
+#main-nav ul li {
+    box-sizing: border-box; /* Cambiamos a border-box que es más predecible */
+    padding: 0; /* Eliminamos cualquier padding que pueda estar causando el problema */
+    margin-left: 3rem; /* Mantenemos el margen existente */
+    display: flex; /* Aseguramos que los elementos se comportan como flex items */
+    align-items: center; /* Centramos verticalmente */
+}
+
+/* Aseguramos que los elementos de navegación tengan altura adecuada */
+#main-nav ul {
+    height: 100%; /* Asegura que ocupe toda la altura del contenedor padre */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center; /* Alinea verticalmente al centro */
+}
+
+/* Ajustes para el contenedor principal del header */
+#main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Asegura que ocupe toda la altura */
+}
+
+/* Alineación específica para el cambiador de idioma */
+.language-switcher-container {
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+}
+
+/* Esto es importante si hay problemas de desbordamiento */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* Aseguramos que la transición de altura del header sea suave */
+#main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    height: var(--header-height-initial);
+    transition: all var(--transition-main);
+    border-bottom: 1px solid transparent;
+    display: flex;
+    align-items: center;
+}
+
+/* Aseguramos que EN quede correctamente posicionado */
+#main-header .en-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+}
+
+/* Para los casos de pantallas más pequeñas */
+@media (max-width: 1024px) {
+    #main-nav ul li {
+        margin: 1.2rem 0;
+        margin-left: 0;
+    }
+    
+    /* Evita que la barra de navegación colapse en móvil */
+    #main-header .container {
+        flex-wrap: nowrap;
+    }
+    
+    /* Asegura que el botón de idioma se mantenga visible */
+    .language-switcher-container {
+        position: absolute;
+        right: 70px; /* Ajusta según sea necesario */
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }
 .cta-banner .text-content-block {
     flex-basis: 60%;
@@ -331,29 +525,29 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 }
 
 /* --- Grid reutilizado (Gran Malecón, Ciudad del Río) --- */
-.quirofanos-grid, .ciudad-rio-grid {
+.view-grid, .ciudad-rio-grid {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
     gap: 4rem;
     align-items: center;
 }
-.quirofanos-content, .ciudad-rio-content { /* No necesita CSS específico aquí */ }
-.quirofanos-content ul, .ciudad-rio-content ul { list-style: none; padding-left: 0; margin-top: 1.5rem; }
-.quirofanos-content ul li, .ciudad-rio-content ul li { padding-left: 40px; position: relative; margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--dark-text); line-height: 1.6; }
-.quirofanos-content ul li i, .ciudad-rio-content ul li i { position: absolute; left: 0; top: 6px; color: var(--secondary-color); font-size: 1.2rem; width: 25px; height: 25px; background-color: rgba(191, 160, 143, 0.1); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
-.quirofanos-image img, .ciudad-rio-image img { width: 100%; height: auto; max-height: 500px; display: block; border-radius: var(--border-radius); box-shadow: 0 15px 45px var(--shadow-medium); object-fit: cover; }
+.view-content, .ciudad-rio-content { /* No necesita CSS específico aquí */ }
+.view-content ul, .ciudad-rio-content ul { list-style: none; padding-left: 0; margin-top: 1.5rem; }
+.view-content ul li, .ciudad-rio-content ul li { padding-left: 40px; position: relative; margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--dark-text); line-height: 1.6; }
+.view-content ul li i, .ciudad-rio-content ul li i { position: absolute; left: 0; top: 6px; color: var(--secondary-color); font-size: 1.2rem; width: 25px; height: 25px; background-color: rgba(191, 160, 143, 0.1); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; }
+.view-image img, .ciudad-rio-image img { width: 100%; height: auto; max-height: 500px; display: block; border-radius: var(--border-radius); box-shadow: 0 15px 45px var(--shadow-medium); object-fit: cover; }
 #gran-malecon h3 { text-align: left; margin-bottom: 1rem; font-size: 1.8rem; color: var(--tertiary-color); }
-#gran-malecon .quirofanos-content h3:nth-of-type(2) { margin-top: 2rem; margin-bottom: 1.5rem; }
+#gran-malecon .view-content h3:nth-of-type(2) { margin-top: 2rem; margin-bottom: 1.5rem; }
 @media (max-width: 992px) {
-    .quirofanos-grid, .ciudad-rio-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .quirofanos-image, .ciudad-rio-image { order: -1; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .view-grid, .ciudad-rio-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .view-image, .ciudad-rio-image { order: -1; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
     #gran-malecon h3, #ciudad-del-rio h3 { text-align: center; }
-    .quirofanos-content ul, .ciudad-rio-content ul { max-width: 500px; margin: 1.5rem auto; display: inline-block; text-align: left; }
-    .quirofanos-content, .ciudad-rio-content { text-align: center; }
-    .quirofanos-content p, .ciudad-rio-content p { margin-left: auto; margin-right: auto; }
+    .view-content ul, .ciudad-rio-content ul { max-width: 500px; margin: 1.5rem auto; display: inline-block; text-align: left; }
+    .view-content, .ciudad-rio-content { text-align: center; }
+    .view-content p, .ciudad-rio-content p { margin-left: auto; margin-right: auto; }
 }
 @media (max-width: 768px) {
-    .quirofanos-image img, .ciudad-rio-image img { max-height: 350px; }
+    .view-image img, .ciudad-rio-image img { max-height: 350px; }
 }
 
 /* --- Gallery Section (Usada en Desarrollo Bquilla) --- */
@@ -377,7 +571,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 @media (max-width: 768px) { .gallery-grid { grid-template-columns: 1fr; } .gallery-item { height: 280px; } }
 
 /* --- Estilos para el bloque con efecto aurora MÁS REALISTA --- */
-.aura-block {
+.block {
     margin-bottom: 30px; /* Espacio entre bloques */
     border-radius: 15px; /* Bordes redondeados */
     padding: 40px 30px; /* Espaciado interno */
@@ -435,7 +629,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 }
 
 /* --- Contenedor interno y estilos de texto/acción para el bloque aurora --- */
-.aura-block .content-wrapper { /* Seleccionado dentro de .aura-block */
+.block .content-wrapper { /* Seleccionado dentro de .block */
     display: flex;
     justify-content: center; /* Centrado para el caso general */
     align-items: center;
@@ -447,13 +641,13 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     flex-direction: column; /* Apilar por defecto */
 }
 
-/* Estilos para la parte del texto dentro de .aura-block */
-.aura-block .text-content-block { /* Seleccionado dentro de .aura-block */
+/* Estilos para la parte del texto dentro de .block */
+.block .text-content-block { /* Seleccionado dentro de .block */
     flex-basis: 100%; /* Ocupa todo el ancho por defecto */
     text-align: center; /* Centrado por defecto */
 }
 
-.aura-block .text-content-block h2 {
+.block .text-content-block h2 {
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 2em; /* Ajusta según necesidad */
@@ -461,7 +655,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     color: var(--white-color); /* Asegurar color blanco */
 }
 
-.aura-block .text-content-block p {
+.block .text-content-block p {
     font-size: 1.1em; /* Ajusta según necesidad */
     line-height: 1.6;
     color: var(--white-color); /* Asegurar color blanco */
@@ -471,15 +665,15 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     margin-right: auto;
 }
 
-/* Estilos para la parte de acción (botón/imagen) dentro de .aura-block */
-.aura-block .action-content { /* Seleccionado dentro de .aura-block */
+/* Estilos para la parte de acción (botón/imagen) dentro de .block */
+.block .action-content { /* Seleccionado dentro de .block */
     flex-basis: 100%; /* Ocupa todo el ancho por defecto */
     text-align: center; /* Centrado por defecto */
     margin-top: 20px; /* Espacio sobre el botón */
 }
 
-/* Estilos para el botón dentro de .aura-block */
-.aura-block .aura-button { /* Seleccionado dentro de .aura-block */
+/* Estilos para el botón dentro de .block */
+.block .aura-button { /* Seleccionado dentro de .block */
     display: inline-block;
     padding: 12px 25px;
     background-color: rgba(255, 255, 255, 0.15);
@@ -491,7 +685,7 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.aura-block .aura-button:hover {
+.block .aura-button:hover {
     background-color: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
     color: #FFF; /* Asegurar color blanco al hacer hover */
@@ -499,20 +693,20 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 
 /* --- Responsividad básica para el bloque aurora --- */
 @media (min-width: 769px) { /* En pantallas más grandes, poner lado a lado */
-    .aura-block .content-wrapper {
+    .block .content-wrapper {
         justify-content: space-between; /* Espacio entre texto y acción */
         text-align: left; /* Alinear texto a la izquierda */
     }
-    .aura-block .text-content-block {
+    .block .text-content-block {
         flex-basis: 60%; /* Más espacio para el texto */
         min-width: 250px;
         text-align: left; /* Alinear texto a la izquierda */
     }
-    .aura-block .text-content-block p {
+    .block .text-content-block p {
         margin-left: 0; /* Quitar centrado auto */
         margin-right: 0;
     }
-    .aura-block .action-content {
+    .block .action-content {
         flex-basis: 35%; /* Espacio para la acción */
         text-align: right; /* Alinear acción a la derecha */
         min-width: 150px;
@@ -521,10 +715,10 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 }
 
 @media (max-width: 768px) { /* Ajustes específicos para móvil si es necesario */
-    .aura-block .text-content-block h2 {
+    .block .text-content-block h2 {
         font-size: 1.6em; /* Reducir tamaño de fuente en móvil */
     }
-    .aura-block .text-content-block p {
+    .block .text-content-block p {
         font-size: 1em; /* Reducir tamaño de fuente en móvil */
     }
 }
@@ -703,32 +897,32 @@ section { padding: 8.5rem 0; overflow: visible; position: relative; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
 body.mobile-nav-active { overflow: hidden; } /* Evita scroll del body cuando el menú móvil está abierto */
 
-/* --- AJUSTES ESPECÍFICOS PARA SECCIÓN "RECONOCIMIENTOS" (.aura-block) --- */
+/* --- AJUSTES ESPECÍFICOS PARA SECCIÓN "RECONOCIMIENTOS" (.block) --- */
 
 /* Asegurar que el H2 principal de la sección sea blanco */
-.aura-block h2 {
-    color: var(--white-color); /* Heredado de .aura-block pero lo ponemos explícito */
+.block h2 {
+    color: var(--white-color); /* Heredado de .block pero lo ponemos explícito */
 }
 
 /* Asegurar que los H3 dentro del contenido específico sean blancos */
-.aura-block .quirofanos-content h3 {
+.block .view-content h3 {
     color: var(--white-color);
 }
 
 /* Asegurar que los párrafos dentro del contenido específico sean blancos */
-.aura-block .quirofanos-content p {
+.block .view-content p {
     color: var(--white-color);
     opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
 }
 
 /* Asegurar que los elementos de lista sean blancos */
-.aura-block .quirofanos-content ul li {
+.block .view-content ul li {
     color: var(--white-color);
     opacity: 0.9; /* Puedes ajustar la opacidad si quieres */
 }
 
 /* Asegurar que los iconos de la lista sean blancos y el fondo contraste */
-.aura-block .quirofanos-content ul li i {
+.block .view-content ul li i {
     color: var(--white-color); /* Color del icono en sí */
     background-color: rgba(255, 255, 255, 0.2); /* Fondo semitransparente blanco */
 }
@@ -757,4 +951,21 @@ body.mobile-nav-active { overflow: hidden; } /* Evita scroll del body cuando el 
 #gran-malecon .logo-item .logo-text {
     font-size: 0.85em; /* Tamaño del texto descriptivo */
     color: #555; /* Color del texto (gris suave) */
+}
+.header-container { /* Reemplaza con tu clase real */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* O como necesites alinear */
+}
+
+/* Puede que necesites estilos específicos para el nuevo contenedor */
+.language-switcher-container {
+    /* Estilos para posicionar o decorar el botón si es necesario */
+    margin-left: 1em; /* Ejemplo: añadir espacio a la izquierda */
+}
+
+/* Asegúrate que los estilos que antes aplicaban a li.language-switcher-item */
+/* ahora apliquen a .language-switcher-container o #language-switcher directamente */
+#language-switcher {
+   /* Estilos del botón */
 }
