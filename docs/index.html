@@ -24,10 +24,13 @@
         integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <!-- === PrimeIcons (NECESARIO PARA EL BANNER DE INSTALACIÓN) === -->
+    <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css">
+
     <!-- === TU HOJA DE ESTILOS PERSONALIZADA === -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!-- === ESTILOS PARA EL BOTÓN DE IDIOMA (Añadir a style.css o aquí) === -->
+    <!-- === ESTILOS PARA EL BOTÓN DE IDIOMA === -->
     <style>
         #language-switcher {
             background-color: var(--primary-color); /* O un color que destaque sutilmente */
@@ -54,6 +57,113 @@
         }
     </style>
 
+    <!-- === CSS PARA EL BANNER DE INSTALACIÓN (AÑADIDO AQUÍ) === -->
+    <style>
+    .install-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+      transform: translateY(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .install-banner.show {
+      transform: translateY(0);
+    }
+
+    .banner-container {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .banner-icon {
+      flex-shrink: 0;
+      margin-right: 16px;
+    }
+
+    .banner-icon img {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      /* !!! IMPORTANTE: Asegúrate que esta ruta es correcta desde la raíz de tu proyecto !!! */
+      /* Si la imagen está en assets/icons/ de la raíz, esto está bien */
+      /* Si está en otro lugar, ajústala */
+      /* src: "assets/icons/icon-192x192.png"; <-- Esto se define en el HTML del banner */
+    }
+
+    .banner-content {
+      flex-grow: 1;
+    }
+
+    .banner-title {
+      margin: 0 0 4px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .banner-description {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .banner-actions {
+      display: flex;
+      align-items: center;
+      margin-left: 16px;
+    }
+
+    .install-button {
+      background-color: #4CAF50; /* Puedes ajustar este color a tu paleta */
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dismiss-button {
+      background: none;
+      border: none;
+      color: #999;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 12px;
+      padding: 4px 8px;
+    }
+
+    .icon-text { /* Estilo para icono dentro de texto (iOS) */
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 1.1em; /* Ajusta según sea necesario */
+      margin: 0 2px;
+    }
+
+    @media (max-width: 600px) {
+      .banner-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .banner-actions {
+        margin-left: 0;
+        margin-top: 12px;
+        align-self: flex-end;
+      }
+    }
+    </style>
+
 </head>
 
 <body>
@@ -62,7 +172,6 @@
     <header id="main-header">
         <div class="container">
             <a href="#pre-hero-banner" class="logo">
-                <!-- El alt de la imagen también debe ser traducible -->
                 <img src="./assets/imagenes/Logo/Ciudad Del Rio.png"
                      alt="Ciudad del Río Logo"
                      data-alt-es="Ciudad del Río Logo"
@@ -76,27 +185,19 @@
                     <li><a href="#gran-malecon" data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</a></li>
                     <li><a href="#proyectos" data-lang-es="Proyectos" data-lang-en="Projects">Proyectos</a></li>
                     <li><a href="#contact" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a></li>
-                    <!-- El botón de idioma ya NO está aquí -->
                 </ul>
             </nav>
-        
-            <!-- === ELEMENTO MOVIDO AQUÍ === -->
-            <!-- Opción 1: Usar un div como contenedor (recomendado para estilos) -->
+
             <div class="language-switcher-container">
                 <button id="language-switcher" aria-label="Cambiar idioma a Inglés">EN</button>
             </div>
-        
-            <!-- Opción 2: Sólo el botón (si no necesitas un div contenedor) -->
-            <!-- <button id="language-switcher" aria-label="Cambiar idioma a Inglés">EN</button> -->
-            <!-- ============================ -->
-        
+
             <button id="mobile-nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
                 <i class="fas fa-bars"></i>
                 <span class="sr-only" data-lang-es="Abrir/Cerrar menú" data-lang-en="Open/Close menu">Abrir/Cerrar menú</span>
             </button>
-        
+
         </div>
-        
     </header>
 
     <!-- Pre-Hero Banner Section -->
@@ -109,24 +210,20 @@
         <div class="banner-overlay"></div>
         <div class="banner-content" data-aos="fade-in" data-aos-delay="100">
             <h1>
-                <!-- Ejemplo de traducción en span -->
                 <span class="decorative-font" data-lang-es="CONOCE LA CIUDAD DEL RÍO" data-lang-en="DISCOVER THE CIUDAD DEL RÍO">CONOCE LA CIUDAD DEL RÍO</span>
             </h1>
-            <!-- Ejemplo de traducción en p -->
             <p class="lead" data-lang-es="Barranquilla mira al río Magdalena con un ambicioso proyecto de renovación urbana" data-lang-en="Barranquilla looks towards the Magdalena River with an ambitious urban renewal project">Barranquilla mira al río Magdalena con un ambicioso proyecto de renovación urbana</p>
-            <!-- Ejemplo de traducción en a (botón) -->
             <a href="#contact" class="btn btn-primary" data-lang-es="Solicitar Información" data-lang-en="Request Information">Solicitar Información</a>
             <a href="#ciudad-del-rio" class="btn btn-secondary" style="margin-left: 1rem;" data-lang-es="Conoce Más" data-lang-en="Learn More">Conoce Más</a>
         </div>
         <a href="#why-barranquilla" class="scroll-down" aria-label="Scroll Down">
-            <i class="fas fa-chevron-down"></i> <span data-lang-es="Descubre" data-lang-en="Discover">Descubre</span> <!-- Añadido span para traducir texto junto al icono -->
+            <i class="fas fa-chevron-down"></i> <span data-lang-es="Descubre" data-lang-en="Discover">Descubre</span>
         </a>
     </section>
 
     <main>
-        <!-- ======================================= -->
-        <!-- INICIO DEL CONTENIDO REORDENADO        -->
-        <!-- ======================================= -->
+        <!-- Contenido principal de la página... -->
+        <!-- (Se omite el resto del contenido <main> por brevedad, pero iría aquí) -->
 
         <!-- 1. ¿Por qué Barranquilla? Section -->
         <section id="why-barranquilla" class="section-bg">
@@ -137,440 +234,456 @@
                 </svg>
             </div>
             <div class="container">
-                <h2 data-aos="fade-up" data-lang-es="¿POR QUÉ BARRANQUILLA?" data-lang-en="WHY BARRANQUILLA?">¿POR QUÉ BARRANQUILLA?</h2>
-                <div class="features-grid">
-                    <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon"><i class="fas fa-chart-line"></i></div>
-                        <h3 data-lang-es="Crecimiento Económico Imparable" data-lang-en="Unstoppable Economic Growth"> Crecimiento Económico Imparable</h3>
-                        <p data-lang-es="Barranquilla es una de las 100 ciudades del mundo con mayor crecimiento en inversión extranjera directa, y lidera la Región Caribe como hub comercial, con un fuerte aumento en ventas empresariales. Una ciudad donde los negocios encuentran terreno fértil para prosperar." data-lang-en="Barranquilla is one of the 100 cities in the world with the highest growth in foreign direct investment, and leads the Caribbean Region as a commercial hub, with a strong increase in business sales. A city where businesses find fertile ground to thrive.">Barranquilla es una de las 100 ciudades del mundo con mayor crecimiento en inversión extranjera directa, y lidera la Región Caribe como hub comercial, con un fuerte aumento en ventas empresariales. Una ciudad donde los negocios encuentran terreno fértil para prosperar.</p>
-                    </div>
-                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon"><i class="fas fa-city"></i></div>
-                        <h3 data-lang-es="Infraestructura y Desarrollo a Gran Escala" data-lang-en="Large-Scale Infrastructure and Development"> Infraestructura y Desarrollo a Gran Escala</h3>
-                        <p data-lang-es="Con la mayor inversión pública per cápita en Colombia, Barranquilla transforma su entorno urbano y natural, revitalizando su conexión histórica con el mar y el río Magdalena mediante proyectos de clase mundial." data-lang-en="With the highest public investment per capita in Colombia, Barranquilla transforms its urban and natural environment, revitalizing its historical connection with the sea and the Magdalena River through world-class projects.">Con la mayor inversión pública per cápita en Colombia, Barranquilla transforma su entorno urbano y natural, revitalizando su conexión histórica con el mar y el río Magdalena mediante proyectos de clase mundial.</p>
-                    </div>
-                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon"><i class="fas fa-globe-americas"></i></div>
-                        <h3 data-lang-es="Turismo y Calidad de Vida en Ascenso" data-lang-en="Rising Tourism and Quality of Life"> Turismo y Calidad de Vida en Ascenso</h3>
-                        <p data-lang-es="Reconocida como la capital deportiva del Caribe y hogar de eventos internacionales, la ciudad alcanzó un récord histórico de 1.6 millones de visitantes en 2023, consolidándose como un destino vibrante para vivir, invertir y disfrutar." data-lang-en="Recognized as the sports capital of the Caribbean region and home to international events, the city reached a historic record of 1.6 million visitors in 2023, consolidating itself as a vibrant destination to live and invest.">Reconocida como la capital deportiva del Caribe y hogar de eventos internacionales, la ciudad alcanzó un récord histórico de 1.6 millones de visitantes en 2023, consolidándose como un destino vibrante para vivir, invertir y disfrutar.</p>
-                    </div>
-                </div>
-            </div>
+                 <h2 data-aos="fade-up" data-lang-es="¿POR QUÉ BARRANQUILLA?" data-lang-en="WHY BARRANQUILLA?">¿POR QUÉ BARRANQUILLA?</h2>
+                 <div class="features-grid">
+                     <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                         <div class="icon"><i class="fas fa-chart-line"></i></div>
+                         <h3 data-lang-es="Crecimiento Económico Imparable" data-lang-en="Unstoppable Economic Growth"> Crecimiento Económico Imparable</h3>
+                         <p data-lang-es="Barranquilla es una de las 100 ciudades del mundo con mayor crecimiento en inversión extranjera directa, y lidera la Región Caribe como hub comercial, con un fuerte aumento en ventas empresariales. Una ciudad donde los negocios encuentran terreno fértil para prosperar." data-lang-en="Barranquilla is one of the 100 cities in the world with the highest growth in foreign direct investment, and leads the Caribbean Region as a commercial hub, with a strong increase in business sales. A city where businesses find fertile ground to thrive.">Barranquilla es una de las 100 ciudades del mundo con mayor crecimiento en inversión extranjera directa, y lidera la Región Caribe como hub comercial, con un fuerte aumento en ventas empresariales. Una ciudad donde los negocios encuentran terreno fértil para prosperar.</p>
+                     </div>
+                     <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                         <div class="icon"><i class="fas fa-city"></i></div>
+                         <h3 data-lang-es="Infraestructura y Desarrollo a Gran Escala" data-lang-en="Large-Scale Infrastructure and Development"> Infraestructura y Desarrollo a Gran Escala</h3>
+                         <p data-lang-es="Con la mayor inversión pública per cápita en Colombia, Barranquilla transforma su entorno urbano y natural, revitalizando su conexión histórica con el mar y el río Magdalena mediante proyectos de clase mundial." data-lang-en="With the highest public investment per capita in Colombia, Barranquilla transforms its urban and natural environment, revitalizing its historical connection with the sea and the Magdalena River through world-class projects.">Con la mayor inversión pública per cápita en Colombia, Barranquilla transforma su entorno urbano y natural, revitalizando su conexión histórica con el mar y el río Magdalena mediante proyectos de clase mundial.</p>
+                     </div>
+                     <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                         <div class="icon"><i class="fas fa-globe-americas"></i></div>
+                         <h3 data-lang-es="Turismo y Calidad de Vida en Ascenso" data-lang-en="Rising Tourism and Quality of Life"> Turismo y Calidad de Vida en Ascenso</h3>
+                         <p data-lang-es="Reconocida como la capital deportiva del Caribe y hogar de eventos internacionales, la ciudad alcanzó un récord histórico de 1.6 millones de visitantes en 2023, consolidándose como un destino vibrante para vivir, invertir y disfrutar." data-lang-en="Recognized as the sports capital of the Caribbean region and home to international events, the city reached a historic record of 1.6 million visitors in 2023, consolidating itself as a vibrant destination to live and invest.">Reconocida como la capital deportiva del Caribe y hogar de eventos internacionales, la ciudad alcanzó un récord histórico de 1.6 millones de visitantes en 2023, consolidándose como un destino vibrante para vivir, invertir y disfrutar.</p>
+                     </div>
+                 </div>
+             </div>
         </section>
-        <!-- === PRIMER BLOCK === -->
-        <section class="block">
-            <div class="content-wrapper">
-                <div class="text-content-block">
-                     <!-- ¡¡IMPORTANTE!! Aplica los atributos data-lang-es y data-lang-en a este H2 y al texto del botón de abajo -->
-                    <h2 data-lang-es="DESCUBRE UN NUEVO MODELO DE CIUDAD JUNTO AL RÍO MAGDALENA" data-lang-en="DISCOVER A NEW CITY MODEL NEXT TO THE MAGDALENA RIVER">DESCUBRE UN NUEVO MODELO DE CIUDAD JUNTO AL RÍO MAGDALENA</h2>
-                </div>
-                <div class="action-content">
-                    <a href="https://share.hsforms.com/16csbYRBZRVGzUW5Bt8NSag560hs" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. Barranquilla y su Desarrollo -->
-        <section id="desarrollo-barranquilla">
-            <div class="container">
-                 <!-- ¡¡IMPORTANTE!! Aplica los atributos data-lang-es y data-lang-en a este H2, al P y a los H4 de la galería -->
-                <h2 data-aos="fade-up" data-lang-es="BARRANQUILLA Y SU DESARROLLO" data-lang-en="BARRANQUILLA AND ITS DEVELOPMENT">BARRANQUILLA Y SU DESARROLLO</h2>
-                <p class="lead text-center" data-aos="fade-up" data-aos-delay="100" data-lang-es="La ciudad avanza en la transformación de su entorno natural con proyectos clave que revitalizan su conexión con el mar y el río Magdalena." data-lang-en="The city is advancing in the transformation of its natural environment with key projects that revitalize its connection with the sea and the Magdalena River.">La ciudad avanza en la transformación de su entorno natural con proyectos clave que revitalizan su conexión con el mar y el río Magdalena.</p>
-
-                <div class="premium-gallery-container">
-                    <div class="gallery-grid">
-                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="slider-container">
-                                <div class="slider-images">
-                                    <img src="./assets/imagenes/Ubicaciones/Cienega Mallorquin.png" alt="Ciénaga de Mallorquín" data-alt-es="Ciénaga de Mallorquín" data-alt-en="Mallorquín Swamp">
-                                </div>
-                            </div>
-                            <div class="overlay-content">
-                                <h4 data-lang-es="Ciénaga de Mallorquín" data-lang-en="Mallorquín Swamp">Ciénaga de Mallorquín</h4>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-                            <div class="slider-container">
-                                <div class="slider-images">
-                                     <img src="./assets/imagenes/Ubicaciones/Tren De Las Flores.png" alt="Tren turístico de las Flores" data-alt-es="Tren turístico de las Flores" data-alt-en="Flowers Tourist Train">
-                                </div>
-                            </div>
-                            <div class="overlay-content">
-                                <h4 data-lang-es="Tren turístico de las Flores" data-lang-en="Flowers Tourist Train">Tren turístico de las Flores</h4>
-                            </div>
-                        </div>
-                         <!-- ... (Aplica data-lang y data-alt a las demás imágenes y títulos de la galería) ... -->
-                         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-                            <div class="slider-container">
-                                <div class="slider-images">
-                                    <img src="./assets/imagenes/Ubicaciones/Puerto Mocho2.png" alt="Playa Puerto Mocho" data-alt-es="Playa Puerto Mocho" data-alt-en="Puerto Mocho Beach">
-                                </div>
-                            </div>
-                            <div class="overlay-content">
-                                <h4 data-lang-es="Playa Puerto Mocho" data-lang-en="Puerto Mocho Beach">Playa Puerto Mocho</h4>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="slider-container">
-                                <div class="slider-images">
-                                    <img src="./assets/imagenes/Ubicaciones/Gran Malecon 2.png" alt="Gran Malecón" data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
-                                </div>
-                            </div>
-                            <div class="overlay-content">
-                                <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
-                            </div>
-                        </div>
-                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="slider-container">
-                                    <div class="slider-images">
-                                        <img src="./assets/imagenes/Ubicaciones/Gran Malecon.png" alt="Gran Malecón" data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
-                                    </div>
-                                </div>
-                                <div class="overlay-content">
-                                     <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
-                                </div>
-                            </div>
-                            <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
-                            <div class="slider-container">
-                                    <div class="slider-images">
-                                        <img src="./assets/imagenes/Ubicaciones/Gran Malecon 3.png" alt="Gran Malecón" data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
-                                    </div>
-                                </div>
-                                <div class="overlay-content">
-                                     <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                    <!-- Contenedor Zoomed compartido si se usa zoom en esta galería -->
-                    <div class="zoomed-container">
-                         <!-- El alt de la imagen ampliada también necesitaría traducción dinámica si se usa -->
-                        <img src="" alt="Imagen Ampliada" class="zoomed-image">
-                        <button class="close-zoom" aria-label="Cerrar zoom"><i class="fas fa-times"></i></button>
-                    </div>
-            </div>
-        </section> <!-- FIN de Desarrollo Barranquilla -->
-
-
-        <!-- 3. Una nueva ciudad se levanta (Originalmente "Gran Malecón / Reconocimientos") -->
-        <section id="gran-malecon" class="block">
-            <div class="container">
-                <div class="adaptive-layout">
-
-                    <div class="adaptive-text-content" data-aos="fade-right">
-                        <!-- ¡¡IMPORTANTE!! Aplica los atributos data-lang-es y data-lang-en a este H2 y P -->
-                        <h2 class="text-headline" data-aos="fade-up" data-aos-delay="50" data-lang-es="Una nueva ciudad se levanta junto al Gran Malecón" data-lang-en="A new city rises next to the Gran Malecón">Una nueva ciudad se levanta junto al Gran Malecón</h2>
-                        <p class="text-paragraph" data-aos="fade-up" data-aos-delay="100" data-lang-es="La Ciudad del Río se alza junto al Gran Malecón, un espacio público de primer nivel premiado nacional e internacionalmente, que ha recibido más de 25 millones de turistas desde el 2017." data-lang-en="The Ciudad del Río stands next to the Gran Malecón, a top-tier public space awarded nationally and internationally, which has received over 25 million tourists since 2017.">La Ciudad del Río se alza junto al Gran Malecón, un espacio público de primer nivel premiado nacional e internacionalmente, que ha recibido más de 25 millones de turistas desde el 2017.</p>
-                    </div>
-
-                    <div class="adaptive-image-content" data-aos="fade-left">
-                         <!-- ¡¡IMPORTANTE!! Aplica data-alt-es y data-alt-en a esta imagen -->
-                        <img src="./assets/imagenes/Gran Malecon/Malecon_vistas(3).png" alt="Gran Malecón del Río" data-alt-es="Gran Malecón del Río" data-alt-en="Gran Malecón of the River">
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. ¿QUÉ ES LA CIUDAD DEL RÍO? -->
-        <section id="ciudad-del-rio" class="section-bg">
-            <div class="container">
-                 <!-- ¡¡IMPORTANTE!! Aplica data-lang a este H2, al P, a los LI (solo el texto, no los iconos), y al H3 -->
-                <h2 data-aos="fade-up" data-lang-es="¿QUÉ ES LA CIUDAD DEL RÍO?" data-lang-en="WHAT IS THE CIUDAD DEL RÍO?">¿QUÉ ES LA CIUDAD DEL RÍO?</h2>
-                <div class="ciudad-rio-grid">
-                    <div class="ciudad-rio-content" data-aos="fade-right" data-aos-delay="200">
-                        <p data-lang-es="La Ciudad del Río es un ambicioso plan de renovación urbana en Barranquilla que transformará la manera en que la ciudad se relaciona con el río Magdalena." data-lang-en="The Ciudad del Río is an ambitious urban renewal plan in Barranquilla that will transform the way the city relates to the Magdalena River.">La Ciudad del Río es un ambicioso plan de renovación urbana en Barranquilla que transformará la manera en que la ciudad se relaciona con el río Magdalena.</p>
-                        <ul>
-                            <li><i class="fas fa-map-marked-alt"></i> <span data-lang-es="105 hectáreas, con 61 hectáreas útiles" data-lang-en="105 hectares, with 61 usable hectares">105 hectáreas, con 61 hectáreas útiles</span></li>
-                            <li><i class="fas fa-tree"></i> <span data-lang-es="Más de 210,000 m² de espacio público" data-lang-en="More than 210,000 m² of public space">Más de 210,000 m² de espacio público</span></li>
-                            <li>
-                                <i class="fas fa-water"></i>
-                                <span data-lang-es="2,600 metros lineales frente al río" data-lang-en="2,600 linear meters facing the river">2,600 metros lineales frente al río</span>
-                            </li>
-                            <li>
-                                <i class="fas fa-home"></i>
-                                <span data-lang-es="Proyección de 50,000 viviendas" data-lang-en="Projection of 50,000 homes">Proyección de 50,000 viviendas</span>
-                            </li>
-                        </ul>
-                        <h3 data-lang-es="Cuatro conceptos urbanos clave:" data-lang-en="Four key urban concepts:">Cuatro conceptos urbanos clave:</h3>
-                        <ul>
-                             <li><i class="fas fa-heartbeat"></i> <span data-lang-es="Ciudad saludable" data-lang-en="Healthy city">Ciudad saludable</span></li>
-                            <li><i class="fas fa-bicycle"></i> <span data-lang-es="Movilidad sostenible" data-lang-en="Sustainable mobility">Movilidad sostenible</span></li>
-                            <li><i class="fas fa-leaf"></i> <span data-lang-es="Urbanismo ecológico" data-lang-en="Ecological urbanism">Urbanismo ecológico</span></li>
-                            <li><i class="fas fa-clock"></i> <span data-lang-es="Ciudad de los 15 minutos" data-lang-en="15-minute city">Ciudad de los 15 minutos</span></li>
-                        </ul>
-                    </div>
-                    <div class="ciudad-rio-image about-image" data-aos="fade-left" data-aos-delay="200">
-                         <!-- ¡¡IMPORTANTE!! Aplica data-alt-es y data-alt-en a esta imagen -->
-                        <img src="./assets/imagenes/Gran Malecon/gran-malecon.png" alt="Concepto Ciudad del Río" data-alt-es="Concepto Ciudad del Río" data-alt-en="Ciudad del Río Concept">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-         <!-- === SEGUNDO BLOCK RESTAURADO === -->
+         <!-- === PRIMER BLOCK === -->
          <section class="block">
-            <div class="content-wrapper">
-                <div class="text-content-block">
-                    <!-- ¡¡IMPORTANTE!! Aplica data-lang a este H2 y al texto del botón -->
-                    <h2 data-lang-es="CONOCE MALECON 72" data-lang-en="DISCOVER MALECON 72">CONOCE MALECON 72</h2>
-                </div>
-                <div class="action-content">
-                    <a href="https://app-na1.hubspotdocuments.com/documents/8678656/view/971328453?accessId=4e0581" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a> <!-- Ajusta el enlace si es necesario -->
-                </div>
-            </div>
-        </section>
+             <div class="content-wrapper">
+                 <div class="text-content-block">
+                      <!-- ¡¡IMPORTANTE!! Aplica los atributos data-lang-es y data-lang-en a este H2 y al texto del botón de abajo -->
+                     <h2 data-lang-es="DESCUBRE UN NUEVO MODELO DE CIUDAD JUNTO AL RÍO MAGDALENA" data-lang-en="DISCOVER A NEW CITY MODEL NEXT TO THE MAGDALENA RIVER">DESCUBRE UN NUEVO MODELO DE CIUDAD JUNTO AL RÍO MAGDALENA</h2>
+                 </div>
+                 <div class="action-content">
+                     <a href="https://share.hsforms.com/16csbYRBZRVGzUW5Bt8NSag560hs" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
+                 </div>
+             </div>
+         </section>
 
-        <!-- 5. Descubre la Nueva Barranquilla (Video) -->
-        <section id="ciudad-del-rio-video" class="section-bg">
-            <div class="container">
-                 <!-- ¡¡IMPORTANTE!! Aplica data-lang a este H2 -->
-                <h2 data-aos="fade-up" style="text-align: center;" data-lang-es="Descubre la Nueva Barranquilla: La Ciudad que Abraza su Río." data-lang-en="Discover the New Barranquilla: The City that Embraces its River.">Descubre la Nueva Barranquilla: La Ciudad que Abraza su Río.</h2>
-                <div class="video-container">
-                     <!-- El title del iframe también podría necesitar traducción -->
-                    <iframe
-                        src="https://www.youtube.com/embed/gQNPU0WKquU?si=eYVPmz8CVtAOprYh&autoplay=1&mute=1&loop=1&playlist=gQNPU0WKquU&controls=0&showinfo=0&rel=0&modestbranding=1&hq=1"
-                        title="YouTube video player - Descubre la Nueva Barranquilla"
-                        data-title-es="YouTube video player - Descubre la Nueva Barranquilla"
-                        data-title-en="YouTube video player - Discover the New Barranquilla"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
-        </section>
+         <!-- 2. Barranquilla y su Desarrollo -->
+         <section id="desarrollo-barranquilla">
+             <div class="container">
+                  <!-- ¡¡IMPORTANTE!! Aplica los atributos data-lang-es y data-lang-en a este H2, al P y a los H4 de la galería -->
+                 <h2 data-aos="fade-up" data-lang-es="BARRANQUILLA Y SU DESARROLLO" data-lang-en="BARRANQUILLA AND ITS DEVELOPMENT">BARRANQUILLA Y SU DESARROLLO</h2>
+                 <p class="lead text-center" data-aos="fade-up" data-aos-delay="100" data-lang-es="La ciudad avanza en la transformación de su entorno natural con proyectos clave que revitalizan su conexión con el mar y el río Magdalena." data-lang-en="The city is advancing in the transformation of its natural environment with key projects that revitalize its connection with the sea and the Magdalena River.">La ciudad avanza en la transformación de su entorno natural con proyectos clave que revitalizan su conexión con el mar y el río Magdalena.</p>
 
-
-        <!-- ================================================================= -->
-        <!-- === ¡¡RECUERDA!! Aplicar data-lang-es y data-lang-en a TODO === -->
-        <!-- === el texto restante (H2, H3, p, strong, a, etc.) en las    === -->
-        <!-- === secciones Proyectos, Mapa, Equipo, Contacto y Footer.   === -->
-        <!-- === También aplica data-alt-es y data-alt-en a las imágenes. === -->
-        <!-- ================================================================= -->
-
-
-        <!-- 6. Proyectos Section -->
-        <section id="proyectos" class="section-bg">
-            <div class="container">
-                <h2 data-aos="fade-up" data-lang-es="PROYECTOS" data-lang-en="PROJECTS">PROYECTOS</h2>
-
-                <!-- Proyecto: Vive Río -->
-                <div class="project-container" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-column-text">
-                        <div class="feature-item">
-                                <div class="icon"><i class="fas fa-building"></i></div>
-                                <h3>VIVE RÍO</h3>
-                                <p><strong data-lang-es="El comienzo de una historia de éxito" data-lang-en="The beginning of a success story">El comienzo de una historia de éxito</strong><br>
-                                <span data-lang-es="El primer proyecto del Gran Malecón de Barranquilla que se posicionó como número 1 en ventas en 2022 en todo el Departamento." data-lang-en="The first project on Barranquilla's Gran Malecón that ranked number 1 in sales in 2022 throughout the Department.">El primer proyecto del Gran Malecón de Barranquilla que se posicionó como número 1 en ventas en 2022 en todo el Departamento.</span><br><br>
-                                <span data-lang-es="Diseñado y estructurado bajo criterios de construcción sostenible. Proyecto de 34 pisos de uso mixto, con modelo habitacional, rentas cortas, distrito gastronómico y oficinas." data-lang-en="Designed and structured under sustainable construction criteria. A 34-story mixed-use project, with a housing model, short-term rentals, a gastronomic district, and offices.">Diseñado y estructurado bajo criterios de construcción sostenible. Proyecto de 34 pisos de uso mixto, con modelo habitacional, rentas cortas, distrito gastronómico y oficinas.</span></p>
-                                <section class="block">
-                                    <div class="content-wrapper">
-                                        <div class="action-content">
-                                            <a href="https://vive-rio.com/" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
-                                        </div>
-                                    </div>
-                                </section>
-                        </div>
-                    </div>
-                    <div class="project-column-media">
-                        <div class="gallery-item">
-                            <img src="./assets/imagenes/Vistas/Vive Rio.png" alt="Vive Río - Imagen Principal" data-alt-es="Vive Río - Imagen Principal" data-alt-en="Vive Río - Main Image">
-                        </div>
-                        <div class="video-container">
-                            <iframe
-                                src="https://www.youtube.com/embed/kFzc51X3QxM?si=2dr2L5tXViJRmv0o&autoplay=1&mute=1&loop=1&playlist=kFzc51X3QxM&controls=0&showinfo=0&rel=0&modestbranding=1"
-                                title="YouTube video player - Vive Río"
-                                data-title-es="YouTube video player - Vive Río"
-                                data-title-en="YouTube video player - Vive Río"
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
-                </div>
-
-                <hr style="margin: 5rem 0; border: 0; border-top: 1px solid var(--border-color);">
-
-                <!-- Proyecto: Malecón 72 -->
-                <div class="project-container" data-aos="fade-up" data-aos-delay="100">
-                    <div class="project-column-media">
-                        <div class="gallery-item">
-                           <img src="./assets/imagenes/Vistas/Malecon 72.png" alt="Malecón 72 - Imagen Principal" data-alt-es="Malecón 72 - Imagen Principal" data-alt-en="Malecón 72 - Main Image">
-                        </div>
-                        <div class="video-container">
-                            <iframe
-                            src="https://www.youtube.com/embed/zeiQK20IrmM?si=t-1-pO45rKhslUSl&autoplay=1&mute=1&loop=1&playlist=zeiQK20IrmM&controls=0&showinfo=0&rel=0&modestbranding=1"
-                            title="YouTube video player - Malecón 72"
-                             data-title-es="YouTube video player - Malecón 72"
-                            data-title-en="YouTube video player - Malecón 72"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen>
-                        </iframe>
-                        </div>
-                    </div>
-                    <div class="project-column-text">
-                        <div class="feature-item">
-                            <div class="icon"><i class="fas fa-star"></i></div>
-                            <h3>MALECÓN 72</h3>
-                            <p><strong data-lang-es="El proyecto inmobiliario más exitoso de Barranquilla" data-lang-en="The most successful real estate project in Barranquilla">El proyecto inmobiliario más exitoso de Barranquilla</strong><br>
-                            <span data-lang-es="Ubicado en primera línea del Gran Malecón y frente al río Magdalena, combina naturaleza, modernidad y una ubicación privilegiada para vivir o invertir en la ciudad que hoy mira al río." data-lang-en="Located on the front line of the Gran Malecón and facing the Magdalena River, it combines nature, modernity, and a privileged location to live or invest in the city that now looks to the river.">Ubicado en primera línea del Gran Malecón y frente al río Magdalena, combina naturaleza, modernidad y una ubicación privilegiada para vivir o invertir en la ciudad que hoy mira al río.</span><br><br>
-                            <span data-lang-es='"En Enero de 2025, las ventas del mes aumentan para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades" - Galería Inmobiliaria' data-lang-en='"In January 2025, monthly sales for non-VIS housing increased by 267.4% compared to the same month last year, with 496 units sold, due to the launch of this project, whose sales totaled 280 units" - Galería Inmobiliaria'> "En Enero de 2025, las ventas del mes aumentan para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades" - Galería Inmobiliaria</span></p>
-                            <section class="block">
-                                <div class="content-wrapper">
-                                    <div class="action-content">
-                                        <a href="https://www.malecon72.com/" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
-                                    </div>
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- Contenedor Zoomed compartido -->
-             <div class="zoomed-container">
-                <img src="" alt="Imagen Ampliada" class="zoomed-image" data-alt-es="Imagen Ampliada" data-alt-en="Zoomed Image">
-                <button class="close-zoom" aria-label="Cerrar zoom" data-aria-label-es="Cerrar zoom" data-aria-label-en="Close zoom"><i class="fas fa-times"></i></button>
-            </div>
-        </section> <!-- FIN de Proyectos -->
-
-        <section class="block">
-            <div class="content-wrapper">
-                <div class="text-content-block">
-                    <h2 data-lang-es="CONOCE VIVE RIO" data-lang-en="DISCOVER VIVE RIO">CONOCE VIVE RIO</h2>
-                </div>
-                <div class="action-content">
-                     <a href="https://app-na1.hubspotdocuments.com/documents/8678656/view/437121787?accessId=c3ffd6" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. Mapa Lotes Section -->
-        <section id="mapa-lotes" class="section-bg">
-            <div class="container">
-                 <h2 data-aos="fade-up" data-lang-es="LOTES DISPONIBLES EN CIUDAD DEL RÍO" data-lang-en="LOTS AVAILABLE IN CIUDAD DEL RÍO">LOTES DISPONIBLES EN CIUDAD DEL RÍO</h2>
-                <p class="lead text-center" data-aos="fade-up" data-aos-delay="50" data-lang-es="Explora la distribución y disponibilidad de lotes dentro del plan maestro de Ciudad del Río a través de nuestro mapa interactivo." data-lang-en="Explore the distribution and availability of lots within the Ciudad del Río master plan through our interactive map.">
-                    Explora la distribución y disponibilidad de lotes dentro del plan maestro de Ciudad del Río a través de nuestro mapa interactivo.
-                </p>
-                <div class="map-container" data-aos="fade-up" data-aos-delay="100">
-                    <iframe
-                        src="https://www.google.com/maps/d/embed?mid=19NtLexJzNf_GS-IdfO2NAr4zgeesCsk&ehbc=2E312F"
-                        width="100%"
-                        height="500"
-                        style="border:0;"
-                        allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
-        </section>
-
-        <!-- 8. El Equipo Section -->
-        <section id="our-team" class="section-bg">
-            <div class="container">
-                <div class="section-title" data-aos="fade-up">
-                    <h2 data-lang-es="EL EQUIPO DETRÁS DE LA CIUDAD DEL RÍO" data-lang-en="THE TEAM BEHIND CIUDAD DEL RÍO">EL EQUIPO DETRÁS DE LA CIUDAD DEL RÍO</h2>
-                     <h2 class="lead text-center" data-aos="fade-up" data-aos-delay="50" data-lang-es="¡Vamos a co-crear juntos un proyecto en la nueva ciudad del rio!" data-lang-en="Let's co-create a project together in the new Ciudad Del Rio!">
-                        ¡Vamos a co-crear juntos un proyecto en la nueva ciudad del rio!
-                    </h2>
-
-                </div>
-                <div class="team-members-container" data-aos="fade-up" data-aos-delay="100">
-                    <div class="team-member">
-                            <div class="member-content">
-                            <div class="member-logo">
-                                 <img src="./assets/imagenes/Logo/Ydn Logo.png" alt="Logo YDN" data-alt-es="Logo YDN" data-alt-en="YDN Logo">
-                            </div>
-                            <h4>YDN</h4>
-                            <p data-lang-es="Desde 1998 desarrollando proyectos de Infraestructura civil e inmobiliaria en todo el territorio nacional. Es la constructora de Vive Río en consorcio." data-lang-en="Since 1998 developing civil and real estate infrastructure projects throughout the national territory. It is the construction company of Vive Río in consortium.">Desde 1998 desarrollando proyectos de Infraestructura civil e inmobiliaria en todo el territorio nacional. Es la constructora de Vive Río en consorcio.</p>
-                            </div>
-                    </div>
-                    <div class="team-member">
-                        <div class="member-content">
-                            <div class="member-logo">
-                                <img src="./assets/imagenes/Logo/Inciti Logo.png" alt="Logo Inciti" data-alt-es="Logo Inciti" data-alt-en="Inciti Logo">
-                            </div>
-                            <h4>Inciti</h4>
-                            <p data-lang-es="Enfocada en crear comunidades inteligentes y sostenibles, ha desarrollado proyectos exitosos, como Vive Río, desde su comercialización hasta su gerencia comercial." data-lang-en="Focused on creating smart and sustainable communities, it has developed successful projects, such as Vive Río, from its marketing to its commercial management.">Enfocada en crear comunidades inteligentes y sostenibles, ha desarrollado proyectos exitosos, como Vive Río, desde su comercialización hasta su gerencia comercial.</p>
-                        </div>
-                    </div>
-                    <div class="team-member">
-                            <div class="member-content">
-                            <div class="member-logo-casa-verde">
-                               <img src="./assets/imagenes/Logo/Casa Verde Logo.png" alt="Logo Casa Verde" data-alt-es="Logo Casa Verde" data-alt-en="Casa Verde Logo">
-                            </div>
-                            <h4>Casa Verde</h4>
-                            <p data-lang-es="Especializados en la promotoría de proyectos inmobiliarios y urbanos se ha enfocado en promover el desarrollo junto al Gran Malecón." data-lang-en="Specialized in promoting real estate and urban projects, it has focused on promoting development alongside the Gran Malecón.">Especializados en la promotoría de proyectos inmobiliarios y urbanos se ha enfocado en promover el desarrollo junto al Gran Malecón.</p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                 <div class="premium-gallery-container">
+                     <div class="gallery-grid">
+                         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                             <div class="slider-container">
+                                 <div class="slider-images">
+                                     <img src="./assets/imagenes/Ubicaciones/Cienega Mallorquin.png" alt="Ciénaga de Mallorquín" data-alt-es="Ciénaga de Mallorquín" data-alt-en="Mallorquín Swamp">
+                                 </div>
+                             </div>
+                             <div class="overlay-content">
+                                 <h4 data-lang-es="Ciénaga de Mallorquín" data-lang-en="Mallorquín Swamp">Ciénaga de Mallorquín</h4>
+                             </div>
+                         </div>
+                         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                             <div class="slider-container">
+                                 <div class="slider-images">
+                                      <img src="./assets/imagenes/Ubicaciones/Tren De Las Flores.png" alt="Tren turístico de las Flores" data-alt-es="Tren turístico de las Flores" data-alt-en="Flowers Tourist Train">
+                                 </div>
+                             </div>
+                             <div class="overlay-content">
+                                 <h4 data-lang-es="Tren turístico de las Flores" data-lang-en="Flowers Tourist Train">Tren turístico de las Flores</h4>
+                             </div>
+                         </div>
+                          <!-- ... (Aplica data-lang y data-alt a las demás imágenes y títulos de la galería) ... -->
+                          <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                             <div class="slider-container">
+                                 <div class="slider-images">
+                                     <img src="./assets/imagenes/Ubicaciones/Puerto Mocho2.png" alt="Playa Puerto Mocho" data-alt-es="Playa Puerto Mocho" data-alt-en="Puerto Mocho Beach">
+                                 </div>
+                             </div>
+                             <div class="overlay-content">
+                                 <h4 data-lang-es="Playa Puerto Mocho" data-lang-en="Puerto Mocho Beach">Playa Puerto Mocho</h4>
+                             </div>
+                         </div>
+                         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                             <div class="slider-container">
+                                 <div class="slider-images">
+                                     <img src="./assets/imagenes/Ubicaciones/Gran Malecon 2.png" alt="Gran Malecón" data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
+                                 </div>
+                             </div>
+                             <div class="overlay-content">
+                                 <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
+                             </div>
+                         </div>
+                         <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                             <div class="slider-container">
+                                     <div class="slider-images">
+                                         <img src="./assets/imagenes/Ubicaciones/Gran Malecon.png" alt="Gran Malecón" data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
+                                     </div>
+                                 </div>
+                                 <div class="overlay-content">
+                                      <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
+                                 </div>
+                             </div>
+                             <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                             <div class="slider-container">
+                                     <div class="slider-images">
+                                         <img src="./assets/imagenes/Ubicaciones/Gran Malecon 3.png" alt="Gran Malecón" data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
+                                     </div>
+                                 </div>
+                                 <div class="overlay-content">
+                                      <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
+                                 </div>
+                             </div>
+                     </div>
+                 </div>
+                     <!-- Contenedor Zoomed compartido si se usa zoom en esta galería -->
+                     <div class="zoomed-container">
+                          <!-- El alt de la imagen ampliada también necesitaría traducción dinámica si se usa -->
+                         <img src="" alt="Imagen Ampliada" class="zoomed-image">
+                         <button class="close-zoom" aria-label="Cerrar zoom"><i class="fas fa-times"></i></button>
+                     </div>
+             </div>
+         </section> <!-- FIN de Desarrollo Barranquilla -->
 
 
-        <!-- Contact Section (Mantenida al final) -->
-        <section id="contact" class="section-dark">
-            <div class="container text-center">
-                 <h2 data-aos="fade-up" data-lang-es="FORMA PARTE DEL FUTURO DE BARRANQUILLA" data-lang-en="BE PART OF BARRANQUILLA'S FUTURE">FORMA PARTE DEL FUTURO DE BARRANQUILLA</h2>
-                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-lang-es="Regístrate y sé de los primeros en recibir información exclusiva sobre CIUDAD DEL RÍO." data-lang-en="Register and be among the first to receive exclusive information about CIUDAD DEL RÍO.">
-                    Regístrate y sé de los primeros en recibir información exclusiva sobre CIUDAD DEL RÍO.
-                </p>
-                <div class="contact-form-wrapper" data-aos="fade-up" data-aos-delay="200">
-                    <!-- HubSpot Form Embed Code -->
-                    <!-- Nota: El contenido del formulario de HubSpot no se traducirá automáticamente con este método. Necesitarías configurar la traducción dentro de HubSpot si es posible, o usar un formulario diferente. -->
-                    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
-                    <script>
-                        hbspt.forms.create({
-                        portalId: "8678656",
-                        formId: "e9cb1b61-1059-4551-b351-6e41b7c3526a",
-                        region: "na1"
-                        });
-                    </script>
-                    <!-- End HubSpot Form Embed Code -->
-                </div>
-            </div>
-            <div class="angled-divider-bottom">
-                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
-                    preserveAspectRatio="none">
-                    <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill-footer"></path>
-                </svg>
-            </div>
-        </section>
+         <!-- 3. Una nueva ciudad se levanta (Originalmente "Gran Malecón / Reconocimientos") -->
+         <section id="gran-malecon" class="block">
+             <div class="container">
+                 <div class="adaptive-layout">
 
-        <!-- ======================================= -->
-        <!-- FIN DEL CONTENIDO REORDENADO          -->
-        <!-- ======================================= -->
+                     <div class="adaptive-text-content" data-aos="fade-right">
+                         <!-- ¡¡IMPORTANTE!! Aplica los atributos data-lang-es y data-lang-en a este H2 y P -->
+                         <h2 class="text-headline" data-aos="fade-up" data-aos-delay="50" data-lang-es="Una nueva ciudad se levanta junto al Gran Malecón" data-lang-en="A new city rises next to the Gran Malecón">Una nueva ciudad se levanta junto al Gran Malecón</h2>
+                         <p class="text-paragraph" data-aos="fade-up" data-aos-delay="100" data-lang-es="La Ciudad del Río se alza junto al Gran Malecón, un espacio público de primer nivel premiado nacional e internacionalmente, que ha recibido más de 25 millones de turistas desde el 2017." data-lang-en="The Ciudad del Río stands next to the Gran Malecón, a top-tier public space awarded nationally and internationally, which has received over 25 million tourists since 2017.">La Ciudad del Río se alza junto al Gran Malecón, un espacio público de primer nivel premiado nacional e internacionalmente, que ha recibido más de 25 millones de turistas desde el 2017.</p>
+                     </div>
+
+                     <div class="adaptive-image-content" data-aos="fade-left">
+                          <!-- ¡¡IMPORTANTE!! Aplica data-alt-es y data-alt-en a esta imagen -->
+                         <img src="./assets/imagenes/Gran Malecon/Malecon_vistas(3).png" alt="Gran Malecón del Río" data-alt-es="Gran Malecón del Río" data-alt-en="Gran Malecón of the River">
+                     </div>
+
+                 </div>
+             </div>
+         </section>
+
+         <!-- 4. ¿QUÉ ES LA CIUDAD DEL RÍO? -->
+         <section id="ciudad-del-rio" class="section-bg">
+             <div class="container">
+                  <!-- ¡¡IMPORTANTE!! Aplica data-lang a este H2, al P, a los LI (solo el texto, no los iconos), y al H3 -->
+                 <h2 data-aos="fade-up" data-lang-es="¿QUÉ ES LA CIUDAD DEL RÍO?" data-lang-en="WHAT IS THE CIUDAD DEL RÍO?">¿QUÉ ES LA CIUDAD DEL RÍO?</h2>
+                 <div class="ciudad-rio-grid">
+                     <div class="ciudad-rio-content" data-aos="fade-right" data-aos-delay="200">
+                         <p data-lang-es="La Ciudad del Río es un ambicioso plan de renovación urbana en Barranquilla que transformará la manera en que la ciudad se relaciona con el río Magdalena." data-lang-en="The Ciudad del Río is an ambitious urban renewal plan in Barranquilla that will transform the way the city relates to the Magdalena River.">La Ciudad del Río es un ambicioso plan de renovación urbana en Barranquilla que transformará la manera en que la ciudad se relaciona con el río Magdalena.</p>
+                         <ul>
+                             <li><i class="fas fa-map-marked-alt"></i> <span data-lang-es="105 hectáreas, con 61 hectáreas útiles" data-lang-en="105 hectares, with 61 usable hectares">105 hectáreas, con 61 hectáreas útiles</span></li>
+                             <li><i class="fas fa-tree"></i> <span data-lang-es="Más de 210,000 m² de espacio público" data-lang-en="More than 210,000 m² of public space">Más de 210,000 m² de espacio público</span></li>
+                             <li>
+                                 <i class="fas fa-water"></i>
+                                 <span data-lang-es="2,600 metros lineales frente al río" data-lang-en="2,600 linear meters facing the river">2,600 metros lineales frente al río</span>
+                             </li>
+                             <li>
+                                 <i class="fas fa-home"></i>
+                                 <span data-lang-es="Proyección de 50,000 viviendas" data-lang-en="Projection of 50,000 homes">Proyección de 50,000 viviendas</span>
+                             </li>
+                         </ul>
+                         <h3 data-lang-es="Cuatro conceptos urbanos clave:" data-lang-en="Four key urban concepts:">Cuatro conceptos urbanos clave:</h3>
+                         <ul>
+                              <li><i class="fas fa-heartbeat"></i> <span data-lang-es="Ciudad saludable" data-lang-en="Healthy city">Ciudad saludable</span></li>
+                             <li><i class="fas fa-bicycle"></i> <span data-lang-es="Movilidad sostenible" data-lang-en="Sustainable mobility">Movilidad sostenible</span></li>
+                             <li><i class="fas fa-leaf"></i> <span data-lang-es="Urbanismo ecológico" data-lang-en="Ecological urbanism">Urbanismo ecológico</span></li>
+                             <li><i class="fas fa-clock"></i> <span data-lang-es="Ciudad de los 15 minutos" data-lang-en="15-minute city">Ciudad de los 15 minutos</span></li>
+                         </ul>
+                     </div>
+                     <div class="ciudad-rio-image about-image" data-aos="fade-left" data-aos-delay="200">
+                          <!-- ¡¡IMPORTANTE!! Aplica data-alt-es y data-alt-en a esta imagen -->
+                         <img src="./assets/imagenes/Gran Malecon/gran-malecon.png" alt="Concepto Ciudad del Río" data-alt-es="Concepto Ciudad del Río" data-alt-en="Ciudad del Río Concept">
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+          <!-- === SEGUNDO BLOCK RESTAURADO === -->
+          <section class="block">
+             <div class="content-wrapper">
+                 <div class="text-content-block">
+                     <!-- ¡¡IMPORTANTE!! Aplica data-lang a este H2 y al texto del botón -->
+                     <h2 data-lang-es="CONOCE MALECON 72" data-lang-en="DISCOVER MALECON 72">CONOCE MALECON 72</h2>
+                 </div>
+                 <div class="action-content">
+                     <a href="https://app-na1.hubspotdocuments.com/documents/8678656/view/971328453?accessId=4e0581" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a> <!-- Ajusta el enlace si es necesario -->
+                 </div>
+             </div>
+         </section>
+
+         <!-- 5. Descubre la Nueva Barranquilla (Video) -->
+         <section id="ciudad-del-rio-video" class="section-bg">
+             <div class="container">
+                  <!-- ¡¡IMPORTANTE!! Aplica data-lang a este H2 -->
+                 <h2 data-aos="fade-up" style="text-align: center;" data-lang-es="Descubre la Nueva Barranquilla: La Ciudad que Abraza su Río." data-lang-en="Discover the New Barranquilla: The City that Embraces its River.">Descubre la Nueva Barranquilla: La Ciudad que Abraza su Río.</h2>
+                 <div class="video-container">
+                      <!-- El title del iframe también podría necesitar traducción -->
+                     <iframe
+                         src="https://www.youtube.com/embed/gQNPU0WKquU?si=eYVPmz8CVtAOprYh&autoplay=1&mute=1&loop=1&playlist=gQNPU0WKquU&controls=0&showinfo=0&rel=0&modestbranding=1&hq=1"
+                         title="YouTube video player - Descubre la Nueva Barranquilla"
+                         data-title-es="YouTube video player - Descubre la Nueva Barranquilla"
+                         data-title-en="YouTube video player - Discover the New Barranquilla"
+                         frameborder="0"
+                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                         allowfullscreen>
+                     </iframe>
+                 </div>
+             </div>
+         </section>
+
+
+         <!-- 6. Proyectos Section -->
+         <section id="proyectos" class="section-bg">
+             <div class="container">
+                 <h2 data-aos="fade-up" data-lang-es="PROYECTOS" data-lang-en="PROJECTS">PROYECTOS</h2>
+
+                 <!-- Proyecto: Vive Río -->
+                 <div class="project-container" data-aos="fade-up" data-aos-delay="100">
+                     <div class="project-column-text">
+                         <div class="feature-item">
+                                 <div class="icon"><i class="fas fa-building"></i></div>
+                                 <h3>VIVE RÍO</h3>
+                                 <p><strong data-lang-es="El comienzo de una historia de éxito" data-lang-en="The beginning of a success story">El comienzo de una historia de éxito</strong><br>
+                                 <span data-lang-es="El primer proyecto del Gran Malecón de Barranquilla que se posicionó como número 1 en ventas en 2022 en todo el Departamento." data-lang-en="The first project on Barranquilla's Gran Malecón that ranked number 1 in sales in 2022 throughout the Department.">El primer proyecto del Gran Malecón de Barranquilla que se posicionó como número 1 en ventas en 2022 en todo el Departamento.</span><br><br>
+                                 <span data-lang-es="Diseñado y estructurado bajo criterios de construcción sostenible. Proyecto de 34 pisos de uso mixto, con modelo habitacional, rentas cortas, distrito gastronómico y oficinas." data-lang-en="Designed and structured under sustainable construction criteria. A 34-story mixed-use project, with a housing model, short-term rentals, a gastronomic district, and offices.">Diseñado y estructurado bajo criterios de construcción sostenible. Proyecto de 34 pisos de uso mixto, con modelo habitacional, rentas cortas, distrito gastronómico y oficinas.</span></p>
+                                 <section class="block">
+                                     <div class="content-wrapper">
+                                         <div class="action-content">
+                                             <a href="https://vive-rio.com/" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
+                                         </div>
+                                     </div>
+                                 </section>
+                         </div>
+                     </div>
+                     <div class="project-column-media">
+                         <div class="gallery-item">
+                             <img src="./assets/imagenes/Vistas/Vive Rio.png" alt="Vive Río - Imagen Principal" data-alt-es="Vive Río - Imagen Principal" data-alt-en="Vive Río - Main Image">
+                         </div>
+                         <div class="video-container">
+                             <iframe
+                                 src="https://www.youtube.com/embed/kFzc51X3QxM?si=2dr2L5tXViJRmv0o&autoplay=1&mute=1&loop=1&playlist=kFzc51X3QxM&controls=0&showinfo=0&rel=0&modestbranding=1"
+                                 title="YouTube video player - Vive Río"
+                                 data-title-es="YouTube video player - Vive Río"
+                                 data-title-en="YouTube video player - Vive Río"
+                                 frameborder="0"
+                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                 allowfullscreen>
+                             </iframe>
+                         </div>
+                     </div>
+                 </div>
+
+                 <hr style="margin: 5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+                 <!-- Proyecto: Malecón 72 -->
+                 <div class="project-container" data-aos="fade-up" data-aos-delay="100">
+                     <div class="project-column-media">
+                         <div class="gallery-item">
+                            <img src="./assets/imagenes/Vistas/Malecon 72.png" alt="Malecón 72 - Imagen Principal" data-alt-es="Malecón 72 - Imagen Principal" data-alt-en="Malecón 72 - Main Image">
+                         </div>
+                         <div class="video-container">
+                             <iframe
+                             src="https://www.youtube.com/embed/zeiQK20IrmM?si=t-1-pO45rKhslUSl&autoplay=1&mute=1&loop=1&playlist=zeiQK20IrmM&controls=0&showinfo=0&rel=0&modestbranding=1"
+                             title="YouTube video player - Malecón 72"
+                              data-title-es="YouTube video player - Malecón 72"
+                             data-title-en="YouTube video player - Malecón 72"
+                             frameborder="0"
+                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                             allowfullscreen>
+                         </iframe>
+                         </div>
+                     </div>
+                     <div class="project-column-text">
+                         <div class="feature-item">
+                             <div class="icon"><i class="fas fa-star"></i></div>
+                             <h3>MALECÓN 72</h3>
+                             <p><strong data-lang-es="El proyecto inmobiliario más exitoso de Barranquilla" data-lang-en="The most successful real estate project in Barranquilla">El proyecto inmobiliario más exitoso de Barranquilla</strong><br>
+                             <span data-lang-es="Ubicado en primera línea del Gran Malecón y frente al río Magdalena, combina naturaleza, modernidad y una ubicación privilegiada para vivir o invertir en la ciudad que hoy mira al río." data-lang-en="Located on the front line of the Gran Malecón and facing the Magdalena River, it combines nature, modernity, and a privileged location to live or invest in the city that now looks to the river.">Ubicado en primera línea del Gran Malecón y frente al río Magdalena, combina naturaleza, modernidad y una ubicación privilegiada para vivir o invertir en la ciudad que hoy mira al río.</span><br><br>
+                             <span data-lang-es='"En Enero de 2025, las ventas del mes aumentan para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades" - Galería Inmobiliaria' data-lang-en='"In January 2025, monthly sales for non-VIS housing increased by 267.4% compared to the same month last year, with 496 units sold, due to the launch of this project, whose sales totaled 280 units" - Galería Inmobiliaria'> "En Enero de 2025, las ventas del mes aumentan para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades" - Galería Inmobiliaria</span></p>
+                             <section class="block">
+                                 <div class="content-wrapper">
+                                     <div class="action-content">
+                                         <a href="https://www.malecon72.com/" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
+                                     </div>
+                                 </div>
+                             </section>
+                         </div>
+                     </div>
+                 </div>
+
+             </div>
+             <!-- Contenedor Zoomed compartido -->
+              <div class="zoomed-container">
+                 <img src="" alt="Imagen Ampliada" class="zoomed-image" data-alt-es="Imagen Ampliada" data-alt-en="Zoomed Image">
+                 <button class="close-zoom" aria-label="Cerrar zoom" data-aria-label-es="Cerrar zoom" data-aria-label-en="Close zoom"><i class="fas fa-times"></i></button>
+             </div>
+         </section> <!-- FIN de Proyectos -->
+
+         <section class="block">
+             <div class="content-wrapper">
+                 <div class="text-content-block">
+                     <h2 data-lang-es="CONOCE VIVE RIO" data-lang-en="DISCOVER VIVE RIO">CONOCE VIVE RIO</h2>
+                 </div>
+                 <div class="action-content">
+                      <a href="https://app-na1.hubspotdocuments.com/documents/8678656/view/437121787?accessId=c3ffd6" class="aura-button" data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
+                 </div>
+             </div>
+         </section>
+
+         <!-- 7. Mapa Lotes Section -->
+         <section id="mapa-lotes" class="section-bg">
+             <div class="container">
+                  <h2 data-aos="fade-up" data-lang-es="LOTES DISPONIBLES EN CIUDAD DEL RÍO" data-lang-en="LOTS AVAILABLE IN CIUDAD DEL RÍO">LOTES DISPONIBLES EN CIUDAD DEL RÍO</h2>
+                 <p class="lead text-center" data-aos="fade-up" data-aos-delay="50" data-lang-es="Explora la distribución y disponibilidad de lotes dentro del plan maestro de Ciudad del Río a través de nuestro mapa interactivo." data-lang-en="Explore the distribution and availability of lots within the Ciudad del Río master plan through our interactive map.">
+                     Explora la distribución y disponibilidad de lotes dentro del plan maestro de Ciudad del Río a través de nuestro mapa interactivo.
+                 </p>
+                 <div class="map-container" data-aos="fade-up" data-aos-delay="100">
+                     <iframe
+                         src="https://www.google.com/maps/d/embed?mid=19NtLexJzNf_GS-IdfO2NAr4zgeesCsk&ehbc=2E312F"
+                         width="100%"
+                         height="500"
+                         style="border:0;"
+                         allowfullscreen=""
+                         loading="lazy"
+                         referrerpolicy="no-referrer-when-downgrade">
+                     </iframe>
+                 </div>
+             </div>
+         </section>
+
+         <!-- 8. El Equipo Section -->
+         <section id="our-team" class="section-bg">
+             <div class="container">
+                 <div class="section-title" data-aos="fade-up">
+                     <h2 data-lang-es="EL EQUIPO DETRÁS DE LA CIUDAD DEL RÍO" data-lang-en="THE TEAM BEHIND CIUDAD DEL RÍO">EL EQUIPO DETRÁS DE LA CIUDAD DEL RÍO</h2>
+                      <h2 class="lead text-center" data-aos="fade-up" data-aos-delay="50" data-lang-es="¡Vamos a co-crear juntos un proyecto en la nueva ciudad del rio!" data-lang-en="Let's co-create a project together in the new Ciudad Del Rio!">
+                         ¡Vamos a co-crear juntos un proyecto en la nueva ciudad del rio!
+                     </h2>
+
+                 </div>
+                 <div class="team-members-container" data-aos="fade-up" data-aos-delay="100">
+                     <div class="team-member">
+                             <div class="member-content">
+                             <div class="member-logo">
+                                  <img src="./assets/imagenes/Logo/Ydn Logo.png" alt="Logo YDN" data-alt-es="Logo YDN" data-alt-en="YDN Logo">
+                             </div>
+                             <h4>YDN</h4>
+                             <p data-lang-es="Desde 1998 desarrollando proyectos de Infraestructura civil e inmobiliaria en todo el territorio nacional. Es la constructora de Vive Río en consorcio." data-lang-en="Since 1998 developing civil and real estate infrastructure projects throughout the national territory. It is the construction company of Vive Río in consortium.">Desde 1998 desarrollando proyectos de Infraestructura civil e inmobiliaria en todo el territorio nacional. Es la constructora de Vive Río en consorcio.</p>
+                             </div>
+                     </div>
+                     <div class="team-member">
+                         <div class="member-content">
+                             <div class="member-logo">
+                                 <img src="./assets/imagenes/Logo/Inciti Logo.png" alt="Logo Inciti" data-alt-es="Logo Inciti" data-alt-en="Inciti Logo">
+                             </div>
+                             <h4>Inciti</h4>
+                             <p data-lang-es="Enfocada en crear comunidades inteligentes y sostenibles, ha desarrollado proyectos exitosos, como Vive Río, desde su comercialización hasta su gerencia comercial." data-lang-en="Focused on creating smart and sustainable communities, it has developed successful projects, such as Vive Río, from its marketing to its commercial management.">Enfocada en crear comunidades inteligentes y sostenibles, ha desarrollado proyectos exitosos, como Vive Río, desde su comercialización hasta su gerencia comercial.</p>
+                         </div>
+                     </div>
+                     <div class="team-member">
+                             <div class="member-content">
+                             <div class="member-logo-casa-verde">
+                                <img src="./assets/imagenes/Logo/Casa Verde Logo.png" alt="Logo Casa Verde" data-alt-es="Logo Casa Verde" data-alt-en="Casa Verde Logo">
+                             </div>
+                             <h4>Casa Verde</h4>
+                             <p data-lang-es="Especializados en la promotoría de proyectos inmobiliarios y urbanos se ha enfocado en promover el desarrollo junto al Gran Malecón." data-lang-en="Specialized in promoting real estate and urban projects, it has focused on promoting development alongside the Gran Malecón.">Especializados en la promotoría de proyectos inmobiliarios y urbanos se ha enfocado en promover el desarrollo junto al Gran Malecón.</p>
+                             </div>
+                     </div>
+                 </div>
+             </div>
+         </section>
+
+
+         <!-- Contact Section (Mantenida al final) -->
+         <section id="contact" class="section-dark">
+             <div class="container text-center">
+                  <h2 data-aos="fade-up" data-lang-es="FORMA PARTE DEL FUTURO DE BARRANQUILLA" data-lang-en="BE PART OF BARRANQUILLA'S FUTURE">FORMA PARTE DEL FUTURO DE BARRANQUILLA</h2>
+                 <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100" data-lang-es="Regístrate y sé de los primeros en recibir información exclusiva sobre CIUDAD DEL RÍO." data-lang-en="Register and be among the first to receive exclusive information about CIUDAD DEL RÍO.">
+                     Regístrate y sé de los primeros en recibir información exclusiva sobre CIUDAD DEL RÍO.
+                 </p>
+                 <div class="contact-form-wrapper" data-aos="fade-up" data-aos-delay="200">
+                     <!-- HubSpot Form Embed Code -->
+                     <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                     <script>
+                         hbspt.forms.create({
+                         portalId: "8678656",
+                         formId: "e9cb1b61-1059-4551-b351-6e41b7c3526a",
+                         region: "na1"
+                         });
+                     </script>
+                     <!-- End HubSpot Form Embed Code -->
+                 </div>
+             </div>
+             <div class="angled-divider-bottom">
+                 <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                     preserveAspectRatio="none">
+                     <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill-footer"></path>
+                 </svg>
+             </div>
+         </section>
 
     </main>
-
 
     <!-- Footer -->
     <footer id="main-footer">
         <div class="container">
-            <a href="#pre-hero-banner" class="footer-logo">
-                 <img src="./assets/imagenes/Logo/Ciudad Del Rio.png" alt="Ciudad del Río Logo Footer" data-alt-es="Ciudad del Río Logo Footer" data-alt-en="Ciudad del Río Logo Footer">
-            </a>
-            <div class="container-footer">
-                 <!-- ¡¡IMPORTANTE!! Aplica data-lang a los párrafos del footer -->
-                 <p>© <span id="current-year"></span> <span data-lang-es="Ciudad del Río. Desarrollado por" data-lang-en="Ciudad del Río. Developed by">Ciudad del Río. Desarrollado por</span> <a href="https://inciti.co" target="_blank" rel="noopener noreferrer"> Inciti.co</a>. <span data-lang-es="Todos los derechos reservados." data-lang-en="All rights reserved.">Todos los derechos reservados.</span></p>
-                        <div class="social-icons">
-                           <a href="https://www.instagram.com/ciudaddelriobaq?igsh=MTM3N2ZhaHNldWtiOA==" aria-label="Instagram de Ciudad del Río" data-aria-label-es="Instagram de Ciudad del Río" data-aria-label-en="Ciudad del Río Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
-                        </div>
-                 <p style="font-size: 0.6em; line-height: 1.4;" data-lang-es="Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los inmuebles ofertados. El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños, elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados y están sujetos a las variaciones pertinentes." data-lang-en="This site and its content, such as illustrations, plans, elevations, and renders are solely illustrative to give visitors an idea of the project, may not accurately represent the development upon completion, and may contain non-standard finishes and furniture in the properties offered. The builder and/or its marketer reserves the right to make changes to plans, designs, elevations, and dimensions without prior notice. Expressed dimensions and square meters are estimates and subject to relevant variations.">
-                    Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los inmuebles ofertados.
-                    El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños, elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados y están sujetos a las variaciones pertinentes.
-                </p>
-            </div>
-        </div>
+             <a href="#pre-hero-banner" class="footer-logo">
+                  <img src="./assets/imagenes/Logo/Ciudad Del Rio.png" alt="Ciudad del Río Logo Footer" data-alt-es="Ciudad del Río Logo Footer" data-alt-en="Ciudad del Río Logo Footer">
+             </a>
+             <div class="container-footer">
+                  <p>© <span id="current-year"></span> <span data-lang-es="Ciudad del Río. Desarrollado por" data-lang-en="Ciudad del Río. Developed by">Ciudad del Río. Desarrollado por</span> <a href="https://inciti.co" target="_blank" rel="noopener noreferrer"> Inciti.co</a>. <span data-lang-es="Todos los derechos reservados." data-lang-en="All rights reserved.">Todos los derechos reservados.</span></p>
+                         <div class="social-icons">
+                            <a href="https://www.instagram.com/ciudaddelriobaq?igsh=MTM3N2ZhaHNldWtiOA==" aria-label="Instagram de Ciudad del Río" data-aria-label-es="Instagram de Ciudad del Río" data-aria-label-en="Ciudad del Río Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                         </div>
+                  <p style="font-size: 0.6em; line-height: 1.4;" data-lang-es="Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los inmuebles ofertados. El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños, elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados y están sujetos a las variaciones pertinentes." data-lang-en="This site and its content, such as illustrations, plans, elevations, and renders are solely illustrative to give visitors an idea of the project, may not accurately represent the development upon completion, and may contain non-standard finishes and furniture in the properties offered. The builder and/or its marketer reserves the right to make changes to plans, designs, elevations, and dimensions without prior notice. Expressed dimensions and square meters are estimates and subject to relevant variations.">
+                     Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los inmuebles ofertados.
+                     El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños, elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados y están sujetos a las variaciones pertinentes.
+                 </p>
+             </div>
+         </div>
     </footer>
-        <!-- === BOTÓN FLOTANTE DE WHATSAPP === -->
-        <a href="https://wa.link/eyox1y" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" data-aria-label-es="Contactar por WhatsApp" data-aria-label-en="Contact via WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-        </a>
+
+    <!-- === BOTÓN FLOTANTE DE WHATSAPP === -->
+    <a href="https://wa.link/eyox1y" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp" data-aria-label-es="Contactar por WhatsApp" data-aria-label-en="Contact via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ============================================== -->
+    <!-- === HTML DEL BANNER DE INSTALACIÓN (AÑADIDO) === -->
+    <!-- ============================================== -->
+    <div id="installBanner" class="install-banner">
+      <div class="banner-container">
+        <div class="banner-icon">
+          <!-- !!! IMPORTANTE: Verifica que esta ruta sea correcta desde la raíz de tu proyecto !!! -->
+          <img src="assets/icons/icon-192x192.png" alt="Inciti Investor">
+        </div>
+        <div class="banner-content">
+          <h4 class="banner-title">Instala Inciti Investor</h4>
+          <p class="banner-description" id="bannerText">
+            Añade esta app a tu pantalla de inicio para acceder rápidamente
+          </p>
+        </div>
+        <div class="banner-actions">
+          <button id="installButton" class="install-button">
+            <i class="pi pi-download"></i> Instalar
+          </button>
+          <button class="dismiss-button" id="dismissButton">
+            <i class="pi pi-times"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================== -->
+    <!-- === FIN HTML BANNER INSTALACIÓN            === -->
+    <!-- ============================================== -->
+
 
     <!-- AOS Library JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -578,7 +691,7 @@
     <!-- === TU SCRIPT PERSONALIZADO === -->
     <script src="js/script.js"></script>
 
-    <!-- === SCRIPT PARA TRADUCCIÓN (Añadir al final de script.js o aquí) === -->
+    <!-- === SCRIPT PARA TRADUCCIÓN === -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const langSwitcher = document.getElementById('language-switcher');
@@ -593,7 +706,6 @@
                 document.querySelectorAll('[data-lang-es]').forEach(el => {
                     const text = el.getAttribute(`data-lang-${lang}`);
                     if (text) {
-                        // Manejar diferentes tipos de elementos (ej. input placeholders, title)
                         if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
                             el.placeholder = text;
                         } else if (el.tagName === 'TITLE') {
@@ -637,9 +749,6 @@
                     langSwitcher.textContent = 'ES';
                     langSwitcher.setAttribute('aria-label', 'Switch language to Spanish');
                 }
-
-                 // Opcional: Guardar preferencia en localStorage
-                 // localStorage.setItem('preferredLanguage', lang);
             };
 
             // Evento click para el botón
@@ -648,17 +757,146 @@
                 setLanguage(newLang);
             });
 
-             // Opcional: Cargar idioma guardado al iniciar
-             // const savedLang = localStorage.getItem('preferredLanguage');
-             // if (savedLang && savedLang !== currentLang) {
-             //    setLanguage(savedLang);
-             // }
-
-            // Aplicar idioma inicial (por si acaso se definió diferente en <html>)
+            // Aplicar idioma inicial
             setLanguage(currentLang);
         });
     </script>
 
-</body>
+    <!-- ==================================================== -->
+    <!-- === JAVASCRIPT PARA BANNER INSTALACIÓN (AÑADIDO) === -->
+    <!-- ==================================================== -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Referencias a elementos del DOM
+      const installBanner = document.getElementById('installBanner');
+      const installButton = document.getElementById('installButton');
+      const dismissButton = document.getElementById('dismissButton');
+      const bannerText = document.getElementById('bannerText');
 
+      // Salir si algún elemento esencial no se encuentra
+      if (!installBanner || !installButton || !dismissButton || !bannerText) {
+        console.error("No se encontraron todos los elementos del banner de instalación.");
+        return;
+      }
+
+      // Detectar si es iOS
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+      // Variable para guardar el evento de instalación
+      let deferredPrompt;
+
+      // Ajustar el texto y botón según la plataforma
+      if (isIOS) {
+        // Usamos innerHTML para poder incluir los tags <i> de los iconos
+        bannerText.innerHTML = 'Instala esta app en tu iPhone: toca <span class="icon-text"><i class="pi pi-share-alt"></i></span> y luego "Añadir a pantalla de inicio"';
+        installButton.style.display = 'none'; // Ocultar botón de instalación estándar en iOS
+      }
+
+      // Verificar si la app ya está instalada (modo standalone PWA)
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        console.log('La app ya está instalada (standalone). No se muestra el banner.');
+        return; // No mostrar el banner si ya está instalada
+      }
+
+      // Escuchar el evento beforeinstallprompt (soportado en Chrome y Edge en escritorio/Android)
+      window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('Evento beforeinstallprompt capturado.');
+        // Prevenir que el navegador muestre su propio prompt automáticamente
+        e.preventDefault();
+        // Guardar el evento para poder dispararlo después
+        deferredPrompt = e;
+        // Mostrar nuestro banner personalizado
+        showBanner();
+      });
+
+      // Función para mostrar el banner (si aplica)
+      function showBanner() {
+        // Verificar si el usuario ya ha descartado el banner recientemente
+        const dismissedTimestamp = localStorage.getItem('installBannerDismissed');
+        const sevenDaysInMillis = 7 * 24 * 60 * 60 * 1000;
+
+        if (dismissedTimestamp) {
+            const timeSinceDismissed = Date.now() - parseInt(dismissedTimestamp, 10);
+            if (timeSinceDismissed < sevenDaysInMillis) {
+                console.log('Banner de instalación descartado recientemente. No se muestra.');
+                return; // No mostrar si fue descartado hace menos de 7 días
+            } else {
+                 console.log('Periodo de descarte expirado. Eliminando la marca.');
+                 localStorage.removeItem('installBannerDismissed'); // Eliminar si ya pasaron 7 días
+            }
+        }
+
+        // Mostrar el banner con un pequeño retraso
+         console.log('Mostrando banner de instalación...');
+         // Usamos setTimeout para evitar que aparezca bruscamente al cargar
+         setTimeout(() => {
+           installBanner.classList.add('show');
+         }, 1500); // Mostrar después de 1.5 segundos (ajusta si prefieres)
+      }
+
+      // Caso especial: Si no se dispara 'beforeinstallprompt' (p.ej. en iOS o Firefox),
+      // pero SÍ queremos mostrar el banner con las instrucciones de iOS.
+      // Comprobamos si deferredPrompt es aún null DESPUÉS de un tiempo prudencial
+      // Y si es iOS.
+      setTimeout(() => {
+          if (!deferredPrompt && isIOS && !window.matchMedia('(display-mode: standalone)').matches) {
+              console.log('No se recibió beforeinstallprompt, pero es iOS y no standalone. Mostrando banner de iOS.');
+              showBanner(); // Llama a showBanner que ya tiene la lógica de descarte
+          } else if (!deferredPrompt && !isIOS) {
+              console.log('No se recibió beforeinstallprompt y no es iOS. No se muestra banner.');
+          }
+      }, 500); // Espera medio segundo para dar tiempo a que llegue beforeinstallprompt
+
+
+      // Evento para el botón de instalación (Android/Desktop Chrome/Edge)
+      installButton.addEventListener('click', async () => {
+        if (!deferredPrompt) {
+          console.log('Botón de instalar clickeado, pero deferredPrompt no está disponible.');
+          return; // Salir si no tenemos el evento guardado
+        }
+
+        console.log('Mostrando prompt de instalación...');
+        // Mostrar el prompt de instalación nativo del navegador
+        deferredPrompt.prompt();
+
+        // Esperar a que el usuario responda al prompt
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`El usuario ${outcome} la instalación.`);
+
+        // Ya no necesitamos el evento guardado, sea cual sea el resultado
+        deferredPrompt = null;
+
+        // Ocultar nuestro banner personalizado
+        installBanner.classList.remove('show');
+      });
+
+      // Evento para el botón de cerrar/descartar el banner
+      dismissButton.addEventListener('click', () => {
+        console.log('Banner descartado por el usuario.');
+        installBanner.classList.remove('show');
+
+        // Guardar la marca de tiempo actual en localStorage para no mostrarlo por 7 días
+        localStorage.setItem('installBannerDismissed', Date.now().toString());
+        console.log('Preferencia de descarte guardada por 7 días.');
+      });
+
+      // Comprobar al cargar si una marca de descarte vieja ya expiró
+      // (Esta lógica ya está integrada en showBanner, pero la dejamos aquí por claridad
+      // de la intención original del código memorizado)
+      const checkDismissedTime = () => {
+          const dismissedTime = localStorage.getItem('installBannerDismissed');
+          if (dismissedTime && (Date.now() - parseInt(dismissedTime, 10) > 7 * 24 * 60 * 60 * 1000)) {
+              console.log('Marca de descarte antigua encontrada y expirada. Eliminando.');
+              localStorage.removeItem('installBannerDismissed');
+          }
+      };
+      checkDismissedTime(); // Ejecutar la comprobación al cargar el script
+
+    });
+    </script>
+    <!-- ==================================================== -->
+    <!-- === FIN JAVASCRIPT BANNER INSTALACIÓN          === -->
+    <!-- ==================================================== -->
+
+</body>
 </html>
