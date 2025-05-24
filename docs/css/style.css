@@ -1,0 +1,311 @@
+/* Estilos base y fuentes */
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    color: #333;
+    padding: 20px 10px;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Evitar el resaltado azul en móviles al tocar */
+}
+
+.marcador {
+    font-size: 1.6em;
+    color: #fff;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.25);
+    padding: 8px 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.contenedor-principal {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0,0,0,0.1);
+    width: 95%;
+    max-width: 700px;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.game-logo { /* Si decides usar un logo */
+    height: 40px;
+    width: auto;
+}
+
+h1 {
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #3a365d;
+    font-size: 2.2em;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+h2 {
+    color: #4a4677;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.6em;
+}
+
+.ruleta-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ruleta-container {
+    position: relative;
+    width: 90vw; /* Ancho relativo al viewport */
+    max-width: 400px; /* Máximo en pantallas grandes */
+    aspect-ratio: 1 / 1; /* Mantenerlo cuadrado */
+    margin: 10px auto 20px;
+}
+
+#ruletaJuego {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.15), inset 0 0 8px rgba(0,0,0,0.1);
+    /* La transición de rotación la maneja JS para el efecto de giro */
+}
+
+.indicador-ruleta {
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: clamp(15px, 5vw, 25px) solid transparent; /* min, preferred, max */
+    border-right: clamp(15px, 5vw, 25px) solid transparent;
+    border-top: clamp(20px, 7vw, 35px) solid #ff6b6b;
+    z-index: 10;
+    filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.2));
+}
+
+.boton-accion {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    letter-spacing: 0.3px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    -webkit-appearance: none; /* Quitar estilos por defecto en iOS */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.boton-accion svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor; /* Heredar color del texto del botón */
+}
+
+.boton-accion.principal {
+    background: linear-gradient(145deg, #5e72e4, #825ee4);
+    margin-bottom: 15px;
+}
+.boton-accion.principal:hover:not(:disabled) {
+    background: linear-gradient(145deg, #4a5ac7, #704cc7);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(94, 114, 228, 0.4);
+}
+
+.boton-accion.secundario { background-color: #f5365c; }
+.boton-accion.secundario:hover:not(:disabled) { background-color: #d42b4d; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(245, 54, 92, 0.3); }
+
+.boton-accion.terciario { background-color: #2dce89; }
+.boton-accion.terciario:hover:not(:disabled) { background-color: #24a871; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(45, 206, 137, 0.3); }
+
+.boton-accion.evaluacion-correcta { background-color: #28a745; }
+.boton-accion.evaluacion-correcta:hover:not(:disabled) { background-color: #218838; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(40, 167, 69, 0.3); }
+
+.boton-accion.evaluacion-incorrecta { background-color: #dc3545; }
+.boton-accion.evaluacion-incorrecta:hover:not(:disabled) { background-color: #c82333; transform: translateY(-2px); box-shadow: 0 6px 15px rgba(220, 53, 69, 0.3); }
+
+.boton-accion:disabled {
+    background-color: #adb5bd !important;
+    background-image: none !important;
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.resultado-seccion {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.display-resultado {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #5e72e4;
+    padding: 15px;
+    margin-top: 8px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    min-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-break: break-all;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.05);
+}
+
+.display-explicacion {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #e9f5ff;
+    border-left: 4px solid #5e72e4;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #3a365d;
+    text-align: left;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+#botonesEvaluacion { /* Contenedor de botones "Lo Dije Bien / Repasar" */
+    margin-top: 15px; /* Espacio arriba, debajo de la explicación */
+    margin-bottom: 10px; /* Espacio abajo, antes de "Nuevo Intento" */
+}
+
+.botones-post-giro {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Animaciones y utilidades */
+.fade-in { animation: fadeInAnimation 0.7s ease-in-out forwards; }
+.slide-up-fade-in { animation: slideUpFadeInAnimation 0.6s ease-out forwards; }
+@keyframes fadeInAnimation { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUpFadeInAnimation { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+.hidden { display: none !important; }
+
+/* --- Media Queries para Responsividad --- */
+
+/* Tablets y móviles grandes (landscape) */
+@media (max-width: 768px) {
+    .contenedor-principal {
+        padding: 15px;
+    }
+    h1 {
+        font-size: 2em;
+    }
+    h2 {
+        font-size: 1.4em;
+    }
+    .marcador {
+        font-size: 1.4em;
+        padding: 8px 15px;
+    }
+    .ruleta-container {
+        max-width: 350px;
+    }
+    .boton-accion {
+        padding: 10px 15px;
+        font-size: 0.95em;
+    }
+    .display-resultado {
+        font-size: 1.3em;
+    }
+    .display-explicacion {
+        font-size: 0.95em;
+    }
+}
+
+/* Móviles (portrait) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px 5px;
+    }
+    .contenedor-principal {
+        padding: 10px;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    h1 {
+        font-size: 1.7em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    .marcador {
+        font-size: 1.2em;
+        padding: 6px 12px;
+        margin-bottom: 15px;
+    }
+    .ruleta-container {
+        max-width: 280px; /* O incluso un poco menos, ej. 260px o 85vw */
+        margin-bottom: 15px;
+    }
+
+    .boton-accion {
+        padding: 9px 12px;
+        font-size: 0.9em;
+    }
+    /* Para que los botones en .botones-post-giro y #botonesEvaluacion se distribuyan mejor */
+    .botones-post-giro .boton-accion,
+    #botonesEvaluacion .boton-accion {
+        flex-grow: 1; /* Permite que los botones crezcan para llenar el espacio */
+        min-width: 120px; /* Ancho mínimo para que no se hagan demasiado pequeños */
+    }
+    /* El botón de Girar principal puede ser más prominente */
+    #botonGirar {
+        width: auto; /* O un ancho específico si se prefiere */
+        flex-grow: 0; /* No queremos que este crezca necesariamente con otros */
+        padding: 12px 25px; /* Más padding para el botón principal */
+    }
+
+    .display-resultado {
+        font-size: 1.2em;
+        min-height: 40px;
+        padding: 10px;
+    }
+    .display-explicacion {
+        font-size: 0.9em;
+        padding: 10px;
+        line-height: 1.4;
+    }
+}
