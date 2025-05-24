@@ -3,78 +3,969 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rueda de Aprendizaje Interactivo</title>
+    <title>S.M.G. Innovation Lab - Educando para el futuro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Opcional: Añadir Font Awesome para iconos fácilmente -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Variables de Color y Fuentes (Modernizado) --- */
+        :root {
+            --color-white: #FFFFFF;
+            --color-blue: #0047AB; /* Azul Rey Principal */
+            --color-blue-darker: #003b8e; /* Azul más oscuro */
+            --color-blue-lighter: #e6f0ff; /* Azul muy claro para fondos sutiles */
+            --color-salmon: #FA8072;
+            --color-salmon-darker: #e56b5a;
+            --color-text-primary: #212529; /* Casi negro para texto principal */
+            --color-text-secondary: #6c757d; /* Gris para texto secundario */
+            --color-light-gray: #f8f9fa; /* Gris claro para fondos alternos */
+            --color-border: #dee2e6; /* Gris para bordes sutiles */
 
-    <link rel="stylesheet" href="./css/style.css">
+            --font-primary: 'Poppins', sans-serif;
+            --base-font-size: 16px;
+            --line-height-base: 1.7;
+            --border-radius-base: 8px; /* Radio de borde consistente */
+            --box-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.07); /* Sombra suave */
+            --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada en hover */
+            --transition-base: all 0.3s ease-in-out; /* Transición estándar */
+        }
 
-    <link rel="shortcut icon" href="./assets/icons/ruleta.png" type="image/x-icon">
+        /* --- Reseteo Básico y Estilos Globales --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="icon" type="image/png" href="./assets/icons/ruleta.png">
+        html {
+            scroll-behavior: smooth;
+            font-size: var(--base-font-size);
+        }
 
-    </head>
+        body {
+            font-family: var(--font-primary);
+            color: var(--color-text-primary);
+            line-height: var(--line-height-base);
+            background-color: var(--color-white);
+            -webkit-font-smoothing: antialiased; /* Mejor renderizado de fuentes */
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1140px; /* Ancho máximo ligeramente mayor */
+            margin: 0 auto;
+            padding: 0 15px; /* Padding estándar Bootstrap */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--color-blue);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1px; }
+        h2 { font-size: 2.2rem; text-align: center; margin-bottom: 2.5rem; } /* Más margen inferior para títulos de sección */
+        h3 { font-size: 1.4rem; } /* Ligeramente más pequeño */
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--color-text-secondary); /* Texto secundario por defecto */
+        }
+        section p:last-of-type {
+            margin-bottom: 0; /* Quitar margen al último párrafo de una sección */
+        }
+
+        a {
+            color: var(--color-salmon);
+            text-decoration: none;
+            transition: var(--transition-base);
+        }
+
+        a:hover {
+            color: var(--color-salmon-darker);
+            text-decoration: none; /* Quitar subrayado por defecto en hover */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            vertical-align: middle;
+            border-radius: var(--border-radius-base); /* Bordes redondeados para imágenes */
+        }
+
+        .section-padding {
+            padding: 80px 0; /* Más padding vertical */
+        }
+
+        .bg-light {
+            background-color: var(--color-light-gray);
+        }
+        .bg-blue-lighter {
+             background-color: var(--color-blue-lighter);
+        }
+
+
+        /* --- Header / Navegación --- */
+        header {
+            background-color: var(--color-white);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Sombra más sutil */
+            position: sticky;
+            top: 0;
+            z-index: 1030; /* Z-index estándar Bootstrap */
+            padding: 15px 0; /* Más padding vertical */
+            transition: var(--transition-base);
+        }
+        header.scrolled {
+             box-shadow: var(--box-shadow-soft); /* Sombra más pronunciada al hacer scroll */
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-blue);
+            text-decoration: none; /* Asegurar que el logo no tenga subrayado */
+        }
+         .logo:hover {
+             color: var(--color-blue-darker); /* Oscurecer un poco al pasar el ratón */
+         }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center; /* Alinear verticalmente */
+            margin: 0; /* Resetear margen de ul */
+        }
+
+        .nav-links li {
+            margin-left: 30px; /* Más espacio entre items */
+        }
+
+        .nav-links a {
+            color: var(--color-text-primary);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative; /* Para pseudo-elementos */
+            padding-bottom: 5px; /* Espacio para línea inferior */
+            text-decoration: none;
+        }
+        .nav-links a::after { /* Efecto línea inferior en hover */
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--color-salmon);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: var(--color-blue);
+        }
+        .nav-links a:hover::after {
+             width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem; /* Ligeramente más pequeño */
+            color: var(--color-blue);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-darker) 100%);
+            color: var(--color-white);
+            padding: 120px 0; /* Más padding */
+            text-align: center;
+            position: relative; /* Para posibles elementos decorativos */
+            overflow: hidden; /* Si se añaden formas */
+        }
+        /* Opcional: Añadir formas abstractas (requiere más CSS) */
+        /* .hero::before { content: ''; ... } */
+
+        .hero-content {
+             max-width: 700px; /* Limitar ancho del texto */
+             margin: 0 auto;
+             position: relative; /* Asegurar que esté sobre las formas */
+             z-index: 2;
+        }
+
+        .hero h1 {
+            color: var(--color-white);
+            margin-bottom: 1.5rem;
+            font-size: 3.2rem; /* Más grande */
+        }
+
+        .hero p {
+            font-size: 1.25rem; /* Más grande */
+            margin-bottom: 2.5rem;
+            color: rgba(255, 255, 255, 0.85); /* Blanco semi-transparente */
+            font-weight: 300; /* Más ligero */
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--color-salmon);
+            color: var(--color-white);
+            padding: 14px 35px; /* Más padding */
+            border-radius: 50px; /* Completamente redondeado */
+            font-weight: 600;
+            text-transform: uppercase; /* Mayúsculas */
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            transition: var(--transition-base), transform 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(250, 128, 114, 0.3); /* Sombra color salmón */
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-salmon-darker);
+            color: var(--color-white);
+            transform: translateY(-3px) scale(1.03); /* Efecto sutil de elevación y escala */
+            box-shadow: 0 6px 15px rgba(250, 128, 114, 0.4);
+        }
+
+        /* --- Sección Quiénes Somos --- */
+        #quienes-somos .container {
+            max-width: 800px; /* Limitar ancho para mejor lectura */
+            text-align: center;
+        }
+         #quienes-somos h2 {
+             margin-bottom: 1.5rem;
+         }
+        #quienes-somos p {
+            font-size: 1.1rem;
+            color: var(--color-text-primary); /* Texto principal más oscuro aquí */
+        }
+
+        /* --- Sección Servicios --- */
+        .services-grid {
+            display: grid;
+            /* Ajustar columnas para que no queden items sueltos */
+             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-item {
+            background-color: var(--color-white);
+            padding: 35px 30px; /* Más padding interno */
+            border-radius: var(--border-radius-base);
+            box-shadow: var(--box-shadow-soft);
+            text-align: center;
+            transition: var(--transition-base);
+            border: 1px solid var(--color-border); /* Borde sutil */
+            display: flex; /* Usar flex para controlar contenido */
+            flex-direction: column; /* Apilar elementos verticalmente */
+            align-items: center; /* Centrar horizontalmente */
+        }
+
+        .service-item:hover {
+            transform: translateY(-8px); /* Elevación más pronunciada */
+            box-shadow: var(--box-shadow-hover);
+        }
+        .service-item h3 {
+            margin-top: 1rem; /* Espacio después del icono */
+             margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+        .service-item p {
+             font-size: 0.95rem;
+             color: var(--color-text-secondary);
+             flex-grow: 1; /* Permite que el párrafo crezca si hay espacio */
+        }
+        /* Placeholder para icono (Mejor usar FontAwesome o SVGs aquí) */
+        .service-icon-placeholder {
+             font-size: 2.8rem; /* Tamaño del icono */
+             color: var(--color-salmon);
+             margin-bottom: 1.2rem;
+             line-height: 1; /* Ajustar altura de línea para icono */
+        }
+
+
+        /* --- Sección Clase Gratis (Formulario) --- */
+        .form-section {
+            max-width: 650px; /* Ligeramente más ancho */
+            margin: 40px auto 0 auto; /* Añadir margen superior */
+            text-align: center;
+            background-color: var(--color-white); /* Asegurar fondo blanco si la sección tiene bg-light */
+            padding: 40px;
+            border-radius: var(--border-radius-base);
+           /* box-shadow: var(--box-shadow-soft); /* Opcional: añadir sombra */
+        }
+         #clase-gratis.bg-light .form-section { /* Si la sección tiene fondo claro */
+             background-color: var(--color-white);
+             box-shadow: var(--box-shadow-soft);
+         }
+         #clase-gratis h2 { /* Asegurar que el H2 esté fuera del .form-section */
+             margin-bottom: 1rem; /* Reducir margen si el form está debajo */
+         }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--color-blue);
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select { /* Añadir select si se usa */
+            width: 100%;
+            padding: 12px 18px; /* Más padding */
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-base);
+            font-family: var(--font-primary);
+            font-size: 1rem;
+            transition: var(--transition-base);
+            background-color: var(--color-light-gray); /* Fondo sutil para inputs */
+            color: var(--color-text-primary); /* Color del texto del input */
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+             color: #aaa;
+             font-weight: 300;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            background-color: var(--color-white); /* Fondo blanco al enfocar */
+            box-shadow: 0 0 0 3px rgba(0, 71, 171, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px; /* Altura mínima */
+        }
+
+        .form-section .cta-button {
+            margin-top: 1rem;
+            width: 100%; /* Botón ancho completo */
+        }
+
+        .whatsapp-link-text { /* Renombrado para claridad */
+            margin-top: 2.5rem;
+            font-weight: 400; /* Normal weight */
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: #25D366;
+            color: var(--color-white);
+            padding: 10px 25px; /* Ajustar padding */
+            border-radius: 50px; /* Redondeado */
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 1rem;
+            transition: var(--transition-base), transform 0.2s ease;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
+            border: none; /* Asegurar que no haya borde */
+        }
+
+        .whatsapp-button img {
+            width: 18px; /* Ligeramente más pequeño */
+            height: auto;
+            margin-right: 10px;
+            border-radius: 0; /* Quitar borde redondeado a icono */
+            vertical-align: middle; /* Alinear mejor */
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1DAE54;
+            color: var(--color-white);
+            transform: translateY(-3px) scale(1.03);
+             box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
+        }
+
+
+        /* --- Sección Blog --- */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .blog-post {
+            background-color: var(--color-white);
+            border-radius: var(--border-radius-base);
+            box-shadow: var(--box-shadow-soft);
+            overflow: hidden; /* Para contener la imagen si se añade */
+            transition: var(--transition-base);
+             border: 1px solid var(--color-border);
+             display: flex; /* Flex para controlar altura si es necesario */
+             flex-direction: column;
+        }
+        .blog-post:hover {
+             transform: translateY(-8px);
+             box-shadow: var(--box-shadow-hover);
+        }
+
+        /* Si añades imagen al blog post */
+        .blog-post img.featured-image {
+             width: 100%;
+             height: 200px; /* Altura fija para la imagen */
+             object-fit: cover; /* Escalar y cortar imagen */
+             border-radius: var(--border-radius-base) var(--border-radius-base) 0 0; /* Redondeado solo arriba */
+             margin-bottom: 0;
+        }
+
+        .blog-content {
+             padding: 25px;
+             flex-grow: 1; /* Permite que el contenido crezca */
+             display: flex;
+             flex-direction: column;
+        }
+
+        .blog-post h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+             color: var(--color-blue);
+        }
+        .blog-post p {
+             font-size: 0.9rem;
+             color: var(--color-text-secondary);
+             margin-bottom: 1rem;
+             flex-grow: 1; /* Empuja el enlace hacia abajo */
+        }
+
+        .blog-post a.read-more {
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--color-salmon);
+            font-size: 0.9rem;
+            text-decoration: none;
+            align-self: flex-start; /* Alinear a la izquierda */
+        }
+         .blog-post a.read-more:hover {
+            color: var(--color-salmon-darker);
+            text-decoration: underline; /* Subrayado opcional en hover */
+         }
+
+
+        /* --- Sección Contacto --- */
+        #contacto .container > h2 { /* Estilo específico para el H2 de contacto */
+            margin-bottom: 3rem;
+        }
+        .contact-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px; /* Más espacio */
+            align-items: flex-start; /* Alinear arriba */
+        }
+
+        .contact-info h3 { /* Título opcional para la info */
+             font-size: 1.6rem;
+             margin-bottom: 1.5rem;
+             color: var(--color-blue);
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem; /* Más espacio entre items */
+            font-size: 1rem;
+            color: var(--color-text-primary);
+            display: flex; /* Para alinear icono y texto */
+            align-items: flex-start; /* Alinear al inicio */
+            line-height: 1.6; /* Ligeramente más espaciado vertical */
+        }
+        /* Icono placeholder usando ::before */
+        .contact-info p::before {
+             font-size: 1.3rem;
+             color: var(--color-salmon);
+             margin-right: 15px; /* Espacio entre icono y texto */
+             min-width: 20px; /* Ancho mínimo para alinear iconos */
+             text-align: center;
+             line-height: inherit; /* Heredar line-height para alinear */
+             margin-top: 2px; /* Ajuste fino vertical */
+        }
+        /* Asignar iconos específicos (puedes usar clases o data-attributes también) */
+        .contact-info p.address::before { content: '📍'; }
+        .contact-info p.phone::before   { content: '📞'; }
+        .contact-info p.email::before   { content: '✉️'; }
+        .contact-info p.hours::before   { content: '🕒'; }
+
+        .contact-info strong { /* Quitar strong si usas iconos */
+            font-weight: 600;
+            color: var(--color-blue);
+            /* display: block; */ /* Opcional: Si quieres el título en línea separada */
+            /* margin-bottom: 0.25rem; */
+        }
+
+
+        .contact-info a {
+             color: var(--color-salmon);
+             word-break: break-word; /* Evitar desbordamiento de emails largos */
+             text-decoration: none;
+        }
+        .contact-info a:hover {
+             color: var(--color-salmon-darker);
+             text-decoration: underline;
+        }
+        .contact-info .whatsapp-button {
+            margin-top: 1.5rem;
+        }
+
+        .map-container { /* Contenedor para el mapa */
+             position: relative;
+             padding-bottom: 75%; /* Ratio 4:3, ajusta según necesidad */
+             height: 0;
+             overflow: hidden;
+             border-radius: var(--border-radius-base);
+             box-shadow: var(--box-shadow-soft);
+             border: 1px solid var(--color-border);
+        }
+
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--color-blue-darker); /* Azul más oscuro */
+            color: rgba(255, 255, 255, 0.7); /* Blanco semi-transparente */
+            text-align: center;
+            padding: 40px 0; /* Más padding */
+            margin-top: 80px; /* Separación de la última sección */
+            font-size: 0.9rem;
+        }
+        footer p {
+            margin-bottom: 0.5rem; /* Espacio si hay más elementos */
+            color: inherit; /* Heredar color del footer */
+        }
+        /* Placeholder para redes sociales */
+        .social-links {
+             margin-top: 1.5rem; /* Más espacio */
+        }
+        .social-links a {
+             color: rgba(255, 255, 255, 0.7);
+             margin: 0 12px; /* Más espacio */
+             font-size: 1.4rem; /* Tamaño del icono */
+             text-decoration: none;
+             transition: var(--transition-base);
+        }
+        .social-links a:hover {
+             color: var(--color-white);
+             transform: scale(1.1); /* Efecto ligero de escala */
+        }
+
+
+        /* --- Responsividad --- */
+        @media (max-width: 992px) { /* Tablets */
+             h1 { font-size: 2.5rem; }
+             h2 { font-size: 2rem; }
+             .hero { padding: 100px 0; }
+             .contact-section { gap: 30px; }
+             .map-container { padding-bottom: 65%; } /* Ajustar ratio si es necesario */
+        }
+
+        @media (max-width: 768px) { /* Móviles grandes y Tablets pequeñas */
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+             .section-padding { padding: 60px 0; }
+
+            header .container {
+                 position: relative; /* Necesario para el menú desplegable */
+            }
+
+            .nav-links {
+                display: none; /* Oculto por defecto */
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%; /* Justo debajo del header */
+                left: 0;
+                background-color: var(--color-white);
+                box-shadow: var(--box-shadow-soft);
+                text-align: center;
+                padding: 15px 0;
+                border-top: 1px solid var(--color-border);
+                 align-items: stretch; /* Estirar items */
+                 z-index: 1020; /* Asegurar que esté sobre el contenido */
+            }
+
+            .nav-links.active {
+                display: flex; /* Mostrar cuando está activo */
+            }
+
+            .nav-links li {
+                margin: 0; /* Quitar margen izquierdo */
+                 width: 100%; /* Ocupar todo el ancho */
+            }
+             .nav-links a {
+                 display: block; /* Ocupar todo el ancho */
+                 padding: 12px 15px; /* Añadir padding vertical y horizontal */
+                 border-bottom: 1px solid var(--color-blue-lighter); /* Separador sutil */
+                 width: 100%; /* Asegurar ancho completo */
+             }
+             .nav-links li:last-child a {
+                  border-bottom: none; /* Quitar borde del último elemento */
+             }
+             .nav-links a::after { display: none; } /* Ocultar línea inferior en móvil */
+
+              .nav-links a:hover {
+                 background-color: var(--color-blue-lighter); /* Fondo sutil en hover */
+                 color: var(--color-blue);
+              }
+
+
+            .menu-toggle {
+                display: block; /* Mostrar botón hamburguesa */
+            }
+
+            .hero { padding: 80px 0; }
+            .hero h1 { font-size: 2.4rem; }
+            .hero p { font-size: 1.1rem; }
+
+            /* Ajustar grids a una columna */
+            .services-grid, .blog-grid {
+                 grid-template-columns: 1fr;
+                 gap: 25px; /* Menos espacio */
+             }
+
+            .contact-section {
+                grid-template-columns: 1fr; /* Una columna */
+                gap: 40px;
+            }
+
+            .map-container {
+                order: 1; /* Mapa primero en móvil */
+                padding-bottom: 80%; /* Quizás más cuadrado en móvil */
+            }
+            .contact-info {
+                order: 2; /* Info después */
+                text-align: left; /* Alinear texto a la izquierda */
+            }
+             .contact-info p {
+                 justify-content: flex-start; /* Alinear al inicio */
+             }
+             .contact-info .whatsapp-button { /* Centrar botón en móvil */
+                 display: flex;
+                 justify-content: center;
+                 width: fit-content;
+                 margin-left: auto;
+                 margin-right: auto;
+             }
+        }
+
+         @media (max-width: 480px) { /* Móviles pequeños */
+             h1 { font-size: 2rem; }
+             h2 { font-size: 1.6rem; }
+             .hero { padding: 60px 0; }
+             .cta-button { padding: 12px 25px; font-size: 0.85rem;}
+             .whatsapp-button { padding: 9px 20px; font-size: 0.85rem;}
+             .form-section { padding: 30px 20px; }
+             .contact-info p { font-size: 0.95rem; }
+             footer { padding: 30px 0; }
+         }
+
+    </style>
+</head>
 <body>
-    <div class="contenedor-principal">
-        <header class="game-header">
-            <h1>Rueda de Aprendizaje</h1>
-        </header>
 
-        <div id="marcadorJuego" class="marcador">
-            Aciertos: <span id="puntosAciertos">0</span>
-        </div>
+    <header id="header">
+        <nav class="container">
+            <a href="#inicio" class="logo">S.M.G. Innovation Lab</a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#clase-gratis">Clase Gratis</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        </nav>
+    </header>
 
-        <div class="ruleta-area">
-            <div class="ruleta-container">
-                <canvas id="ruletaJuego"></canvas> <div class="indicador-ruleta"></div>
+    <main>
+        <!-- Sección Inicio -->
+        <section id="inicio" class="hero">
+            <div class="container hero-content">
+                <h1>Educando para el futuro, innovando desde hoy.</h1>
+                <p>Transformamos la curiosidad en conocimiento a través de la robótica, la tecnología y el mindfulness.</p>
+                <!-- IMPORTANTE: Cambia #pago-placeholder por tu enlace real de Wompi, PayU, etc. -->
+                <a href="#pago-placeholder" class="cta-button">Inscríbete Ahora</a>
             </div>
-            <button id="botonGirar" class="boton-accion principal">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.59V7.41c0-.89 1.08-1.34 1.71-.71l4.59 4.59c.39.39.39 1.02 0 1.41l-4.59 4.59c-.63.63-1.71.18-1.71-.71z"/>
-                </svg>
-                GIRAR
-            </button>
-        </div>
+        </section>
 
-        <div id="areaResultado" class="resultado-seccion" style="display:none;">
-            <h2>¡Resultado!</h2>
-            <div id="textoResultado" class="display-resultado">
+        <!-- Sección Quiénes Somos -->
+        <section id="quienes-somos" class="section-padding">
+            <div class="container">
+                <h2>Nuestra Inspiración</h2>
+                 <!-- IMPORTANTE: Reemplaza el texto entre corchetes con tu historia real -->
+                <p>S.M.G. Innovation Lab nació de una historia personal de amor y superación. Inspirados por [La experiencia con mi hermano con autismo y ver cómo la tecnología podía ser una herramienta increíble para su desarrollo y comunicación], nuestra misión es crear un espacio inclusivo donde cada niño y joven pueda descubrir su potencial a través de la tecnología y el bienestar.</p>
+                <p>Combinamos la vanguardia educativa con un enfoque humano, preparando a las nuevas generaciones no solo con habilidades técnicas, sino también con inteligencia emocional y resiliencia.</p>
+                <!-- Opcional: Añadir una foto inspiradora -->
+                 <!-- <img src="ruta/a/imagen_inspiradora.jpg" alt="Inspiración S.M.G." style="margin-top: 2rem; max-width: 600px; display: block; margin-left: auto; margin-right: auto; border-radius: var(--border-radius-base);"> -->
+            </div>
+        </section>
+
+        <!-- Sección Servicios / Programas -->
+        <section id="servicios" class="section-padding bg-light">
+            <div class="container">
+                <h2>Explora Nuestros Programas</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon-placeholder">🤖</div> <!-- Placeholder Icono -->
+                        <h3>Robótica Creativa</h3>
+                        <p>Diseña, construye y programa robots. Fomentamos la lógica, la resolución de problemas y el trabajo en equipo.</p>
+                    </div>
+                    <div class="service-item">
+                         <div class="service-icon-placeholder">🧠</div> <!-- Placeholder Icono -->
+                        <h3>Mindfulness Tech</h3>
+                        <p>Integramos herramientas digitales con prácticas de atención plena para mejorar la concentración y reducir el estrés.</p>
+                    </div>
+                    <div class="service-item">
+                         <div class="service-icon-placeholder">☀️</div> <!-- Placeholder Icono -->
+                        <h3>Talleres Vacacionales</h3>
+                        <p>Inmersiones temáticas llenas de diversión y aprendizaje en tecnología, ciencia y arte durante las vacaciones.</p>
+                    </div>
+                     <div class="service-item">
+                          <div class="service-icon-placeholder">💻</div> <!-- Placeholder Icono -->
+                        <h3>Clases Online</h3>
+                        <p>Participa en nuestros innovadores programas desde cualquier lugar con nuestras clases virtuales interactivas.</p>
+                    </div>
                 </div>
-
-            <div id="explicacionIngles" class="display-explicacion" style="display:none;">
-                </div>
-
-            <div id="botonesEvaluacion" class="botones-post-giro" style="display:none;">
-                <button id="botonCorrecto" class="boton-accion evaluacion-correcta">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
-                    </svg>
-                    ¡Lo Dije Bien!
-                </button>
-                <button id="botonIncorrecto" class="boton-accion evaluacion-incorrecta">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
-                    </svg>
-                    Necesito Repasar
-                </button>
             </div>
+        </section>
 
-            <div class="botones-post-giro"> <button id="botonNuevoIntento" class="boton-accion secundario">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
-                    </svg>
-                    Nuevo Intento
-                </button>
-                <button id="botonExplicarIngles" class="boton-accion terciario">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1.5 14.5c-2.03 0-3.84-1.06-4.92-2.7h9.84c-1.08 1.64-2.89 2.7-4.92 2.7zm0-11c.86 0 1.69.24 2.4.67.71-.43 1.54-.67 2.4-.67 1.1 0 2.1.44 2.83 1.17C17.16 7.44 16.1 7 15 7c-.86 0-1.69.24-2.4.67-.71-.43-1.54-.67-2.4-.67-.76 0-1.47.18-2.1.5.93-1.13 2.3-1.84 3.83-1.84zm4.67 3.5H8.83c-.23.64-.33 1.31-.33 2s.1 1.36.33 2h6.34c.23-.64.33-1.31.33-2s-.1-1.36-.33-2zm1.33 4.33c-.49 1.12-1.26 2.06-2.21 2.7.96.64 2.09.97 3.28.97 2.07 0 3.92-1.1 4.94-2.77-.35.09-.7.14-1.06.14-.96 0-1.88-.28-2.64-.64-.1.21-.21.41-.31.63zm-9.34-.06c-.95-.64-1.72-1.58-2.21-2.7.28.42.62.78 1.02 1.09-.76.36-1.68.64-2.64.64-.36 0-.71-.05-1.06-.14C3.58 17.9 5.43 19 7.5 19c1.19 0 2.32-.33 3.28-.97-.1-.22-.21-.42-.31-.63z"/>
-                    </svg>
-                    Explicar en Inglés
-                </button>
+        <!-- Sección Agenda una Clase Gratis -->
+        <section id="clase-gratis" class="section-padding">
+            <div class="container">
+                 <!-- Título H2 centrado -->
+                 <h2>¡Prueba una Clase Gratis!</h2>
+                <div class="form-section">
+                    <p style="margin-bottom: 2rem; font-size: 1.05rem; color: var(--color-text-primary);">Descubre nuestra metodología única. Déjanos tus datos y te contactaremos para agendar tu clase de prueba sin costo.</p>
+                    <form id="claseGratisForm" action="TU_ENDPOINT_DE_FORMULARIO" method="POST"> <!-- Reemplaza con tu endpoint o usa JS -->
+                        <div class="form-group">
+                            <label for="nombre">Nombre del Padre/Madre:</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre completo">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Correo Electrónico:</label>
+                            <input type="email" id="email" name="email" required placeholder="tucorreo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono / WhatsApp:</label>
+                            <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 3001234567">
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">¿Alguna pregunta o preferencia? (Opcional):</label>
+                            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Ej: Interesado en robótica para niño de 8 años, preferencia horario tarde..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">Solicitar Mi Clase Gratis</button>
+                    </form>
+                    <p class="whatsapp-link-text">¿Prefieres escribirnos directamente?</p>
+                    <!-- IMPORTANTE: Reemplaza 57XXXXXXXXXX con tu número real de WhatsApp -->
+                    <a href="https://wa.me/57XXXXXXXXXX?text=Hola%2C%20estoy%20interesado%20en%20agendar%20una%20clase%20gratis%20en%20S.M.G.%20Innovation%20Lab." target="_blank" class="whatsapp-button">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon"> Chatear por WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Blog / Noticias -->
+        <section id="blog" class="section-padding bg-light">
+            <div class="container">
+                <h2>Últimas Noticias y Consejos</h2>
+                <div class="blog-grid">
+                    <!-- IMPORTANTE: Reemplaza contenido e imágenes de ejemplo -->
+                    <article class="blog-post">
+                         <!-- <img src="ruta/imagen_blog1.jpg" alt="Feria de Ciencia" class="featured-image"> -->
+                         <div class="blog-content">
+                             <h3>S.M.G. Lab brilla en la Feria de Ciencia Escolar</h3>
+                             <p>Nuestros pequeños inventores presentaron sus proyectos de robótica, demostrando creatividad y trabajo en equipo. ¡Una experiencia inolvidable!</p>
+                             <a href="#" class="read-more">Leer Más →</a> <!-- Enlaza al artículo completo -->
+                         </div>
+                    </article>
+                    <article class="blog-post">
+                          <!-- <img src="ruta/imagen_blog2.jpg" alt="Mindfulness y tecnología" class="featured-image"> -->
+                          <div class="blog-content">
+                              <h3>Tecnología Consciente: 5 Apps de Mindfulness para Niños</h3>
+                              <p>Descubre aplicaciones que ayudan a tus hijos a desarrollar la atención plena de forma divertida y adaptada a su edad.</p>
+                              <a href="#" class="read-more">Leer Más →</a>
+                          </div>
+                    </article>
+                    <article class="blog-post">
+                         <!-- <img src="ruta/imagen_blog3.jpg" alt="Niño programando robot" class="featured-image"> -->
+                         <div class="blog-content">
+                             <h3>¿Por qué la Robótica es Clave para el Futuro Profesional?</h3>
+                             <p>Exploramos las habilidades esenciales que la robótica desarrolla y su creciente importancia en el mercado laboral del mañana.</p>
+                              <a href="#" class="read-more">Leer Más →</a>
+                         </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contáctanos -->
+        <section id="contacto" class="section-padding">
+             <div class="container">
+                <h2>Ponte en Contacto</h2>
+                <div class="contact-section">
+                    <div class="contact-info">
+                         <!-- <h3>Información de Contacto</h3> Opcional -->
+                         <!-- IMPORTANTE: Reemplaza la información de contacto -->
+                        <p class="address"><strong>Dirección:</strong> [Tu Dirección Completa o "Modalidad Principalmente Online"], Barranquilla, Colombia</p>
+                        <p class="phone"><strong>Teléfono:</strong> <a href="tel:+573001234567">+57 300 123 4567</a></p>
+                        <p class="email"><strong>Email:</strong> <a href="mailto:info@smginnovationlab.com">info@smginnovationlab.com</a></p>
+                        <p class="hours"><strong>Horario:</strong> Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+
+                        <!-- IMPORTANTE: Reemplaza 57XXXXXXXXXX con tu número real de WhatsApp -->
+                        <a href="https://wa.me/57XXXXXXXXXX?text=Hola%2C%20quisiera%20más%20información%20sobre%20S.M.G.%20Innovation%20Lab." target="_blank" class="whatsapp-button" style="margin-top: 1rem;">
+                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon"> Contáctanos por WhatsApp
+                        </a>
+                    </div>
+                    <div class="map-container">
+                         <!-- IMPORTANTE: Reemplaza el 'src' del iframe con el código embebido de TU ubicación en Google Maps -->
+                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125326.19865595768!2d-74.83979473830686!3d11.00066823163631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d44d12ae075%3A0x9125c49633448dc!2sBarranquilla%2C%20Atl%C3%A1ntico!5e0!3m2!1ses-419!2sco!4v1700000000000!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación en Google Maps"></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2024 S.M.G. Innovation Lab. Todos los derechos reservados.</p>
+            <p>Creado con ❤️ y tecnología en Barranquilla.</p>
+            <div class="social-links">
+                <!-- IMPORTANTE: Reemplaza # con tus enlaces reales y considera usar iconos (FontAwesome o SVGs) -->
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a> <!-- Ejemplo SVG Facebook -->
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a> <!-- Ejemplo SVG Instagram -->
+                <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg></a> <!-- Ejemplo SVG LinkedIn -->
             </div>
         </div>
-    </div>
+    </footer>
 
-    <script src="./js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // --- Menú Hamburguesa para Móvil ---
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navLinks = document.querySelector('.nav-links');
+            const header = document.getElementById('header'); // Seleccionar header por ID
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    const isActive = navLinks.classList.toggle('active');
+                    menuToggle.setAttribute('aria-expanded', isActive); // Mejor accesibilidad
+                    if (isActive) {
+                        menuToggle.setAttribute('aria-label', 'Cerrar menú');
+                        menuToggle.innerHTML = '✕'; // Icono de cerrar
+                    } else {
+                        menuToggle.setAttribute('aria-label', 'Abrir menú');
+                        menuToggle.innerHTML = '☰'; // Icono hamburguesa
+                    }
+                });
+
+                // Cerrar menú al hacer clic en un enlace (para SPAs o smooth scroll)
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (navLinks.classList.contains('active')) {
+                            navLinks.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                            menuToggle.setAttribute('aria-label', 'Abrir menú');
+                            menuToggle.innerHTML = '☰';
+                        }
+                    });
+                });
+
+                // Cerrar menú al hacer clic fuera (en móvil)
+                document.addEventListener('click', (event) => {
+                    const isClickInsideNav = navLinks.contains(event.target);
+                    const isClickOnToggle = menuToggle.contains(event.target);
+                    const isNavActive = navLinks.classList.contains('active');
+
+                    if (isNavActive && !isClickInsideNav && !isClickOnToggle) {
+                         navLinks.classList.remove('active');
+                         menuToggle.setAttribute('aria-expanded', 'false');
+                         menuToggle.setAttribute('aria-label', 'Abrir menú');
+                         menuToggle.innerHTML = '☰';
+                    }
+                });
+            }
+
+            // --- Simulación de Envío de Formulario "Clase Gratis" ---
+            // (Si NO usas un action= en el <form>, puedes usar JS para enviarlo)
+            const claseGratisForm = document.getElementById('claseGratisForm');
+            if (claseGratisForm && !claseGratisForm.getAttribute('action')) { // Solo si no hay 'action'
+                claseGratisForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Prevenir envío normal si se maneja con JS
+
+                    // --- Aquí iría tu lógica de envío con fetch() a tu backend, ---
+                    // --- o usando servicios como Formspree, EmailJS, Netlify Forms, etc. ---
+
+                    // Ejemplo de simulación básica:
+                    const nombre = document.getElementById('nombre').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const telefono = document.getElementById('telefono').value.trim();
+
+                    if (nombre && email && telefono) {
+                        // Simulación Éxito
+                        alert('¡Gracias! Tu solicitud para la clase gratis ha sido recibida. Te contactaremos pronto. (Simulación)');
+                        claseGratisForm.reset(); // Limpiar formulario
+                    } else {
+                        alert('Por favor, completa los campos requeridos: Nombre, Email y Teléfono.');
+                    }
+                });
+            }
+
+            // --- Añadir clase 'scrolled' al header al hacer scroll ---
+             if(header) {
+                 const scrollThreshold = 50; // Pixels para activar la sombra
+                 const handleScroll = () => {
+                     if (window.scrollY > scrollThreshold) {
+                         header.classList.add('scrolled');
+                     } else {
+                         header.classList.remove('scrolled');
+                     }
+                 };
+                 // Optimización: usar passive: true si el listener no previene el scroll
+                 window.addEventListener('scroll', handleScroll, { passive: true });
+                 // Ejecutar una vez al cargar por si la página carga scrolleada
+                 handleScroll();
+            }
+
+        });
+    </script>
+
 </body>
 </html>
