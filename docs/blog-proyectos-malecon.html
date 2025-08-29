@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-es="Los 4 proyectos que están transformando el Gran Malecón - Ciudad del Río" data-lang-en="The 4 Projects Transforming the Gran Malecón - Ciudad del Río">Los 4 proyectos que están transformando el Gran Malecón de Barranquilla - Ciudad del Río</title>
+    
+    <link rel="icon" type="image/png" href="./assets/imagenes/Logo/Logo ciudad del rio-02.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* Estilos específicos para páginas de blog */
+        .blog-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('./assets/imagenes/Blog/Blog_1.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            margin-top: var(--header-height-current, 70px);
+            border-radius: 0 0 25px 25px;
+            overflow: hidden;
+        }
+
+        .blog-header h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; color: white; }
+        .blog-meta { font-size: 1rem; opacity: 0.9; }
+        .blog-content { max-width: 800px; margin: 0 auto; padding: 4rem 2rem; line-height: 1.8; }
+        .blog-image-full { width: 100%; height: auto; margin: 2.5rem 0; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        .blog-content h2 { text-align: left; }
+        .blog-content p, .blog-content strong { text-align: left; }
+        .back-to-home { display: inline-flex; align-items: center; color: var(--secondary-color); text-decoration: none; font-weight: 600; margin-bottom: 2rem; transition: color var(--transition-fast); }
+        .back-to-home:hover { color: var(--primary-color); }
+        .back-to-home i { margin-right: 0.5rem; }
+        .cta-section { background: var(--light-bg); padding: 3rem 0; text-align: center; margin-top: 3rem; }
+        
+        /* --- AJUSTES DE HEADER PARA BLOG --- */
+        #mobile-nav-toggle { display: block; }
+        .header-controls { display: flex; align-items: center; gap: 1rem; }
+        
+        /* Estilo del botón de idioma */
+        #language-switcher {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
+        #language-switcher:hover { background-color: var(--secondary-color); }
+
+        /* Animación de Menú Mejorada */
+        #main-nav {
+            display: block; /* Mantenlo como block para que la animación funcione */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0.3s;
+        }
+        #main-nav.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s 0s;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="main-header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="./assets/imagenes/Logo/Ciudad Del Rio.png" alt="Ciudad del Río Logo">
+            </a>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="index.html#pre-hero-banner" data-lang-es="Inicio" data-lang-en="Home">Inicio</a></li>
+                    <li><a href="index.html#why-barranquilla" data-lang-es="¿Por qué Barranquilla?" data-lang-en="Why Barranquilla?">¿Por qué Barranquilla?</a></li>
+                    <li><a href="index.html#our-team" data-lang-es="Nosotros" data-lang-en="About Us">Nosotros</a></li>
+                    <li><a href="index.html#proyectos" data-lang-es="Proyectos" data-lang-en="Projects">Proyectos</a></li>
+                    <li><a href="index.html#blog" data-lang-es="Blog" data-lang-en="Blog">Blog</a></li>
+                    <li><a href="index.html#contact" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <div class="language-switcher-container">
+                    <button id="language-switcher" aria-label="Cambiar idioma">EN</button>
+                </div>
+                <button id="mobile-nav-toggle" aria-label="Abrir menú">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="blog-header">
+        <div class="container">
+            <h1 data-lang-es="Los 4 proyectos que están transformando el Gran Malecón de Barranquilla" data-lang-en="The 4 Projects Transforming Barranquilla's Gran Malecón">Los 4 proyectos que están transformando el Gran Malecón de Barranquilla</h1>
+            <div class="blog-meta">
+                <i class="fas fa-calendar-alt"></i> <span data-lang-es="Febrero 2025" data-lang-en="February 2025">Febrero 2025</span> | <i class="fas fa-user"></i> Ciudad del Río
+            </div>
+        </div>
+    </section>
+
+    <main class="blog-content">
+        <a href="index.html" class="back-to-home"><i class="fas fa-arrow-left"></i> <span data-lang-es="Volver al inicio" data-lang-en="Back to home">Volver al inicio</span></a>
+
+        <p data-lang-es="El Gran Malecón de Barranquilla se ha convertido en el ícono urbano más importante de la ciudad y en un motor de inversión y desarrollo. Frente al majestuoso río Magdalena, hoy encontramos proyectos que no solo cambian el paisaje, sino que abren oportunidades de crecimiento para residentes, turistas e inversionistas." data-lang-en="Barranquilla's Gran Malecón has become the city's most important urban icon and a driver of investment and development. Facing the majestic Magdalena River, today we find projects that not only change the landscape but also open up growth opportunities for residents, tourists, and investors.">El Gran Malecón de Barranquilla se ha convertido en el ícono urbano más importante de la ciudad y en un motor de inversión y desarrollo. Frente al majestuoso río Magdalena, hoy encontramos proyectos que no solo cambian el paisaje, sino que abren oportunidades de crecimiento para residentes, turistas e inversionistas.</p>
+        
+        <img src="./assets/imagenes/Gran Malecon/Malecon_vistas(3).png" alt="Vista panorámica del Gran Malecón" class="blog-image-full">
+
+        <h2 data-lang-es="1. Vive Río" data-lang-en="1. Vive Río">1. Vive Río</h2>
+        <p data-lang-es="Un espacio turístico y gastronómico que atrae a miles de visitantes cada semana. Sus restaurantes, cafés y zonas de encuentro han posicionado el Malecón como un punto de referencia en Colombia." data-lang-en="A tourist and gastronomic space that attracts thousands of visitors every week. Its restaurants, cafes, and meeting areas have positioned the Malecón as a landmark in Colombia.">Un espacio turístico y gastronómico que atrae a miles de visitantes cada semana. Sus restaurantes, cafés y zonas de encuentro han posicionado el Malecón como un punto de referencia en Colombia.</p>
+        <p><strong data-lang-es="Características destacadas:" data-lang-en="Key Features:">Características destacadas:</strong></p>
+        <p data-lang-es="• Proyecto de 34 pisos de uso mixto<br>• Diseñado bajo criterios de construcción sostenible<br>• Modelo habitacional, rentas cortas, distrito gastronómico y oficinas<br>• Se posicionó como número 1 en ventas en 2022 en todo el Departamento" data-lang-en="• 34-story mixed-use project<br>• Designed under sustainable construction criteria<br>• Housing model, short-term rentals, gastronomic district, and offices<br>• Ranked number 1 in sales in the entire Department in 2022">• Proyecto de 34 pisos de uso mixto<br>• Diseñado bajo criterios de construcción sostenible<br>• Modelo habitacional, rentas cortas, distrito gastronómico y oficinas<br>• Se posicionó como número 1 en ventas en 2022 en todo el Departamento</p>
+
+        <h2 data-lang-es="2. Malecón 72" data-lang-en="2. Malecón 72">2. Malecón 72</h2>
+        <p data-lang-es="Uno de los proyectos residenciales más modernos frente al río. Combina diseño arquitectónico contemporáneo, amenities pensados para la vida urbana y una ubicación privilegiada en la Ciudad del Río." data-lang-en="One of the most modern residential projects facing the river. It combines contemporary architectural design, amenities designed for urban life, and a privileged location in Ciudad del Río.">Uno de los proyectos residenciales más modernos frente al río. Combina diseño arquitectónico contemporáneo, amenities pensados para la vida urbana y una ubicación privilegiada en la Ciudad del Río.</p>
+        <p><strong data-lang-es="Datos de impacto:" data-lang-en="Impact Data:">Datos de impacto:</strong></p>
+        <p data-lang-es="En Enero de 2025, las ventas del mes aumentaron para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades, según Galería Inmobiliaria." data-lang-en="In January 2025, monthly sales for non-subsidized housing increased by 267.4% compared to the same month last year, with 496 units sold, due to the launch of this project, which accounted for 280 units in sales, according to Galería Inmobiliaria.">En Enero de 2025, las ventas del mes aumentaron para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades, según Galería Inmobiliaria.</p>
+        
+        <img src="./assets/imagenes/Vistas/Malecon 72.png" alt="Render del proyecto Malecón 72" class="blog-image-full">
+
+        <h2 data-lang-es="3. Rivatta del Río" data-lang-en="3. Rivatta del Río">3. Rivatta del Río</h2>
+        <p data-lang-es="Proyecto residencial que ofrece exclusividad y estilo de vida frente al río. Su diseño, sus zonas sociales y su cercanía al Gran Malecón lo convierten en una de las opciones más atractivas para vivir o invertir en Barranquilla." data-lang-en="A residential project that offers exclusivity and a riverside lifestyle. Its design, social areas, and proximity to the Gran Malecón make it one of the most attractive options for living or investing in Barranquilla.">Proyecto residencial que ofrece exclusividad y estilo de vida frente al río. Su diseño, sus zonas sociales y su cercanía al Gran Malecón lo convierten en una de las opciones más atractivas para vivir o invertir en Barranquilla.</p>
+        <p><strong data-lang-es="Propuesta de valor:" data-lang-en="Value Proposition:">Propuesta de valor:</strong></p>
+        <p data-lang-es="• Proyecto de Constructora Bolívar<br>• Torres modernas con fachadas dinámicas<br>• Balcones en todos los apartamentos<br>• Tipologías desde 50 m² hasta 105 m²<br>• Piscina infinita con vista al río, gimnasio equipado, coworking y salas premium" data-lang-en="• A project by Constructora Bolívar<br>• Modern towers with dynamic facades<br>• Balconies in all apartments<br>• Unit types from 50 m² to 105 m²<br>• Infinity pool with river view, equipped gym, coworking, and premium lounges">• Proyecto de Constructora Bolívar<br>• Torres modernas con fachadas dinámicas<br>• Balcones en todos los apartamentos<br>• Tipologías desde 50 m² hasta 105 m²<br>• Piscina infinita con vista al río, gimnasio equipado, coworking y salas premium</p>
+
+        <h2 data-lang-es="El Gran Malecón no es solo un lugar para visitar" data-lang-en="The Gran Malecón is More Than Just a Place to Visit">El Gran Malecón no es solo un lugar para visitar</h2>
+        <p data-lang-es="El Gran Malecón no es solo un lugar para visitar, es un espacio para vivir e invertir. Estos proyectos han transformado completamente la relación de Barranquilla con el río Magdalena, creando oportunidades únicas de inversión y desarrollo. La combinación de proyectos residenciales de alta calidad, espacios públicos premiados internacionalmente y una visión urbana integral hacen del Gran Malecón el epicentro del nuevo Barranquilla." data-lang-en="The Gran Malecón is not just a place to visit; it's a place to live and invest. These projects have completely transformed Barranquilla's relationship with the Magdalena River, creating unique opportunities for investment and development. The combination of high-quality residential projects, internationally awarded public spaces, and a comprehensive urban vision make the Gran Malecón the epicenter of the new Barranquilla.">El Gran Malecón no es solo un lugar para visitar, es un espacio para vivir e invertir. Estos proyectos han transformado completamente la relación de Barranquilla con el río Magdalena, creando oportunidades únicas de inversión y desarrollo. La combinación de proyectos residenciales de alta calidad, espacios públicos premiados internacionalmente y una visión urbana integral hacen del Gran Malecón el epicentro del nuevo Barranquilla.</p>
+    </main>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 data-lang-es="¿Quieres ser parte de esta transformación?" data-lang-en="Want to be part of this transformation?">¿Quieres ser parte de esta transformación?</h2>
+            <p data-lang-es="Conoce más sobre los proyectos que hacen parte de Ciudad del Río y descubre tu próxima gran oportunidad." data-lang-en="Learn more about the projects in Ciudad del Río and discover your next great opportunity.">Conoce más sobre los proyectos que hacen parte de Ciudad del Río y descubre tu próxima gran oportunidad.</p>
+            <a href="index.html#contact" class="btn btn-primary" data-lang-es="Solicitar Información" data-lang-en="Request Information">Solicitar Información</a>
+            <a href="index.html#proyectos" class="btn btn-secondary" style="margin-left: 1rem;" data-lang-es="Ver Proyectos" data-lang-en="View Projects">Ver Proyectos</a>
+        </div>
+    </section>
+
+    <footer id="main-footer">
+        <div class="container">
+            <a href="index.html" class="footer-logo">
+                <img src="./assets/imagenes/Logo/Ciudad Del Rio.png" alt="Ciudad del Río Logo Footer">
+            </a>
+            <div class="container-footer">
+                <p>© <span id="current-year"></span> <span data-lang-es="Ciudad del Río. Desarrollado por" data-lang-en="Ciudad del Río. Developed by">Ciudad del Río. Desarrollado por</span> <a href="https://inciti.co" target="_blank" rel="noopener noreferrer">Inciti.co</a>. <span data-lang-es="Todos los derechos reservados." data-lang-en="All rights reserved.">Todos los derechos reservados.</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Script de funcionalidad básica (AOS, año)
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            AOS.init({ duration: 900, once: true, offset: 80 });
+
+            // --- SCRIPT DE TRADUCCIÓN COMPLETO ---
+            const langSwitcher = document.getElementById('language-switcher');
+            let currentLang = 'es'; 
+
+            const setLanguage = (lang) => {
+                currentLang = lang;
+                document.documentElement.lang = lang;
+
+                document.querySelectorAll('[data-lang-es]').forEach(el => {
+                    const text = el.getAttribute(`data-lang-${lang}`);
+                    if (text) el.textContent = text;
+                });
+                
+                document.querySelectorAll('[data-alt-es]').forEach(el => {
+                    const altText = el.getAttribute(`data-alt-${lang}`);
+                    if (altText) el.alt = altText;
+                });
+                
+                if (lang === 'es') {
+                    langSwitcher.textContent = 'EN';
+                    langSwitcher.setAttribute('aria-label', 'Cambiar idioma a Inglés');
+                } else {
+                    langSwitcher.textContent = 'ES';
+                    langSwitcher.setAttribute('aria-label', 'Switch language to Spanish');
+                }
+            };
+
+            langSwitcher.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                setLanguage(newLang);
+            });
+            
+            setLanguage(currentLang); // Aplicar idioma inicial
+        });
+    </script>
+</body>
+</html>

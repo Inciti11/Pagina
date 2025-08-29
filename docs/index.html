@@ -1,580 +1,973 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es"> <!-- El atributo lang se actualizará con JS -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Innovation lab robotics</title>
+    <!-- El title también necesitará traducción si lo deseas -->
+    <title data-lang-es="Ciudad del Río - Barranquilla" data-lang-en="Ciudad del Río - Barranquilla">Ciudad del Río -
+        Barranquilla</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/imagenes/Logo/Logo ciudad del rio-02.png">
+
+    <!-- Google Fonts - Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
+    <!-- AOS Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- === TU HOJA DE ESTILOS PERSONALIZADA === -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- === ESTILOS PARA EL BOTÓN DE IDIOMA (Añadir a style.css o aquí) === -->
     <style>
-        /* --- Variables de Color y Fuentes (Estilo Original Restaurado) --- */
-        :root {
-            --color-white: #FFFFFF;
-            --color-blue: #0047AB; /* Azul Rey Principal */
-            --color-blue-darker: #003b8e; /* Azul más oscuro */
-            --color-blue-lighter: #e6f0ff; /* Azul muy claro para fondos sutiles */
-            --color-salmon: #FA8072;
-            --color-salmon-darker: #e56b5a;
-            --color-text-primary: #212529; /* Casi negro para texto principal */
-            --color-text-secondary: #6c757d; /* Gris para texto secundario */
-            --color-light-gray: #f8f9fa; /* Gris claro para fondos alternos */
-            --color-border: #dee2e6; /* Gris para bordes sutiles */
-            --color-whatsapp: #25D366;
-            --color-whatsapp-darker: #1DAE54;
-
-            --font-primary: 'Poppins', sans-serif;
-            --base-font-size: 16px;
-            --line-height-base: 1.7;
-            --border-radius-base: 8px; /* Radio de borde consistente */
-            --box-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.07); /* Sombra suave */
-            --box-shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada en hover */
-            --transition-base: all 0.3s ease-in-out; /* Transición estándar */
+        #language-switcher {
+            background-color: var(--primary-color);
+            /* O un color que destaque sutilmente */
+            color: white;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9em;
+            margin-left: 10px;
+            /* Espacio respecto a Contacto */
+            transition: background-color 0.3s ease;
         }
 
-        /* --- Reseteo Básico y Estilos Globales --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        #language-switcher:hover {
+            background-color: var(--secondary-color);
+            /* Un color al pasar el ratón */
         }
 
-        html {
-            scroll-behavior: smooth;
-            font-size: var(--base-font-size);
+        /* Asegurar que se vea bien en el menú móvil si es necesario */
+        #main-nav.active #language-switcher {
+            margin-top: 10px;
+            margin-left: 0;
+            display: block;
+            /* O como se muestren los otros li */
         }
-
-        body {
-            font-family: var(--font-primary);
-            color: var(--color-text-primary);
-            line-height: var(--line-height-base);
-            background-color: var(--color-white);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1140px;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        h1, h2, h3, h4, h5, h6 {
-            color: var(--color-blue);
-            margin-bottom: 0.75rem;
-            font-weight: 600;
-            line-height: 1.3;
-        }
-
-        h1 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1px; }
-        h2 { font-size: 2.2rem; text-align: center; margin-bottom: 2.5rem; }
-        h3 { font-size: 1.4rem; }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--color-text-secondary);
-        }
-        section p:last-of-type {
-            margin-bottom: 0;
-        }
-
-        a {
-            color: var(--color-salmon);
-            text-decoration: none;
-            transition: var(--transition-base);
-        }
-
-        a:hover {
-            color: var(--color-salmon-darker);
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            vertical-align: middle;
-            /* border-radius: var(--border-radius-base); quitado globalmente para img */
-        }
-        /* Aplicar border-radius específicamente donde se necesite */
-        .service-item img, .blog-post img, .map-container {
-             border-radius: var(--border-radius-base);
-        }
-
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        .bg-light {
-            background-color: var(--color-light-gray);
-        }
-        .bg-blue-lighter {
-             background-color: var(--color-blue-lighter);
-        }
-
-        /* --- Header / Navegación --- */
-        header {
-            background-color: var(--color-white);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1030;
-            padding: 15px 0;
-            transition: var(--transition-base);
-        }
-        header.scrolled {
-             box-shadow: var(--box-shadow-soft);
-        }
-        header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: var(--color-blue);
-            text-decoration: none;
-        }
-         .logo:hover {
-             color: var(--color-blue-darker);
-         }
-        .nav-links {
-            list-style: none;
-            display: flex;
-            align-items: center;
-            margin: 0;
-        }
-        .nav-links li { margin-left: 30px; }
-        .nav-links a {
-            color: var(--color-text-primary);
-            font-weight: 600;
-            font-size: 0.95rem;
-            position: relative;
-            padding-bottom: 5px;
-            text-decoration: none;
-        }
-        .nav-links a::after {
-            content: ''; position: absolute; width: 0; height: 2px; bottom: 0; left: 0;
-            background-color: var(--color-salmon); transition: width 0.3s ease;
-        }
-        .nav-links a:hover { color: var(--color-blue); }
-        .nav-links a:hover::after { width: 100%; }
-        .menu-toggle {
-            display: none; background: none; border: none; font-size: 1.8rem;
-            color: var(--color-blue); cursor: pointer; padding: 5px;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            background: linear-gradient(135deg, var(--color-blue) 0%, var(--color-blue-darker) 100%);
-            color: var(--color-white); padding: 120px 0; text-align: center;
-            position: relative; overflow: hidden;
-        }
-        .hero-content { max-width: 700px; margin: 0 auto; position: relative; z-index: 2; }
-        .hero h1 { color: var(--color-white); margin-bottom: 1.5rem; font-size: 3.2rem; }
-        .hero p {
-            font-size: 1.25rem; margin-bottom: 2.5rem; color: rgba(255, 255, 255, 0.85);
-            font-weight: 300;
-        }
-        .cta-button {
-            display: inline-block; background: var(--color-salmon); color: var(--color-white);
-            padding: 14px 35px; border-radius: 50px; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.5px; text-decoration: none;
-            transition: var(--transition-base), transform 0.2s ease; border: none;
-            cursor: pointer; font-family: var(--font-primary); font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(250, 128, 114, 0.3);
-            margin-top: 35px;
-        }
-        .cta-button:hover {
-            background-color: var(--color-salmon-darker); color: var(--color-white);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 15px rgba(250, 128, 114, 0.4);
-        }
-
-        /* --- Sección Quiénes Somos --- */
-        #quienes-somos .container { max-width: 800px; text-align: center; }
-        #quienes-somos h2 { margin-bottom: 1.5rem; }
-        #quienes-somos p { font-size: 1.1rem; color: var(--color-text-primary); }
-
-        /* --- Sección Servicios --- */
-        .services-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px; margin-top: 40px;
-        }
-        .service-item {
-            background-color: var(--color-white); padding: 35px 30px;
-            border-radius: var(--border-radius-base); box-shadow: var(--box-shadow-soft);
-            text-align: center; transition: var(--transition-base);
-            border: 1px solid var(--color-border); display: flex; flex-direction: column;
-            align-items: center;
-        }
-        .service-item:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); }
-        .service-item h3 { margin-top: 1rem; margin-bottom: 0.75rem; font-size: 1.3rem; }
-        .service-item p { font-size: 0.95rem; color: var(--color-text-secondary); flex-grow: 1; }
-        .service-icon-placeholder {
-             font-size: 2.8rem; color: var(--color-salmon); margin-bottom: 1.2rem; line-height: 1;
-        }
-
-        /* --- Sección Registrarse (Contenedor del botón) --- */
-        .form-section-container {
-            max-width: 650px; margin: 40px auto 0 auto; text-align: center;
-            background-color: var(--color-white); padding: 40px;
-            border-radius: var(--border-radius-base);
-        }
-        #clase-gratis.bg-light .form-section-container { box-shadow: var(--box-shadow-soft); }
-        #clase-gratis h2 { margin-bottom: 1rem; }
-        .form-section-container .cta-button { margin-top: 1rem; width: 100%; }
-        .whatsapp-link-text {
-            margin-top: 2.5rem; font-weight: 400; color: var(--color-text-secondary);
-            font-size: 0.95rem; margin-bottom: 0.5rem;
-        }
-        .whatsapp-button {
-            display: inline-flex; align-items: center; background-color: var(--color-whatsapp);
-            color: var(--color-white); padding: 10px 25px; border-radius: 50px;
-            font-weight: 600; text-decoration: none; margin-top: 1rem;
-            transition: var(--transition-base), transform 0.2s ease; font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); border: none;
-        }
-        .whatsapp-button img { /* Estilo para IMG dentro del botón WhatsApp */
-            width: 18px; height: 18px; /* Tamaño fijo */
-            margin-right: 10px;
-            border-radius: 0; /* Sin borde redondeado para el icono */
-            vertical-align: middle;
-            object-fit: contain; /* Asegurar que se vea bien */
-        }
-        .whatsapp-button:hover {
-            background-color: var(--color-whatsapp-darker); color: var(--color-white);
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-        }
-
-        /* --- Sección Blog --- */
-        .blog-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-top: 40px;
-        }
-        .blog-post {
-            background-color: var(--color-white); border-radius: var(--border-radius-base);
-            box-shadow: var(--box-shadow-soft); overflow: hidden; transition: var(--transition-base);
-            border: 1px solid var(--color-border); display: flex; flex-direction: column;
-        }
-        .blog-post:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-hover); }
-        .blog-post img.featured-image {
-             width: 100%; height: 200px; object-fit: cover;
-             border-radius: var(--border-radius-base) var(--border-radius-base) 0 0; margin-bottom: 0;
-        }
-        .blog-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .blog-post h3 { margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--color-blue); }
-        .blog-post p { font-size: 0.9rem; color: var(--color-text-secondary); margin-bottom: 0; flex-grow: 1; }
-
-        /* --- Sección Contacto --- */
-        #contacto .container > h2 { margin-bottom: 3rem; }
-        .contact-section {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: flex-start;
-        }
-        .contact-info h3 { font-size: 1.6rem; margin-bottom: 1.5rem; color: var(--color-blue); }
-        .contact-info p {
-            margin-bottom: 1.5rem; font-size: 1rem; color: var(--color-text-primary);
-            display: flex; align-items: flex-start; line-height: 1.6;
-        }
-        .contact-info p::before {
-             font-size: 1.3rem; color: var(--color-salmon); margin-right: 15px;
-             min-width: 20px; text-align: center; line-height: inherit; margin-top: 2px;
-        }
-        .contact-info p.address::before { content: '📍'; }
-        .contact-info p.phone::before   { content: '📞'; }
-        .contact-info p.email::before   { content: '✉️'; }
-        .contact-info p.hours::before   { content: '🕒'; }
-        .contact-info strong { font-weight: 600; color: var(--color-blue); }
-        .contact-info a { word-break: break-word; text-decoration: none; }
-        .contact-info a:hover {  text-decoration: underline; }
-        .contact-info .whatsapp-button { margin-top: 1.5rem; }
-        .map-container {
-             position: relative; padding-bottom: 75%; height: 0; overflow: hidden;
-             border-radius: var(--border-radius-base); box-shadow: var(--box-shadow-soft);
-             border: 1px solid var(--color-border);
-        }
-        .map-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
-
-        /* --- Footer --- */
-        footer {
-            background-color: var(--color-blue-darker); color: rgba(255, 255, 255, 0.7);
-            text-align: center; padding: 40px 0; margin-top: 80px; font-size: 0.9rem;
-        }
-        footer p { margin-bottom: 0.5rem; color: inherit; }
-
-        /* --- Botón Flotante de WhatsApp (Usando IMG) --- */
-        .whatsapp-float {
-            position: fixed;
-            width: 60px;
-            height: 60px;
-            bottom: 25px;
-            right: 25px;
-            background-color: var(--color-whatsapp);
-            color: var(--color-white); /* El color del texto no aplica a la img directamente */
-            border-radius: 50%;
-            text-align: center;
-            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-base), transform 0.2s ease;
-            text-decoration: none;
-            overflow: hidden; /* Para asegurar que la img no se salga si es grande */
-        }
-        .whatsapp-float:hover {
-            background-color: var(--color-whatsapp-darker);
-            transform: scale(1.1);
-        }
-        .whatsapp-float img { /* Estilo para la imagen dentro del botón flotante */
-            width: 55%; /* Ajusta el tamaño relativo al contenedor */
-            height: 55%;
-            object-fit: contain; /* Para que no se deforme */
-            /* No necesita color, fill, ni vertical-align */
-             border-radius: 0; /* Asegurar que la imagen no sea redondeada si hereda */
-        }
-
-        /* --- Responsividad --- */
-        @media (max-width: 992px) {
-             h1 { font-size: 2.5rem; } h2 { font-size: 2rem; }
-             .hero { padding: 100px 0; } .contact-section { gap: 30px; }
-             .map-container { padding-bottom: 65%; }
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.2rem; } h2 { font-size: 1.8rem; }
-             .section-padding { padding: 60px 0; }
-            header .container { position: relative; }
-            .nav-links {
-                display: none; flex-direction: column; width: 100%; position: absolute;
-                top: 100%; left: 0; background-color: var(--color-white);
-                box-shadow: var(--box-shadow-soft); text-align: center; padding: 15px 0;
-                border-top: 1px solid var(--color-border); align-items: stretch; z-index: 1020;
-            }
-            .nav-links.active { display: flex; }
-            .nav-links li { margin: 0; width: 100%; }
-            .nav-links a { display: block; padding: 12px 15px; border-bottom: 1px solid var(--color-blue-lighter); width: 100%; }
-            .nav-links li:last-child a { border-bottom: none; }
-            .nav-links a::after { display: none; }
-            .nav-links a:hover { background-color: var(--color-blue-lighter); color: var(--color-blue); }
-            .menu-toggle { display: block; }
-            .hero { padding: 80px 0; } .hero h1 { font-size: 2.4rem; } .hero p { font-size: 1.1rem; }
-            .services-grid, .blog-grid { grid-template-columns: 1fr; gap: 25px; }
-            .contact-section { grid-template-columns: 1fr; gap: 40px; }
-            .map-container { order: 1; padding-bottom: 80%; }
-            .contact-info { order: 2; text-align: left; }
-            .contact-info p { justify-content: flex-start; }
-            .contact-info .whatsapp-button { display: flex; justify-content: center; width: fit-content; margin-left: auto; margin-right: auto; }
-            /* Ajuste botón flotante en móvil */
-            .whatsapp-float { width: 50px; height: 50px; bottom: 20px; right: 20px; }
-            /* No se necesita ajustar el tamaño de la img aquí si usa % */
-        }
-         @media (max-width: 480px) {
-             h1 { font-size: 2rem; } h2 { font-size: 1.6rem; }
-             .hero { padding: 60px 0; }
-             .cta-button { padding: 12px 25px; font-size: 0.85rem;}
-             .whatsapp-button { padding: 9px 20px; font-size: 0.85rem;}
-             .form-section-container { padding: 30px 20px; }
-             .contact-info p { font-size: 0.95rem; }
-             footer { padding: 30px 0; }
-         }
-
     </style>
+
 </head>
+
 <body>
 
-    <header id="header">
-        <nav class="container">
-            <a href="#inicio" class="logo">Innovation lab robotics</a>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#quienes-somos">Quiénes Somos</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#clase-gratis">Registrarse</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-            <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
-        </nav>
+    <!-- Header -->
+    <header id="main-header">
+        <div class="container">
+            <a href="#pre-hero-banner" class="logo">
+                <!-- El alt de la imagen también debe ser traducible -->
+                <img src="./assets/imagenes/Logo/Ciudad Del Rio.png" alt="Ciudad del Río Logo"
+                    data-alt-es="Ciudad del Río Logo" data-alt-en="Ciudad del Río Logo">
+            </a>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#pre-hero-banner" class="active" data-lang-es="Inicio" data-lang-en="Home">Inicio</a>
+                    </li>
+                    <li><a href="#why-barranquilla" data-lang-es="¿Por qué Barranquilla?"
+                            data-lang-en="Why Barranquilla?">¿Por qué Barranquilla?</a></li>
+                    <li><a href="#our-team" data-lang-es="Nosotros" data-lang-en="About Us">Nosotros</a></li>
+                    <li><a href="#proyectos" data-lang-es="Proyectos" data-lang-en="Projects">Proyectos</a></li>
+                    <li><a href="#blog" data-lang-es="Blog" data-lang-en="Blog">Blog</a></li> <!-- Ya está agregado -->
+                    <li><a href="#contact" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a></li>
+                </ul>
+            </nav>
+
+            <!-- === ELEMENTO MOVIDO AQUÍ === -->
+            <!-- Opción 1: Usar un div como contenedor (recomendado para estilos) -->
+            <div class="language-switcher-container">
+                <button id="language-switcher" aria-label="Cambiar idioma a Inglés">EN</button>
+            </div>
+
+            <!-- Opción 2: Sólo el botón (si no necesitas un div contenedor) -->
+            <!-- <button id="language-switcher" aria-label="Cambiar idioma a Inglés">EN</button> -->
+            <!-- ============================ -->
+
+            <button id="mobile-nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-nav">
+                <i class="fas fa-bars"></i>
+                <span class="sr-only" data-lang-es="Abrir/Cerrar menú" data-lang-en="Open/Close menu">Abrir/Cerrar
+                    menú</span>
+            </button>
+
+        </div>
+
     </header>
 
+    <!-- Pre-Hero Banner Section -->
+    <section id="pre-hero-banner">
+        <div class="background-slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <div class="banner-overlay"></div>
+        <div class="banner-content" data-aos="fade-in" data-aos-delay="100">
+            <h1>
+                <!-- Ejemplo de traducción en span -->
+                <span class="decorative-font" data-lang-es="CONOCE LA CIUDAD DEL RÍO"
+                    data-lang-en="DISCOVER THE CIUDAD DEL RÍO">CONOCE LA CIUDAD DEL RÍO</span>
+            </h1>
+            <!-- Ejemplo de traducción en p -->
+            <p class="lead"
+                data-lang-es="Barranquilla mira al río Magdalena con un ambicioso proyecto de renovación urbana"
+                data-lang-en="Barranquilla looks towards the Magdalena River with an ambitious urban renewal project">
+                Barranquilla mira al río Magdalena con un ambicioso proyecto de renovación urbana</p>
+            <!-- Ejemplo de traducción en a (botón) -->
+            <a href="#contact" class="btn btn-primary" data-lang-es="Solicitar Información"
+                data-lang-en="Request Information">Solicitar Información</a>
+            <a href="#why-barranquilla" class="btn btn-secondary" style="margin-left: 1rem;" data-lang-es="Conoce Más"
+                data-lang-en="Learn More">Conoce Más</a>
+        </div>
+        <a href="#why-barranquilla" class="scroll-down" aria-label="Scroll Down">
+            <i class="fas fa-chevron-down"></i> <span data-lang-es="Descubre" data-lang-en="Discover">Descubre
+                <br></span>
+            <!-- Añadido span para traducir texto junto al icono -->
+        </a>
+    </section>
+
     <main>
-        <!-- Sección Inicio -->
-        <section id="inicio" class="hero">
-            <div class="container hero-content">
-                <h1>Educando para el futuro, innovando desde hoy.</h1>
-                <p>Transformamos la curiosidad en conocimiento a través de la robótica, la tecnología y el mindfulness.</p>
-                <!-- Botón Hero actualizado -->
-                <a href="https://forms.gle/Wysre9hi8Cmifux89" target="_blank" class="cta-button">Inscríbete Ahora</a>
-            </div>
-        </section>
+        <!-- ======================================= -->
+        <!-- INICIO DEL CONTENIDO ORGANIZADO        -->
+        <!-- ======================================= -->
 
-        <!-- Sección Quiénes Somos -->
-        <section id="quienes-somos" class="section-padding">
-            <div class="container">
-                <h2>Nuestra Inspiración</h2>
-                <p>S.M.G. Innovation Lab nació de una historia personal de amor y superación. Inspirados por [La experiencia con mi hermano con autismo y ver cómo la tecnología podía ser una herramienta increíble para su desarrollo y comunicación], nuestra misión es crear un espacio inclusivo donde cada niño y joven pueda descubrir su potencial a través de la tecnología y el bienestar.</p>
-                <p>Combinamos la vanguardia educativa con un enfoque humano, preparando a las nuevas generaciones no solo con habilidades técnicas, sino también con inteligencia emocional y resiliencia.</p>
+        <!-- 1. ¿Por qué Barranquilla? Section -->
+        <section id="why-barranquilla" class="section-bg">
+            <div class="angled-divider-top" style="color: var(--light-bg);">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill"></path>
+                </svg>
             </div>
-        </section>
-
-        <!-- Sección Servicios / Programas -->
-        <section id="servicios" class="section-padding bg-light">
             <div class="container">
-                <h2>Explora Nuestros Programas</h2>
-                <div class="services-grid">
-                    <div class="service-item">
-                        <div class="service-icon-placeholder">🤖</div>
-                        <h3>Robótica Creativa</h3>
-                        <p>Diseña, construye y programa robots. Fomentamos la lógica, la resolución de problemas y el trabajo en equipo.</p>
+                <h2 data-aos="fade-up" data-lang-es="¿POR QUÉ BARRANQUILLA?" data-lang-en="WHY BARRANQUILLA?">¿POR QUÉ
+                    BARRANQUILLA?</h2>
+                <div class="features-grid">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon"><i class="fas fa-chart-line"></i></div>
+                        <h3 data-lang-es="Crecimiento Económico Imparable" data-lang-en="Unstoppable Economic Growth">
+                            Crecimiento Económico Imparable</h3>
+                        <p data-lang-es="Barranquilla es una de las 100 ciudades del mundo con mayor crecimiento en inversión extranjera directa, y lidera la Región Caribe como hub comercial, con un fuerte aumento en ventas empresariales. Una ciudad donde los negocios encuentran terreno fértil para prosperar."
+                            data-lang-en="Barranquilla is one of the 100 cities in the world with the highest growth in foreign direct investment, and leads the Caribbean Region as a commercial hub, with a strong increase in business sales. A city where businesses find fertile ground to thrive.">
+                            Barranquilla es una de las 100 ciudades del mundo con mayor crecimiento en inversión
+                            extranjera directa, y lidera la Región Caribe como hub comercial, con un fuerte aumento en
+                            ventas empresariales. Una ciudad donde los negocios encuentran terreno fértil para
+                            prosperar.</p>
                     </div>
-                    <div class="service-item">
-                         <div class="service-icon-placeholder">🧠</div>
-                        <h3>Mindfulness Tech</h3>
-                        <p>Integramos herramientas digitales con prácticas de atención plena para mejorar la concentración y reducir el estrés.</p>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon"><i class="fas fa-city"></i></div>
+                        <h3 data-lang-es="Infraestructura y Desarrollo a Gran Escala"
+                            data-lang-en="Large-Scale Infrastructure and Development"> Infraestructura y Desarrollo a
+                            Gran Escala</h3>
+                        <p data-lang-es="Con la mayor inversión pública per cápita en Colombia, Barranquilla transforma su entorno urbano y natural, revitalizando su conexión histórica con el mar y el río Magdalena mediante proyectos de clase mundial."
+                            data-lang-en="With the highest public investment per capita in Colombia, Barranquilla transforms its urban and natural environment, revitalizing its historical connection with the sea and the Magdalena River through world-class projects.">
+                            Con la mayor inversión pública per cápita en Colombia, Barranquilla transforma su entorno
+                            urbano y natural, revitalizando su conexión histórica con el mar y el río Magdalena mediante
+                            proyectos de clase mundial.</p>
                     </div>
-                    <div class="service-item">
-                         <div class="service-icon-placeholder">☀️</div>
-                        <h3>Talleres Vacacionales</h3>
-                        <p>Inmersiones temáticas llenas de diversión y aprendizaje en tecnología, ciencia y arte durante las vacaciones.</p>
-                    </div>
-                     <div class="service-item">
-                          <div class="service-icon-placeholder">💻</div>
-                        <h3>Clases Online</h3>
-                        <p>Participa en nuestros innovadores programas desde cualquier lugar con nuestras clases virtuales interactivas.</p>
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon"><i class="fas fa-globe-americas"></i></div>
+                        <h3 data-lang-es="Turismo y Calidad de Vida en Ascenso"
+                            data-lang-en="Rising Tourism and Quality of Life"> Turismo y Calidad de Vida en Ascenso</h3>
+                        <p data-lang-es="Reconocida como la capital deportiva del Caribe y hogar de eventos internacionales, la ciudad alcanzó un récord histórico de 1.6 millones de visitantes en 2023, consolidándose como un destino vibrante para vivir, invertir y disfrutar."
+                            data-lang-en="Recognized as the sports capital of the Caribbean region and home to international events, the city reached a historic record of 1.6 million visitors in 2023, consolidating itself as a vibrant destination to live and invest.">
+                            Reconocida como la capital deportiva del Caribe y hogar de eventos internacionales, la
+                            ciudad alcanzó un récord histórico de 1.6 millones de visitantes en 2023, consolidándose
+                            como un destino vibrante para vivir, invertir y disfrutar.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Registrarse -->
-        <section id="clase-gratis" class="section-padding">
-            <div class="container">
-                 <h2>¡Regístrate y Descubre!</h2>
-                <div class="form-section-container">
-                    <p>¿Listo para empezar la aventura de la robótica? Haz clic en el botón para ir al formulario de registro.</p>
-                    <!-- Botón que redirige al Google Form -->
-                    <a href="https://forms.gle/Wysre9hi8Cmifux89" target="_blank" class="cta-button">Ir al Formulario de Registro</a>
-                    <p class="whatsapp-link-text">¿Tienes preguntas? Escríbenos directamente:</p>
-                    <!-- Botón de WhatsApp Actualizado -->
-                    <a href="https://wa.link/pnce4s" target="_blank" class="whatsapp-button">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon"> Chatear por WhatsApp
-                    </a>
+        <!-- === PRIMER BLOCK === -->
+        <section class="block">
+            <div class="content-wrapper">
+                <div class="text-content-block">
+                    <h2 data-lang-es="DESCUBRE UN NUEVO MODELO DE CIUDAD JUNTO AL RÍO MAGDALENA"
+                        data-lang-en="DISCOVER A NEW CITY MODEL NEXT TO THE MAGDALENA RIVER">DESCUBRE UN NUEVO MODELO DE
+                        CIUDAD JUNTO AL RÍO MAGDALENA</h2>
+                </div>
+                <div class="action-content">
+                    <a href="https://share.hsforms.com/16csbYRBZRVGzUW5Bt8NSag560hs" class="m72-button"
+                        data-lang-es="Más Información" data-lang-en="More Information">Más Información</a>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Blog / Noticias -->
-        <section id="blog" class="section-padding bg-light">
+        <!-- 2. Barranquilla y su Desarrollo -->
+        <section id="desarrollo-barranquilla">
             <div class="container">
-                <h2>Últimas Noticias y Consejos</h2>
+                <h2 data-aos="fade-up" data-lang-es="BARRANQUILLA Y SU DESARROLLO"
+                    data-lang-en="BARRANQUILLA AND ITS DEVELOPMENT">BARRANQUILLA Y SU DESARROLLO</h2>
+                <p class="lead text-center" data-aos="fade-up" data-aos-delay="100"
+                    data-lang-es="La ciudad avanza en la transformación de su entorno natural con proyectos clave que revitalizan su conexión con el mar y el río Magdalena."
+                    data-lang-en="The city is advancing in the transformation of its natural environment with key projects that revitalize its connection with the sea and the Magdalena River.">
+                    La ciudad avanza en la transformación de su entorno natural con proyectos clave que revitalizan su
+                    conexión con el mar y el río Magdalena.</p>
+
+                <div class="premium-gallery-container">
+                    <div class="gallery-grid">
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Ubicaciones/Cienega Mallorquin.png"
+                                        alt="Ciénaga de Mallorquín" data-alt-es="Ciénaga de Mallorquín"
+                                        data-alt-en="Mallorquín Swamp">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4 data-lang-es="Ciénaga de Mallorquín" data-lang-en="Mallorquín Swamp">Ciénaga de
+                                    Mallorquín</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Ubicaciones/Tren De Las Flores.png"
+                                        alt="Tren turístico de las Flores" data-alt-es="Tren turístico de las Flores"
+                                        data-alt-en="Flowers Tourist Train">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4 data-lang-es="Tren turístico de las Flores" data-lang-en="Flowers Tourist Train">
+                                    Tren turístico de las Flores</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Ubicaciones/Puerto Mocho2.png" alt="Playa Puerto Mocho"
+                                        data-alt-es="Playa Puerto Mocho" data-alt-en="Puerto Mocho Beach">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4 data-lang-es="Playa Puerto Mocho" data-lang-en="Puerto Mocho Beach">Playa Puerto
+                                    Mocho</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Ubicaciones/Gran Malecon 2.png" alt="Gran Malecón"
+                                        data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Ubicaciones/Gran Malecon.png" alt="Gran Malecón"
+                                        data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
+                            </div>
+                        </div>
+                        <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
+                            <div class="slider-container">
+                                <div class="slider-images">
+                                    <img src="./assets/imagenes/Ubicaciones/Gran Malecon 3.png" alt="Gran Malecón"
+                                        data-alt-es="Gran Malecón" data-alt-en="Gran Malecón">
+                                </div>
+                            </div>
+                            <div class="overlay-content">
+                                <h4 data-lang-es="Gran Malecón" data-lang-en="Gran Malecón">Gran Malecón</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Contenedor Zoomed compartido si se usa zoom en esta galería -->
+                <div class="zoomed-container">
+                    <!-- El alt de la imagen ampliada también necesitaría traducción dinámica si se usa -->
+                    <img src="" alt="Imagen Ampliada" class="zoomed-image">
+                    <button class="close-zoom" aria-label="Cerrar zoom"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+        </section> <!-- FIN de Desarrollo Barranquilla -->
+
+        <!-- 3. Una nueva ciudad se levanta (Gran Malecón) -->
+        <section id="gran-malecon" class="block">
+            <div class="container">
+                <div class="adaptive-layout">
+
+                    <div class="adaptive-text-content" data-aos="fade-right">
+                        <h2 class="text-headline" data-aos="fade-up" data-aos-delay="50"
+                            data-lang-es="Una nueva ciudad se levanta junto al Gran Malecón"
+                            data-lang-en="A new city rises next to the Gran Malecón">Una nueva ciudad se levanta junto
+                            al Gran Malecón</h2>
+                        <p class="text-paragraph" data-aos="fade-up" data-aos-delay="100"
+                            data-lang-es="La Ciudad del Río se alza junto al Gran Malecón, un espacio público de primer nivel premiado nacional e internacionalmente, que ha recibido más de 25 millones de turistas desde el 2017."
+                            data-lang-en="The Ciudad del Río stands next to the Gran Malecón, a top-tier public space awarded nationally and internationally, which has received over 25 million tourists since 2017.">
+                            La Ciudad del Río se alza junto al Gran Malecón, un espacio público de primer nivel premiado
+                            nacional e internacionalmente, que ha recibido más de 25 millones de turistas desde el 2017.
+                        </p>
+                    </div>
+
+                    <div class="adaptive-image-content" data-aos="fade-left">
+                        <img src="./assets/imagenes/Gran Malecon/Malecon_vistas(3).png" alt="Gran Malecón del Río"
+                            data-alt-es="Gran Malecón del Río" data-alt-en="Gran Malecón of the River">
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. ¿QUÉ ES LA CIUDAD DEL RÍO? -->
+        <section id="ciudad-del-rio" class="section-bg">
+            <div class="container">
+                <h2 data-aos="fade-up" data-lang-es="¿QUÉ ES LA CIUDAD DEL RÍO?"
+                    data-lang-en="WHAT IS THE CIUDAD DEL RÍO?">¿QUÉ ES LA CIUDAD DEL RÍO?</h2>
+                <div class="ciudad-rio-grid">
+                    <div class="ciudad-rio-content" data-aos="fade-right" data-aos-delay="200">
+                        <p data-lang-es="La Ciudad del Río es un ambicioso plan de renovación urbana en Barranquilla que transformará la manera en que la ciudad se relaciona con el río Magdalena."
+                            data-lang-en="The Ciudad del Río is an ambitious urban renewal plan in Barranquilla that will transform the way the city relates to the Magdalena River.">
+                            La Ciudad del Río es un ambicioso plan de renovación urbana en Barranquilla que transformará
+                            la manera en que la ciudad se relaciona con el río Magdalena.</p>
+                        <ul>
+                            <li><i class="fas fa-map-marked-alt"></i> <span
+                                    data-lang-es="105 hectáreas, con 61 hectáreas útiles"
+                                    data-lang-en="105 hectares, with 61 usable hectares">105 hectáreas, con 61 hectáreas
+                                    útiles</span></li>
+                            <li><i class="fas fa-tree"></i> <span data-lang-es="Más de 210,000 m² de espacio público"
+                                    data-lang-en="More than 210,000 m² of public space">Más de 210,000 m² de espacio
+                                    público</span></li>
+                            <li>
+                                <i class="fas fa-water"></i>
+                                <span data-lang-es="2,600 metros lineales frente al río"
+                                    data-lang-en="2,600 linear meters facing the river">2,600 metros lineales frente al
+                                    río</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-home"></i>
+                                <span data-lang-es="Proyección de 50,000 viviendas"
+                                    data-lang-en="Projection of 50,000 homes">Proyección de 50,000 viviendas</span>
+                            </li>
+                        </ul>
+                        <h3 data-lang-es="Cuatro conceptos urbanos clave:" data-lang-en="Four key urban concepts:">
+                            Cuatro conceptos urbanos clave:</h3>
+                        <ul>
+                            <li><i class="fas fa-heartbeat"></i> <span data-lang-es="Ciudad saludable"
+                                    data-lang-en="Healthy city">Ciudad saludable</span></li>
+                            <li><i class="fas fa-bicycle"></i> <span data-lang-es="Movilidad sostenible"
+                                    data-lang-en="Sustainable mobility">Movilidad sostenible</span></li>
+                            <li><i class="fas fa-leaf"></i> <span data-lang-es="Urbanismo ecológico"
+                                    data-lang-en="Ecological urbanism">Urbanismo ecológico</span></li>
+                            <li><i class="fas fa-clock"></i> <span data-lang-es="Ciudad de los 15 minutos"
+                                    data-lang-en="15-minute city">Ciudad de los 15 minutos</span></li>
+                        </ul>
+                    </div>
+                    <div class="ciudad-rio-image about-image" data-aos="fade-left" data-aos-delay="200">
+                        <img src="./assets/imagenes/Gran Malecon/gran-malecon.png" alt="Concepto Ciudad del Río"
+                            data-alt-es="Concepto Ciudad del Río" data-alt-en="Ciudad del Río Concept">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === SEGUNDO BLOCK === -->
+        <section class="block">
+            <div class="content-wrapper">
+                <div class="text-content-block">
+                    <h2 data-lang-es="CONOCE MALECON 72" data-lang-en="DISCOVER MALECON 72">CONOCE MALECON 72</h2>
+                </div>
+                <div class="action-content">
+                    <a href="https://app-na1.hubspotdocuments.com/documents/8678656/view/971328453?accessId=4e0581"
+                        class="m72-button" data-lang-es="Más Información" data-lang-en="More Information">Más
+                        Información</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Descubre la Nueva Barranquilla (Video) -->
+        <section id="ciudad-del-rio-video" class="section-bg">
+            <div class="container">
+                <h2 data-aos="fade-up" style="text-align: center;"
+                    data-lang-es="Descubre la Nueva Barranquilla: La Ciudad que Abraza su Río."
+                    data-lang-en="Discover the New Barranquilla: The City that Embraces its River.">Descubre la Nueva
+                    Barranquilla: La Ciudad que Abraza su Río.</h2>
+                <div class="video-container">
+                    <iframe
+                        src="https://www.youtube.com/embed/gQNPU0WKquU?si=eYVPmz8CVtAOprYh&autoplay=1&mute=1&loop=1&playlist=gQNPU0WKquU&controls=0&showinfo=0&rel=0&modestbranding=1&hq=1"
+                        title="YouTube video player - Descubre la Nueva Barranquilla"
+                        data-title-es="YouTube video player - Descubre la Nueva Barranquilla"
+                        data-title-en="YouTube video player - Discover the New Barranquilla" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Proyectos Section -->
+        <section id="proyectos" class="section-bg">
+            <div class="container">
+                <h2 data-aos="fade-up" data-lang-es="PROYECTOS" data-lang-en="PROJECTS">PROYECTOS</h2>
+
+                <div class="project-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-column-media">
+                        <div class="gallery-item">
+                            <h3>MALECON 72</h3>
+                            <img src="./assets/imagenes/Vistas/Malecon 72.png" alt="Malecón 72 - Imagen Principal"
+                                data-alt-es="Malecón 72 - Imagen Principal" data-alt-en="Malecón 72 - Main Image">
+                        </div>
+                        <div class="video-container">
+                            <iframe
+                                src="https://www.youtube.com/embed/zeiQK20IrmM?si=t-1-pO45rKhslUSl&autoplay=1&mute=1&loop=1&playlist=zeiQK20IrmM&controls=0&showinfo=0&rel=0&modestbranding=1"
+                                title="YouTube video player - Malecón 72"
+                                data-title-es="YouTube video player - Malecón 72"
+                                data-title-en="YouTube video player - Malecón 72" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                    <div class="project-column-text">
+                        <div class="feature-item">
+                            <div class="icon"><i class="fas fa-star"></i></div>
+                            <h3>MALECÓN 72</h3>
+                            <p><strong data-lang-es="El proyecto inmobiliario más exitoso de Barranquilla"
+                                    data-lang-en="The most successful real estate project in Barranquilla">El proyecto
+                                    inmobiliario más exitoso de Barranquilla</strong><br>
+                                <span
+                                    data-lang-es="Ubicado en primera línea del Gran Malecón y frente al río Magdalena, combina naturaleza, modernidad y una ubicación privilegiada para vivir o invertir en la ciudad que hoy mira al río."
+                                    data-lang-en="Located on the front line of the Gran Malecón and facing the Magdalena River, it combines nature, modernity, and a privileged location to live or invest in the city that now looks to the river.">Ubicado
+                                    en primera línea del Gran Malecón y frente al río Magdalena...</span><br><br>
+                                <span
+                                    data-lang-es='"En Enero de 2025, las ventas del mes aumentan para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades" - Galería Inmobiliaria'
+                                    data-lang-en='"In January 2025, monthly sales for non-VIS housing increased by 267.4% compared to the same month last year, with 496 units sold, due to the launch of this project, whose sales totaled 280 units" - Galería Inmobiliaria'>
+                                    "En Enero de 2025, las ventas del mes aumentan para la vivienda No VIS un 267,4%..."
+                                    - Galería
+                                    Inmobiliaria</span>
+                            </p>
+                            <section class="block">
+                                <div class="content-wrapper">
+                                    <div class="action-content">
+                                        <a href="https://www.malecon72.com/" class="m72-button"
+                                            data-lang-es="Más Información" data-lang-en="More Information">Más
+                                            Información</a>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="margin: 5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+                <div class="project-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-column-text">
+                        <div class="feature-item">
+                            <div class="icon"><i class="fas fa-building"></i></div>
+                            <h3>RIVATTA DEL RÍO</h3>
+                            <p><strong data-lang-es="Lujo, Diseño y Conexión con Ciudad del Río"
+                                    data-lang-en="Luxury, Design and Connection with Ciudad del Río">Lujo, Diseño y
+                                    Conexión con Ciudad del Río</strong><br>
+                                <span
+                                    data-lang-es="Proyecto habitacional de alto perfil de Constructora Bolívar, estratégicamente ubicado frente al Gran Malecón. Con torres modernas, fachadas dinámicas y balcones en todos los apartamentos, Rivatta integra diseño sofisticado con funcionalidad."
+                                    data-lang-en="High-profile residential project by Constructora Bolívar, strategically located in front of the Gran Malecón. With modern towers, dynamic facades and balconies in all apartments, Rivatta integrates sophisticated design with functionality.">Proyecto
+                                    habitacional de alto perfil de Constructora Bolívar, estratégicamente ubicado frente
+                                    al Gran Malecón...</span><br><br>
+                                <span
+                                    data-lang-es="Sus tipologías van desde 50 m² (1 hab.), 68 m² (2 hab.), hasta 105 m² (3 hab.), adaptándose tanto a quienes buscan su primera vivienda como a familias e inversionistas. Amenidades destacadas: piscina infinita con vista al río, gimnasio equipado, coworking y salas premium."
+                                    data-lang-en="Its typologies range from 50 m² (1 bedroom), 68 m² (2 bedrooms), to 105 m² (3 bedrooms), adapting to both those seeking their first home and families and investors. Featured amenities: infinity pool with river view, equipped gym, coworking and premium rooms.">Sus
+                                    tipologías van desde 50 m² hasta 105 m², adaptándose a familias e
+                                    inversionistas...</span>
+                            </p>
+                            <section class="block">
+                                <div class="content-wrapper">
+                                    <div class="action-content">
+                                        <a href="#contact" class="m72-button" data-lang-es="Más Información"
+                                            data-lang-en="More Information">Más
+                                            Información</a>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="project-column-media">
+                        <div class="gallery-item">
+                            <h3>RIVATTA DEL RÍO</h3>
+                            <img src="https://cbolivarstoragedev.blob.core.windows.net/fileslive-2023-20-11/imagenes/proyecto/fotos/rivatta-piscina-1.webp"
+                                alt="Rivatta del Río - Piscina" data-alt-es="Rivatta del Río - Piscina"
+                                data-alt-en="Rivatta del Río - Pool">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://cbolivarstoragedev.blob.core.windows.net/fileslive-2023-20-11/imagenes/proyectos/slider-fotos/rivatta-imagen-aerea-1.webp"
+                                alt="Rivatta del Río - Vista Aérea" data-alt-es="Rivatta del Río - Vista Aérea"
+                                data-alt-en="Rivatta del Río - Aerial View">
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="margin: 5rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+                <div class="project-container reverse" data-aos="fade-up" data-aos-delay="100">
+                    <div class="project-column-text">
+                        <div class="feature-item">
+                            <div class="icon"><i class="fas fa-trophy"></i></div>
+                            <h3>VIVE RÍO</h3>
+                            <p><strong data-lang-es="El comienzo de una historia de éxito"
+                                    data-lang-en="The beginning of a success story">El comienzo de una historia de
+                                    éxito</strong><br>
+                                <span
+                                    data-lang-es="El primer proyecto del Gran Malecón de Barranquilla que se posicionó como número 1 en ventas en 2022 en todo el Departamento."
+                                    data-lang-en="The first project on Barranquilla's Gran Malecón that ranked number 1 in sales in 2022 throughout the Department.">El
+                                    primer proyecto del Gran Malecón de Barranquilla que se posicionó como número 1 en
+                                    ventas en 2022 en todo el Departamento.</span><br><br>
+                                <span
+                                    data-lang-es="Diseñado y estructurado bajo criterios de construcción sostenible. Proyecto de 34 pisos de uso mixto, con modelo habitacional, rentas cortas, distrito gastronómico y oficinas."
+                                    data-lang-en="Designed and structured under sustainable construction criteria. A 34-story mixed-use project, with a housing model, short-term rentals, a gastronomic district, and offices.">Diseñado
+                                    y estructurado bajo criterios de construcción sostenible. Proyecto de 34 pisos de
+                                    uso mixto...</span>
+                            </p>
+                            <section class="block">
+                                <div class="content-wrapper">
+                                    <div class="action-content">
+                                        <a href="https://vive-rio.com/" class="m72-button"
+                                            data-lang-es="Más Información" data-lang-en="More Information">Más
+                                            Información</a>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="project-column-media">
+                        <div class="gallery-item">
+                            <h3>VIVE RÍO</h3>
+                            <img src="./assets/imagenes/Vistas/Vive Rio.png" alt="Vive Río - Imagen Principal"
+                                data-alt-es="Vive Río - Imagen Principal" data-alt-en="Vive Río - Main Image">
+                        </div>
+                        <div class="video-container">
+                            <iframe
+                                src="https://www.youtube.com/embed/kFzc51X3QxM?si=2dr2L5tXViJRmv0o&autoplay=1&mute=1&loop=1&playlist=kFzc51X3QxM&controls=0&showinfo=0&rel=0&modestbranding=1"
+                                title="YouTube video player - Vive Río" data-title-es="YouTube video player - Vive Río"
+                                data-title-en="YouTube video player - Vive Río" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="zoomed-container">
+                <img src="" alt="Imagen Ampliada" class="zoomed-image" data-alt-es="Imagen Ampliada"
+                    data-alt-en="Zoomed Image">
+                <button class="close-zoom" aria-label="Cerrar zoom" data-aria-label-es="Cerrar zoom"
+                    data-aria-label-en="Close zoom"><i class="fas fa-times"></i></button>
+            </div>
+        </section>
+        <section id="blog" class="section-bg">
+            <div class="container">
+                <h2 data-aos="fade-up" data-lang-es="BLOG" data-lang-en="BLOG">BLOG</h2>
+                <p class="lead text-center" data-aos="fade-up" data-aos-delay="50"
+                    data-lang-es="Mantente informado sobre las últimas novedades y oportunidades de inversión en Ciudad del Río y el Gran Malecón de Barranquilla."
+                    data-lang-en="Stay informed about the latest news and investment opportunities in Ciudad del Río and the Gran Malecón of Barranquilla.">
+                    Mantente informado sobre las últimas novedades y oportunidades de inversión en Ciudad del Río y el
+                    Gran Malecón de Barranquilla.
+                </p>
+
                 <div class="blog-grid">
-                    <article class="blog-post">
-                         <div class="blog-content">
-                             <h3>S.M.G. Lab brilla en la Feria de Ciencia Escolar</h3>
-                             <p>Nuestros pequeños inventores presentaron sus proyectos de robótica, demostrando creatividad y trabajo en equipo. ¡Una experiencia inolvidable!</p>
-                         </div>
-                    </article>
-                    <article class="blog-post">
-                          <div class="blog-content">
-                              <h3>Tecnología Consciente: 5 Apps de Mindfulness para Niños</h3>
-                              <p>Descubre aplicaciones que ayudan a tus hijos a desarrollar la atención plena de forma divertida y adaptada a su edad.</p>
-                          </div>
-                    </article>
-                    <article class="blog-post">
-                         <div class="blog-content">
-                             <h3>¿Por qué la Robótica es Clave para el Futuro Profesional?</h3>
-                             <p>Exploramos las habilidades esenciales que la robótica desarrolla y su creciente importancia en el mercado laboral del mañana.</p>
-                         </div>
-                    </article>
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="100">
+                        <div class="blog-image">
+                            <img src="./assets/imagenes/Vistas/Gran Malecon.png"
+                                alt="Los 4 proyectos que están transformando el Gran Malecón"
+                                data-alt-es="Los 4 proyectos que están transformando el Gran Malecón"
+                                data-alt-en="The 4 projects transforming the Gran Malecón">
+                        </div>
+                        <div class="blog-content">
+                            <h3 data-lang-es="Los 4 proyectos que están transformando el Gran Malecón de Barranquilla"
+                                data-lang-en="The 4 projects transforming Barranquilla's Gran Malecón">
+                                Los 4 proyectos que están transformando el Gran Malecón de Barranquilla</h3>
+                            <p data-lang-es="El Gran Malecón de Barranquilla se ha convertido en el ícono urbano más importante de la ciudad y en un motor de inversión y desarrollo..."
+                                data-lang-en="Barranquilla's Gran Malecón has become the city's most important urban icon and a driver of investment and development...">
+                                El Gran Malecón de Barranquilla se ha convertido en el ícono urbano más importante de la
+                                ciudad...</p>
+                            <a href="blog-proyectos-malecon.html" class="btn-read-more" data-lang-es="Leer más"
+                                data-lang-en="Read more">Leer más</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-post" data-aos="fade-up" data-aos-delay="200">
+                        <div class="blog-image">
+                            <img src="./assets/imagenes/Vistas/Malecon 1.png"
+                                alt="Por qué invertir en Barranquilla frente al río Magdalena"
+                                data-alt-es="Por qué invertir en Barranquilla frente al río Magdalena"
+                                data-alt-en="Why invest in Barranquilla facing the Magdalena River">
+                        </div>
+                        <div class="blog-content">
+                            <h3 data-lang-es="Por qué invertir en Barranquilla frente al río Magdalena es la mejor decisión en 2025"
+                                data-lang-en="Why investing in Barranquilla facing the Magdalena River is the best decision in 2025">
+                                Por qué invertir en Barranquilla frente al río Magdalena es la mejor decisión en 2025
+                            </h3>
+                            <p data-lang-es="Barranquilla vive un renacer urbano frente al río Magdalena. Lo que antes era una frontera natural hoy es el epicentro del desarrollo..."
+                                data-lang-en="Barranquilla is experiencing an urban renaissance facing the Magdalena River. What was once a natural border is now the epicenter of development...">
+                                Barranquilla vive un renacer urbano frente al río Magdalena...</p>
+                            <a href="blog-invertir-barranquilla.html" class="btn-read-more" data-lang-es="Leer más"
+                                data-lang-en="Read more">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Block para Vive Rio -->
+        <section class="block">
+            <div class="content-wrapper">
+                <div class="text-content-block">
+                    <h2 data-lang-es="CONOCE VIVE RIO" data-lang-en="DISCOVER VIVE RIO">CONOCE VIVE RIO</h2>
+                </div>
+                <div class="action-content">
+                    <a href="https://app-na1.hubspotdocuments.com/documents/8678656/view/437121787?accessId=c3ffd6"
+                        class="m72-button" data-lang-es="Más Información" data-lang-en="More Information">Más
+                        Información</a>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Contáctanos -->
-        <section id="contacto" class="section-padding">
-             <div class="container">
-                <h2>Ponte en Contacto</h2>
-                <div class="contact-section">
-                    <div class="contact-info">
-                        <p class="address"><strong>Dirección:</strong> [Tu Dirección Completa o "Modalidad Principalmente Online"], Barranquilla, Colombia</p>
-                        <p class="phone"><strong>Teléfono:</strong> <a href="tel:+573001234567">+57 300 123 4567</a></p>
-                        <p class="email"><strong>Email:</strong> <a href="mailto:info@innovationlabrobotics.com">info@innovationlabrobotics.com</a></p>
-                        <p class="hours"><strong>Horario:</strong> Lunes a Viernes: 9:00 AM - 6:00 PM</p>
-                        <!-- Botón WhatsApp en Contacto - Actualizado -->
-                        <a href="https://wa.link/pnce4s" target="_blank" class="whatsapp-button"  target="_blank" style="margin-top: 1rem;">
-                             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon"> Contáctanos por WhatsApp
-                        </a>
+        <!-- 7. Mapa Lotes Section -->
+        <section id="mapa-lotes" class="section-bg">
+            <div class="container">
+                <h2 data-aos="fade-up" data-lang-es="LOS PROYECTOS DE LA CIUDAD DEL RIO"
+                    data-lang-en="PROJECTS IN CIUDAD DEL RÍO">LOS PROYECTOS DE LA CIUDAD DEL RIO</h2>
+                <p class="lead text-center" data-aos="fade-up" data-aos-delay="50"
+                    data-lang-es="Explora la distribución y disponibilidad de lotes dentro del plan maestro de Ciudad del Río a través de nuestro mapa interactivo."
+                    data-lang-en="Explore the distribution and availability of lots within the Ciudad del Río master plan through our interactive map.">
+                    Explora la distribución y disponibilidad de lotes dentro del plan maestro de Ciudad del Río a través
+                    de nuestro mapa interactivo.
+                </p>
+                <div class="map-container" data-aos="fade-up" data-aos-delay="100">
+                    <iframe src="https://www.google.com/maps/d/embed?mid=19NtLexJzNf_GS-IdfO2NAr4zgeesCsk&ehbc=2E312F"
+                        width="100%" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Descubre Malecón 72 -->
+        <div class="container">
+            <h2 data-aos="fade-up" data-lang-es="Descubre Malecón 72" data-lang-en="Experience Malecón 72">Descubre <br>
+                Malecón 72</h2>
+            <p class="lead text-center" data-aos="fade-up" data-aos-delay="50"
+                data-lang-es="Un exclusivo desarrollo residencial ubicado frente al Gran Malecón de Barranquilla, donde la naturaleza y la modernidad se encuentran para ofrecerte un estilo de vida único."
+                data-lang-en="An exclusive residential development located in front of the Gran Malecón of Barranquilla, where nature and modernity meet to offer you a unique lifestyle.">
+                Un exclusivo desarrollo residencial ubicado frente al Gran Malecón de Barranquilla, donde la naturaleza
+                y la modernidad se encuentran para ofrecerte un estilo de vida único. </p>
+        </div>
+
+        <!-- Tarjeta Malecón 72 -->
+        <div class="mi-contenedor-tarjeta-inciti">
+            <div class="tarjeta-inciti">
+                <div class="tarjeta-inciti-imagen-contenedor">
+                    <img src="/assets/imagenes/Ubicaciones/M72-render.png" alt="Personas en una presentación - INCITI"
+                        class="tarjeta-inciti-imagen-fondo">
+                    <div class="tarjeta-inciti-superposicion-gris"></div>
+                </div>
+                <div class="tarjeta-inciti-contenido">
+                    <div class="text-content-block">
+                        <h2 data-lang-es="CONOCE MAS SOBRE MALECÓN 72" data-lang-en="LEARN MORE ABOUT MALECÓN 72">CONOCE
+                            MAS SOBRE MALECÓN 72</h2>
                     </div>
-                    <div class="map-container">
-                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125326.19865595768!2d-74.83979473830686!3d11.00066823163631!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d44d12ae075%3A0x9125c49633448dc!2sBarranquilla%2C%20Atl%C3%A1ntico!5e0!3m2!1ses-419!2sco!4v1700000000000!5m2!1ses-419!2sco" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación en Google Maps"></iframe>
+                    <div class="action-content">
+                        <a href="https://www.malecon72.com/" class="m72-button" target="_blank"
+                            rel="noopener noreferrer" data-lang-es="Más información" data-lang-en="More information">Más
+                            información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br> <br>
+        <div class="container">
+            <h2 data-aos="fade-up" data-lang-es="Descubre Rivatta del Río" data-lang-en="Discover Rivatta del Río">
+                Descubre <br> Rivatta del Río</h2>
+            <p class="lead text-center" data-aos="fade-up" data-aos-delay="50"
+                data-lang-es="Un proyecto residencial que redefine el lujo y la conexión con la naturaleza, ofreciendo un estilo de vida sofisticado frente al río Magdalena."
+                data-lang-en="A residential project that redefines luxury and connection with nature, offering a sophisticated lifestyle facing the Magdalena River.">
+                Un proyecto residencial que redefine el lujo y la conexión con la naturaleza, ofreciendo un estilo de
+                vida sofisticado frente al río Magdalena.
+            </p>
+        </div>
+
+        <div class="mi-contenedor-tarjeta-inciti">
+            <div class="tarjeta-inciti">
+                <div class="tarjeta-inciti-imagen-contenedor">
+                    <img src="https://cbolivarstoragedev.blob.core.windows.net/fileslive-2023-20-11/imagenes/proyecto/fotos/rivatta-piscina-1.webp"
+                        alt="Render del proyecto Rivatta del Río" class="tarjeta-inciti-imagen-fondo">
+                    <div class="tarjeta-inciti-superposicion-gris"></div>
+                </div>
+                <div class="tarjeta-inciti-contenido">
+                    <div class="text-content-block">
+                        <h2 data-lang-es="CONOCE MÁS SOBRE RIVATTA DEL RÍO"
+                            data-lang-en="LEARN MORE ABOUT RIVATTA DEL RÍO">CONOCE MÁS SOBRE RIVATTA DEL RÍO</h2>
+                    </div>
+                    <div class="action-content">
+                        <a href="#contact" class="m72-button" data-lang-es="Más información"
+                            data-lang-en="More information">Más información</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. El Equipo Section -->
+        <section id="our-team" class="section-bg">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2 data-lang-es="EL EQUIPO DETRÁS DE LA CIUDAD DEL RÍO"
+                        data-lang-en="THE TEAM BEHIND CIUDAD DEL RÍO">EL EQUIPO DETRÁS DE LA CIUDAD DEL RÍO</h2>
+                    <h2 class="lead text-center" data-aos="fade-up" data-aos-delay="50"
+                        data-lang-es="¡Vamos a co-crear juntos un proyecto en la nueva ciudad del rio!"
+                        data-lang-en="Let's co-create a project together in the new Ciudad Del Rio!">
+                        ¡Vamos a co-crear juntos un proyecto en la nueva ciudad del rio!
+                    </h2>
+                </div>
+                <div class="team-members-container" data-aos="fade-up" data-aos-delay="100">
+                    <div class="team-member">
+                        <div class="member-content">
+                            <div class="member-logo">
+                                <img src="./assets/imagenes/Logo/Ydn Logo.png" alt="Logo YDN" data-alt-es="Logo YDN"
+                                    data-alt-en="YDN Logo">
+                            </div>
+                            <h4>YDN</h4>
+                            <p data-lang-es="Desde 1998 desarrollando proyectos de Infraestructura civil e inmobiliaria en todo el territorio nacional. Es la constructora de Vive Río en consorcio."
+                                data-lang-en="Since 1998 developing civil and real estate infrastructure projects throughout the national territory. It is the construction company of Vive Río in consortium.">
+                                Desde 1998 desarrollando proyectos de Infraestructura civil e inmobiliaria en todo el
+                                territorio nacional. Es la constructora de Vive Río en consorcio.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-content">
+                            <div class="member-logo">
+                                <img src="./assets/imagenes/Logo/Inciti Logo.png" alt="Logo Inciti"
+                                    data-alt-es="Logo Inciti" data-alt-en="Inciti Logo">
+                            </div>
+                            <h4>Inciti</h4>
+                            <p data-lang-es="Enfocada en crear comunidades inteligentes y sostenibles, ha desarrollado proyectos exitosos, como Vive Río, desde su comercialización hasta su gerencia comercial."
+                                data-lang-en="Focused on creating smart and sustainable communities, it has developed successful projects, such as Vive Río, from its marketing to its commercial management.">
+                                Enfocada en crear comunidades inteligentes y sostenibles, ha desarrollado proyectos
+                                exitosos, como Vive Río, desde su comercialización hasta su gerencia comercial.</p>
+                        </div>
+                    </div>
+                    <div class="team-member">
+                        <div class="member-content">
+                            <div class="member-logo-casa-verde">
+                                <img src="./assets/imagenes/Logo/Casa Verde Logo.png" alt="Logo Casa Verde"
+                                    data-alt-es="Logo Casa Verde" data-alt-en="Casa Verde Logo">
+                            </div>
+                            <h4>Casa Verde</h4>
+                            <p data-lang-es="Especializados en la promotoría de proyectos inmobiliarios y urbanos se ha enfocado en promover el desarrollo junto al Gran Malecón."
+                                data-lang-en="Specialized in promoting real estate and urban projects, it has focused on promoting development alongside the Gran Malecón.">
+                                Especializados en la promotoría de proyectos inmobiliarios y urbanos se ha enfocado en
+                                promover el desarrollo junto al Gran Malecón.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tarjeta INCITI -->
+                <div class="mi-contenedor-tarjeta-inciti">
+                    <div class="tarjeta-inciti">
+                        <div class="tarjeta-inciti-imagen-contenedor">
+                            <img src="/assets/imagenes/Ubicaciones/equipo_inciti.jpg"
+                                alt="Personas en una presentación - INCITI" class="tarjeta-inciti-imagen-fondo">
+                            <div class="tarjeta-inciti-superposicion-gris"></div>
+                        </div>
+                        <div class="tarjeta-inciti-contenido">
+                            <div class="text-content-block">
+                                <h2 data-lang-es="CONOCE MAS SOBRE INCITI" data-lang-en="LEARN MORE ABOUT INCITI">CONOCE
+                                    MAS SOBRE INCITI</h2>
+                            </div>
+                            <div class="tarjeta-inciti-logo-texto">
+                                <img src="/assets/imagenes/Logo/Logo inciti (blanco)_Mesa de trabajo 1.png"
+                                    alt="Logo INCITI" class="tarjeta-inciti-logo">
+                            </div>
+                            <div class="action-content">
+                                <a href="https://inciti.co/" class="m72-button" target="_blank"
+                                    rel="noopener noreferrer" data-lang-es="Más información"
+                                    data-lang-en="More information">Más información</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section-dark">
+            <div class="container text-center">
+                <h2 data-aos="fade-up" data-lang-es="FORMA PARTE DEL FUTURO DE BARRANQUILLA"
+                    data-lang-en="BE PART OF BARRANQUILLA'S FUTURE">FORMA PARTE DEL FUTURO DE BARRANQUILLA</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100"
+                    data-lang-es="Regístrate y sé de los primeros en recibir información exclusiva sobre CIUDAD DEL RÍO."
+                    data-lang-en="Register and be among the first to receive exclusive information about CIUDAD DEL RÍO.">
+                    Regístrate y sé de los primeros en recibir información exclusiva sobre CIUDAD DEL RÍO.
+                </p>
+                <div class="contact-form-wrapper" data-aos="fade-up" data-aos-delay="200">
+                    <!-- HubSpot Form Embed Code -->
+                    <script charset="utf-8" type="text/javascript" src="//js.hsforms.net/forms/embed/v2.js"></script>
+                    <script>
+                        hbspt.forms.create({
+                            portalId: "8678656",
+                            formId: "e9cb1b61-1059-4551-b351-6e41b7c3526a",
+                            region: "na1"
+                        });
+                    </script>
+                    <!-- End HubSpot Form Embed Code -->
+                </div>
+            </div>
+            <div class="angled-divider-bottom">
+                <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"
+                    preserveAspectRatio="none">
+                    <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="shape-fill-footer"></path>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ======================================= -->
+        <!-- FIN DEL CONTENIDO ORGANIZADO          -->
+        <!-- ======================================= -->
+
     </main>
 
-    <footer>
+    <!-- Footer -->
+    <footer id="main-footer">
         <div class="container">
-            <p>© 2024 Innovation lab robotics. Todos los derechos reservados.</p>
-            <p>Creado por Sharif y su equipo  y tecnología en Barranquilla.</p>
+            <a href="#pre-hero-banner" class="footer-logo">
+                <img src="./assets/imagenes/Logo/Ciudad Del Rio.png" alt="Ciudad del Río Logo Footer"
+                    data-alt-es="Ciudad del Río Logo Footer" data-alt-en="Ciudad del Río Logo Footer">
+            </a>
+            <div class="container-footer">
+                <p>© <span id="current-year"></span> <span data-lang-es="Ciudad del Río. Desarrollado por"
+                        data-lang-en="Ciudad del Río. Developed by">Ciudad del Río. Desarrollado por</span> <a
+                        href="https://inciti.co" target="_blank" rel="noopener noreferrer"> Inciti.co</a>. <span
+                        data-lang-es="Todos los derechos reservados." data-lang-en="All rights reserved.">Todos los
+                        derechos reservados.</span></p>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/ciudaddelriobaq?igsh=MTM3N2ZhaHNldWtiOA=="
+                        aria-label="Instagram de Ciudad del Río" data-aria-label-es="Instagram de Ciudad del Río"
+                        data-aria-label-en="Ciudad del Río Instagram" target="_blank" rel="noopener noreferrer"><i
+                            class="fab fa-instagram"></i></a>
+                </div>
+                <p style="font-size: 0.6em; line-height: 1.4;"
+                    data-lang-es="Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los inmuebles ofertados. El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños, elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados y están sujetos a las variaciones pertinentes."
+                    data-lang-en="This site and its content, such as illustrations, plans, elevations, and renders are solely illustrative to give visitors an idea of the project, may not accurately represent the development upon completion, and may contain non-standard finishes and furniture in the properties offered. The builder and/or its marketer reserves the right to make changes to plans, designs, elevations, and dimensions without prior notice. Expressed dimensions and square meters are estimates and subject to relevant variations.">
+                    Este sitio y su contenido, como ilustraciones, planos, elevaciones y renders son únicamente
+                    ilustrativos para que los visitantes tengan una idea del proyecto, podrían no representar de forma
+                    precisa el desarrollo al terminarse y podrían contener acabados y mobiliario no estándar en los
+                    inmuebles ofertados.
+                    El constructor y/o su comercializador se reserva el derecho a hacer cambios a los planos, diseños,
+                    elevaciones y dimensiones sin previo aviso. Dimensiones expresadas y metros cuadrados son estimados
+                    y están sujetos a las variaciones pertinentes.
+                </p>
+            </div>
         </div>
     </footer>
 
-    <!-- Botón Flotante de WhatsApp (Usando IMG) -->
-    <a href="https://wa.link/pnce4s" target="_blank" class="whatsapp-float" aria-label="Contactar por WhatsApp">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" alt="WhatsApp Icon">
+    <!-- === BOTÓN FLOTANTE DE WHATSAPP === -->
+    <a href="https://wa.link/eyox1y" class="whatsapp-float" target="_blank" rel="noopener noreferrer"
+        aria-label="Contactar por WhatsApp" data-aria-label-es="Contactar por WhatsApp"
+        data-aria-label-en="Contact via WhatsApp">
+        <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- Menú Hamburguesa para Móvil ---
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navLinks = document.querySelector('.nav-links');
-            const header = document.getElementById('header');
+    <!-- AOS Library JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-            if (menuToggle && navLinks) {
-                menuToggle.addEventListener('click', () => {
-                    const isActive = navLinks.classList.toggle('active');
-                    menuToggle.setAttribute('aria-expanded', isActive);
-                    menuToggle.innerHTML = isActive ? '✕' : '☰';
-                    menuToggle.setAttribute('aria-label', isActive ? 'Cerrar menú' : 'Abrir menú');
-                });
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (navLinks.classList.contains('active')) {
-                            navLinks.classList.remove('active');
-                            menuToggle.setAttribute('aria-expanded', 'false');
-                            menuToggle.innerHTML = '☰';
-                            menuToggle.setAttribute('aria-label', 'Abrir menú');
+    <!-- === TU SCRIPT PERSONALIZADO === -->
+    <script src="js/script.js"></script>
+
+    <!-- === SCRIPT PARA TRADUCCIÓN === -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const langSwitcher = document.getElementById('language-switcher');
+            let currentLang = document.documentElement.lang || 'es'; // Obtener idioma inicial
+
+            // Función para aplicar la traducción
+            const setLanguage = (lang) => {
+                currentLang = lang;
+                document.documentElement.lang = lang; // Actualizar el atributo lang del HTML
+
+                // Traducir texto principal
+                document.querySelectorAll('[data-lang-es]').forEach(el => {
+                    const text = el.getAttribute(`data-lang-${lang}`);
+                    if (text) {
+                        // Manejar diferentes tipos de elementos (ej. input placeholders, title)
+                        if (el.tagName === 'INPUT' && el.hasAttribute('placeholder')) {
+                            el.placeholder = text;
+                        } else if (el.tagName === 'TITLE') {
+                            document.title = text;
+                        } else {
+                            el.textContent = text;
                         }
-                    });
-                });
-                document.addEventListener('click', (event) => {
-                    const isClickInsideNav = navLinks.contains(event.target);
-                    const isClickOnToggle = menuToggle.contains(event.target);
-                    if (navLinks.classList.contains('active') && !isClickInsideNav && !isClickOnToggle) {
-                         navLinks.classList.remove('active');
-                         menuToggle.setAttribute('aria-expanded', 'false');
-                         menuToggle.innerHTML = '☰';
-                         menuToggle.setAttribute('aria-label', 'Abrir menú');
                     }
                 });
-            }
 
-            // --- Añadir clase 'scrolled' al header al hacer scroll ---
-             if(header) {
-                 const scrollThreshold = 50;
-                 const handleScroll = () => {
-                     header.classList.toggle('scrolled', window.scrollY > scrollThreshold);
-                 };
-                 window.addEventListener('scroll', handleScroll, { passive: true });
-                 handleScroll(); // Ejecutar una vez al cargar
-            }
+                // Traducir atributos 'alt' de imágenes
+                document.querySelectorAll('[data-alt-es]').forEach(el => {
+                    const altText = el.getAttribute(`data-alt-${lang}`);
+                    if (altText) {
+                        el.alt = altText;
+                    }
+                });
+
+                // Traducir atributos 'aria-label'
+                document.querySelectorAll('[data-aria-label-es]').forEach(el => {
+                    const labelText = el.getAttribute(`data-aria-label-${lang}`);
+                    if (labelText) {
+                        el.setAttribute('aria-label', labelText);
+                    }
+                });
+
+                // Traducir atributos 'title' de iframes/elementos
+                document.querySelectorAll('[data-title-es]').forEach(el => {
+                    const titleText = el.getAttribute(`data-title-${lang}`);
+                    if (titleText) {
+                        el.title = titleText;
+                    }
+                });
+
+                // Actualizar el texto y aria-label del botón de cambio
+                if (lang === 'es') {
+                    langSwitcher.textContent = 'EN';
+                    langSwitcher.setAttribute('aria-label', 'Cambiar idioma a Inglés');
+                } else {
+                    langSwitcher.textContent = 'ES';
+                    langSwitcher.setAttribute('aria-label', 'Switch language to Spanish');
+                }
+
+                // Opcional: Guardar preferencia en localStorage
+                // localStorage.setItem('preferredLanguage', lang);
+            };
+
+            // Evento click para el botón
+            langSwitcher.addEventListener('click', () => {
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                setLanguage(newLang);
+            });
+
+            // Opcional: Cargar idioma guardado al iniciar
+            // const savedLang = localStorage.getItem('preferredLanguage');
+            // if (savedLang && savedLang !== currentLang) {
+            //    setLanguage(savedLang);
+            // }
+
+            // Aplicar idioma inicial (por si acaso se definió diferente en <html>)
+            setLanguage(currentLang);
         });
     </script>
 
 </body>
+
 </html>
