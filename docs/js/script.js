@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeZoomBtn = document.querySelector('.close-zoom');
 
 
-     // Utility Functions
+    // Utility Functions
     function getCssVariable(variable) {
         const varName = variable.startsWith('--') ? variable : '--' + variable;
         return getComputedStyle(root).getPropertyValue(varName).trim();
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.style.top = currentHeightValue;
             mainNav.style.maxHeight = `calc(100vh - ${currentHeightValue})`;
         }
-        if(preHeroBanner) {
+        if (preHeroBanner) {
             preHeroBanner.style.marginTop = currentHeightValue;
         }
     }
@@ -91,43 +91,43 @@ document.addEventListener('DOMContentLoaded', () => {
             const endPoint = sectionTop + sectionHeight - currentHeaderHeight - window.innerHeight * 0.5; // Más abajo
 
             if (scrollY >= triggerPoint && scrollY < endPoint) {
-               currentSectionId = current.getAttribute('id');
+                currentSectionId = current.getAttribute('id');
             }
         });
 
         // Manejo especial para el final de la página (activar último enlace)
         let footer = document.getElementById('main-footer');
         if (footer && (window.innerHeight + scrollY) >= document.body.offsetHeight - (footer.offsetHeight * 0.8) && sections.length > 0) { // Activar antes de llegar al fondo
-             currentSectionId = sections[sections.length - 1]?.getAttribute('id') || currentSectionId;
+            currentSectionId = sections[sections.length - 1]?.getAttribute('id') || currentSectionId;
         }
 
         // Manejo especial para el inicio (activar 'Inicio' si está cerca de la parte superior)
         if (!currentSectionId && scrollY < window.innerHeight * 0.4) { // Activar si está en el primer 40% de la altura de la ventana
-             currentSectionId = 'pre-hero-banner';
+            currentSectionId = 'pre-hero-banner';
         }
 
-         navLinksScroll.forEach(link => {
-             const linkHref = link.getAttribute('href');
-             const isLogo = link.classList.contains('logo') || link.classList.contains('footer-logo');
-             const targetId = linkHref ? linkHref.substring(1) : null;
+        navLinksScroll.forEach(link => {
+            const linkHref = link.getAttribute('href');
+            const isLogo = link.classList.contains('logo') || link.classList.contains('footer-logo');
+            const targetId = linkHref ? linkHref.substring(1) : null;
 
-             if (targetId) {
-                 // Para los logos, solo activar si el target es pre-hero-banner y estamos ahí
-                 if (isLogo && targetId === 'pre-hero-banner') {
+            if (targetId) {
+                // Para los logos, solo activar si el target es pre-hero-banner y estamos ahí
+                if (isLogo && targetId === 'pre-hero-banner') {
                     link.classList.toggle('active', currentSectionId === 'pre-hero-banner');
-                 }
-                 // Para los enlaces normales del nav, activar si coincide el ID
-                 else if (!isLogo && link.closest('#main-nav')) {
-                     link.classList.toggle('active', targetId === currentSectionId);
-                 }
-                 // Para otros enlaces (como scroll-down), no aplicar clase 'active' visualmente
-                 else {
-                     link.classList.remove('active'); // Asegurarse que otros no tengan 'active'
-                 }
-             } else {
-                 link.classList.remove('active'); // Limpiar enlaces sin href válido
-             }
-         });
+                }
+                // Para los enlaces normales del nav, activar si coincide el ID
+                else if (!isLogo && link.closest('#main-nav')) {
+                    link.classList.toggle('active', targetId === currentSectionId);
+                }
+                // Para otros enlaces (como scroll-down), no aplicar clase 'active' visualmente
+                else {
+                    link.classList.remove('active'); // Asegurarse que otros no tengan 'active'
+                }
+            } else {
+                link.classList.remove('active'); // Limpiar enlaces sin href válido
+            }
+        });
     }
 
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!targetHref || !targetHref.startsWith('#') || this.isEqualNode(mobileNavToggle)) {
             // Si es un enlace externo y el menú móvil está abierto, ciérralo
             if (mainNav.classList.contains('active') && !this.isEqualNode(mobileNavToggle)) {
-                 toggleMobileNav();
+                toggleMobileNav();
             }
             return; // Permite el comportamiento por defecto (ir a URL externa o no hacer nada)
         }
@@ -165,11 +165,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function initializeGallerySliders() {
         const galleryItems = document.querySelectorAll('.gallery-item');
         // Asegurarse de que los elementos de zoom existan antes de continuar
-         if (!zoomedContainer || !zoomedImageEl || !closeZoomBtn) {
-             console.warn("Elementos del zoom no encontrados. Funcionalidad de zoom desactivada.");
-              // No añadir listeners si faltan elementos clave
-              return;
-         }
+        if (!zoomedContainer || !zoomedImageEl || !closeZoomBtn) {
+            console.warn("Elementos del zoom no encontrados. Funcionalidad de zoom desactivada.");
+            // No añadir listeners si faltan elementos clave
+            return;
+        }
 
 
         galleryItems.forEach(item => {
@@ -188,10 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Si no hay imágenes, ocultar controles y salir
             if (imageCount === 0) {
-                if(prevBtn) prevBtn.style.display = 'none';
-                if(nextBtn) nextBtn.style.display = 'none';
-                if(indicatorsContainer) indicatorsContainer.style.display = 'none';
-                if(zoomBtn) zoomBtn.style.display = 'none';
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+                if (indicatorsContainer) indicatorsContainer.style.display = 'none';
+                if (zoomBtn) zoomBtn.style.display = 'none';
                 return;
             }
 
@@ -199,8 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (indicatorsContainer) {
                 indicatorsContainer.innerHTML = ''; // Limpiar indicadores previos
                 if (imageCount > 1) {
-                     indicatorsContainer.style.display = 'flex'; // Asegurar que sea visible
-                     indicators = images.map((_, index) => {
+                    indicatorsContainer.style.display = 'flex'; // Asegurar que sea visible
+                    indicators = images.map((_, index) => {
                         const span = document.createElement('span');
                         span.addEventListener('click', () => goToSlide(index));
                         indicatorsContainer.appendChild(span);
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Actualizar indicadores solo si existen
                 if (indicators.length > 0) {
                     indicators.forEach((indicator, i) => {
-                       indicator.classList.toggle('active', i === currentIndex);
+                        indicator.classList.toggle('active', i === currentIndex);
                     });
                 }
             }
@@ -229,8 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Mostrar/ocultar botones de navegación según el número de imágenes
             function updateSliderNavVisibility() {
                 const singleImage = imageCount <= 1;
-                if(prevBtn) prevBtn.style.display = singleImage ? 'none' : '';
-                if(nextBtn) nextBtn.style.display = singleImage ? 'none' : '';
+                if (prevBtn) prevBtn.style.display = singleImage ? 'none' : '';
+                if (nextBtn) nextBtn.style.display = singleImage ? 'none' : '';
             }
 
             // Añadir listeners a los botones solo si existen
@@ -239,20 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Event Listener for Zoom (Solo si el botón existe y hay imágenes)
             if (zoomBtn && imageCount > 0) {
-                 zoomBtn.style.display = ''; // Asegurar que sea visible si hay imágenes
-                 zoomBtn.addEventListener('click', (e) => {
-                     e.stopPropagation(); // Prevenir que el click se propague al item
-                     // Asegurarse que zoomedImageEl exista antes de usarlo
-                     if (images[currentIndex] && zoomedImageEl && zoomedContainer) {
-                         zoomedImageEl.src = images[currentIndex].src;
-                         zoomedImageEl.alt = images[currentIndex].alt || 'Imagen ampliada';
-                         zoomedContainer.classList.add('active');
-                         body.style.overflow = 'hidden'; // Evitar scroll del fondo
-                     }
-                 });
-             } else if (zoomBtn) {
+                zoomBtn.style.display = ''; // Asegurar que sea visible si hay imágenes
+                zoomBtn.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevenir que el click se propague al item
+                    // Asegurarse que zoomedImageEl exista antes de usarlo
+                    if (images[currentIndex] && zoomedImageEl && zoomedContainer) {
+                        zoomedImageEl.src = images[currentIndex].src;
+                        zoomedImageEl.alt = images[currentIndex].alt || 'Imagen ampliada';
+                        zoomedContainer.classList.add('active');
+                        body.style.overflow = 'hidden'; // Evitar scroll del fondo
+                    }
+                });
+            } else if (zoomBtn) {
                 zoomBtn.style.display = 'none'; // Ocultar botón de zoom si no hay imágenes
-             }
+            }
 
 
             goToSlide(0); // Ir a la primera imagen inicialmente
@@ -260,41 +260,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // --- Zoom Close Logic ---
-         function closeZoom() {
-             if (zoomedContainer) {
-                 zoomedContainer.classList.remove('active');
-                 body.style.overflow = ''; // Restaurar scroll del body
-             }
-         }
+        function closeZoom() {
+            if (zoomedContainer) {
+                zoomedContainer.classList.remove('active');
+                body.style.overflow = ''; // Restaurar scroll del body
+            }
+        }
 
-         // Añadir listeners para cerrar el zoom solo si los elementos existen
-         if (closeZoomBtn) {
-             closeZoomBtn.addEventListener('click', closeZoom);
-         }
-         if (zoomedContainer) {
-             // Cerrar al hacer clic fuera de la imagen
-             zoomedContainer.addEventListener('click', (e) => {
-                 if (e.target === zoomedContainer) { // Asegurarse que el clic fue en el fondo y no en la imagen
-                     closeZoom();
-                 }
-             });
-         }
+        // Añadir listeners para cerrar el zoom solo si los elementos existen
+        if (closeZoomBtn) {
+            closeZoomBtn.addEventListener('click', closeZoom);
+        }
+        if (zoomedContainer) {
+            // Cerrar al hacer clic fuera de la imagen
+            zoomedContainer.addEventListener('click', (e) => {
+                if (e.target === zoomedContainer) { // Asegurarse que el clic fue en el fondo y no en la imagen
+                    closeZoom();
+                }
+            });
+        }
 
-         // Añadir listener para tecla Escape (solo una vez)
-         if (zoomedContainer && !document.keyListenerAdded) {
-             document.addEventListener('keydown', (e) => {
-                 if (e.key === 'Escape' && zoomedContainer.classList.contains('active')) {
-                     closeZoom();
-                 }
-             });
-             document.keyListenerAdded = true; // Marcar que el listener ya fue añadido
-         }
+        // Añadir listener para tecla Escape (solo una vez)
+        if (zoomedContainer && !document.keyListenerAdded) {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && zoomedContainer.classList.contains('active')) {
+                    closeZoom();
+                }
+            });
+            document.keyListenerAdded = true; // Marcar que el listener ya fue añadido
+        }
 
     }
 
 
     // --- Footer Year ---
-    function setFooterYear() { if(yearSpan) yearSpan.textContent = new Date().getFullYear(); }
+    function setFooterYear() { if (yearSpan) yearSpan.textContent = new Date().getFullYear(); }
 
     // --- Initial Setup Calls ---
     updateHeaderState(); // Establecer altura inicial del header
@@ -319,5 +319,42 @@ document.addEventListener('DOMContentLoaded', () => {
             updateHeaderState();
             activateNavLink(); // Reajustar enlace activo en resize
         }, 250); // Esperar 250ms después del último evento resize
+    });
+
+
+
+    // Dropdown móvil optimizado
+    document.addEventListener('DOMContentLoaded', function () {
+        const dropdownTrigger = document.querySelector('.dropdown-trigger');
+        const dropdown = document.querySelector('.dropdown');
+
+        if (dropdownTrigger && dropdown) {
+            // Manejar click en móvil
+            dropdownTrigger.addEventListener('click', function (e) {
+                if (window.innerWidth <= 768) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('mobile-active');
+
+                    // Cerrar otros dropdowns
+                    document.querySelectorAll('.dropdown:not(.mobile-active)').forEach(dd => {
+                        dd.classList.remove('mobile-active');
+                    });
+                }
+            });
+
+            // Cerrar al hacer click fuera
+            document.addEventListener('click', function (e) {
+                if (!dropdown.contains(e.target)) {
+                    dropdown.classList.remove('mobile-active');
+                }
+            });
+
+            // Limpiar estado al redimensionar
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 768) {
+                    dropdown.classList.remove('mobile-active');
+                }
+            });
+        }
     });
 });
