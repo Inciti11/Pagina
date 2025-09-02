@@ -2650,10 +2650,23 @@ body.mobile-nav-active {
         /* Restablece la dirección del texto para el contenido interno */
     }
 }
+
 /* === DROPDOWN MENU OPTIMIZADO === */
 .dropdown {
     position: relative;
     display: inline-block;
+}
+
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+    /* Coincide con tu margin-top: 5px + un poco más */
+    background: transparent;
+    z-index: 999;
 }
 
 .dropdown-content {
@@ -2661,7 +2674,7 @@ body.mobile-nav-active {
     position: absolute;
     background-color: white;
     min-width: 300px;
-    box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.15);
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     z-index: 1000;
     border-radius: 12px;
     padding: 8px 0;
@@ -2712,13 +2725,14 @@ body.mobile-nav-active {
 }
 
 @keyframes slideDown {
-    from { 
-        opacity: 0; 
-        transform: translateX(-50%) translateY(-15px); 
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-15px);
     }
-    to { 
-        opacity: 1; 
-        transform: translateX(-50%) translateY(0); 
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
     }
 }
 
@@ -2737,21 +2751,21 @@ body.mobile-nav-active {
         border-radius: 8px;
         border-left: 3px solid var(--primary-color);
     }
-    
+
     .dropdown-content a {
         padding: 12px 15px 12px 25px;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         font-size: 15px;
         color: #555 !important;
     }
 
     .dropdown-content a:last-child {
-        background-color: rgba(0,123,255,0.05);
+        background-color: rgba(0, 123, 255, 0.05);
         border-radius: 5px;
         margin: 5px 10px;
         padding: 12px 15px;
     }
-    
+
     .dropdown-content a:hover {
         background-color: var(--primary-color);
         color: white !important;
@@ -2759,7 +2773,7 @@ body.mobile-nav-active {
         margin: 0 10px;
         transform: none;
     }
-    
+
     /* Toggle manual en móvil */
     .dropdown.mobile-active .dropdown-content {
         display: block !important;
@@ -2769,7 +2783,7 @@ body.mobile-nav-active {
     .dropdown.mobile-active .dropdown-arrow {
         transform: rotate(180deg);
     }
-    
+
     /* Ocultar por defecto */
     .dropdown-content {
         display: none;
@@ -2777,18 +2791,15 @@ body.mobile-nav-active {
 }
 
 @keyframes mobileSlideIn {
-    from { 
-        opacity: 0; 
+    from {
+        opacity: 0;
         transform: translateY(-10px);
         max-height: 0;
     }
-    to { 
-        opacity: 1; 
+
+    to {
+        opacity: 1;
         transform: translateY(0);
         max-height: 300px;
     }
 }
-
-
-
-
