@@ -39,7 +39,18 @@
         .blog-header h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
+            font-size: clamp(1.8rem, 4vw, 2rem);
             color: white;
+        }
+
+        @media (max-width: 768px) {
+            .blog-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .blog-content p {
+                font-size: 0.95rem;
+            }
         }
 
         .blog-meta {
@@ -63,12 +74,18 @@
         }
 
         .blog-content h2 {
-            text-align: left;
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
         .blog-content p,
         .blog-content strong {
-            text-align: left;
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            text-align: justify;
         }
 
         .back-to-home {
@@ -90,10 +107,106 @@
         }
 
         .cta-section {
-            background: var(--light-bg);
-            padding: 3rem 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            padding: 4rem 0;
             text-align: center;
             margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 25px 25px 0 0;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Estilos mejorados para los botones en la sección CTA */
+        .cta-section .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem;
+        }
+
+        .cta-section .btn-primary {
+            background: white;
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid white;
+        }
+
+        .cta-section .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            background: #f8f9fa;
+            color: var(--primary-color);
+        }
+
+        .cta-section .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cta-section .btn-secondary:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive para móviles */
+        @media (max-width: 768px) {
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+
+            .cta-section p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .cta-section .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+                margin: 0.5rem 0;
+            }
         }
 
         /* --- AJUSTES DE HEADER PARA BLOG --- */
@@ -203,27 +316,17 @@
             data-lang-en="A tourist and gastronomic space that attracts thousands of visitors every week. Its restaurants, cafes, and meeting areas have positioned the Malecón as a landmark in Colombia.">
             Un espacio turístico y gastronómico que atrae a miles de visitantes cada semana. Sus restaurantes, cafés y
             zonas de encuentro han posicionado el Malecón como un punto de referencia en Colombia.</p>
-        <p><strong data-lang-es="Características destacadas:" data-lang-en="Key Features:">Características
-                destacadas:</strong></p>
-        <p data-lang-es="• Proyecto de 34 pisos de uso mixto<br>• Diseñado bajo criterios de construcción sostenible<br>• Modelo habitacional, rentas cortas, distrito gastronómico y oficinas<br>• Se posicionó como número 1 en ventas en 2022 en todo el Departamento"
-            data-lang-en="• 34-story mixed-use project<br>• Designed under sustainable construction criteria<br>• Housing model, short-term rentals, gastronomic district, and offices<br>• Ranked number 1 in sales in the entire Department in 2022">
-            • Proyecto de 34 pisos de uso mixto<br>• Diseñado bajo criterios de construcción sostenible<br>• Modelo
-            habitacional, rentas cortas, distrito gastronómico y oficinas<br>• Se posicionó como número 1 en ventas en
-            2022 en todo el Departamento</p>
+        <p>
 
         <h2 data-lang-es="2. Malecón 72" data-lang-en="2. Malecón 72">2. Malecón 72</h2>
         <p data-lang-es="Uno de los proyectos residenciales más modernos frente al río. Combina diseño arquitectónico contemporáneo, amenities pensados para la vida urbana y una ubicación privilegiada en la Ciudad del Río."
             data-lang-en="One of the most modern residential projects facing the river. It combines contemporary architectural design, amenities designed for urban life, and a privileged location in Ciudad del Río.">
             Uno de los proyectos residenciales más modernos frente al río. Combina diseño arquitectónico contemporáneo,
             amenities pensados para la vida urbana y una ubicación privilegiada en la Ciudad del Río.</p>
-        <p><strong data-lang-es="Datos de impacto:" data-lang-en="Impact Data:">Datos de impacto:</strong></p>
-        <p data-lang-es="En Enero de 2025, las ventas del mes aumentaron para la vivienda No VIS un 267,4% frente al mismo mes del año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron 280 unidades, según Galería Inmobiliaria."
-            data-lang-en="In January 2025, monthly sales for non-subsidized housing increased by 267.4% compared to the same month last year, with 496 units sold, due to the launch of this project, which accounted for 280 units in sales, according to Galería Inmobiliaria.">
-            En Enero de 2025, las ventas del mes aumentaron para la vivienda No VIS un 267,4% frente al mismo mes del
-            año anterior, con 496 unidades comercializadas, debido al lanzamiento de este proyecto, cuyas ventas sumaron
-            280 unidades, según Galería Inmobiliaria.</p>
+        <p>
 
-        <img src="./assets/imagenes/Vistas/Malecon 72.png" alt="Render del proyecto Malecón 72" class="blog-image-full">
+            <img src="./assets/imagenes/Vistas/Malecon 72.png" alt="Render del proyecto Malecón 72"
+                class="blog-image-full">
 
         <h2 data-lang-es="3. Rivatta del Río" data-lang-en="3. Rivatta del Río">3. Rivatta del Río</h2>
         <p data-lang-es="Proyecto residencial que ofrece exclusividad y estilo de vida frente al río. Su diseño, sus zonas sociales y su cercanía al Gran Malecón lo convierten en una de las opciones más atractivas para vivir o invertir en Barranquilla."
@@ -231,12 +334,7 @@
             Proyecto residencial que ofrece exclusividad y estilo de vida frente al río. Su diseño, sus zonas sociales y
             su cercanía al Gran Malecón lo convierten en una de las opciones más atractivas para vivir o invertir en
             Barranquilla.</p>
-        <p><strong data-lang-es="Propuesta de valor:" data-lang-en="Value Proposition:">Propuesta de valor:</strong></p>
-        <p data-lang-es="• Proyecto de Constructora Bolívar<br>• Torres modernas con fachadas dinámicas<br>• Balcones en todos los apartamentos<br>• Tipologías desde 50 m² hasta 105 m²<br>• Piscina infinita con vista al río, gimnasio equipado, coworking y salas premium"
-            data-lang-en="• A project by Constructora Bolívar<br>• Modern towers with dynamic facades<br>• Balconies in all apartments<br>• Unit types from 50 m² to 105 m²<br>• Infinity pool with river view, equipped gym, coworking, and premium lounges">
-            • Proyecto de Constructora Bolívar<br>• Torres modernas con fachadas dinámicas<br>• Balcones en todos los
-            apartamentos<br>• Tipologías desde 50 m² hasta 105 m²<br>• Piscina infinita con vista al río, gimnasio
-            equipado, coworking y salas premium</p>
+        <p>
         <h2 data-lang-es="4. Río Living" data-lang-en="4. Río Living">4. Río Living</h2>
         <p data-lang-es="Una propuesta que conecta la vida urbana con la tranquilidad del Magdalena. Este proyecto se enfoca en brindar confort y una experiencia residencial rodeada de vistas únicas y espacios modernos."
             data-lang-en="A proposal that connects urban life with the tranquility of the Magdalena River. This project focuses on providing comfort and a residential experience surrounded by unique views and modern spaces.">
@@ -256,16 +354,26 @@
 
     <section class="cta-section">
         <div class="container">
-            <h2 data-lang-es="¿Quieres ser parte de esta transformación?"
-                data-lang-en="Want to be part of this transformation?">¿Quieres ser parte de esta transformación?</h2>
-            <p data-lang-es="Conoce más sobre los proyectos que hacen parte de Ciudad del Río y descubre tu próxima gran oportunidad."
-                data-lang-en="Learn more about the projects in Ciudad del Río and discover your next great opportunity.">
-                Conoce más sobre los proyectos que hacen parte de Ciudad del Río y descubre tu próxima gran oportunidad.
+            <h2 data-lang-es="¿Listo para invertir en el futuro de Barranquilla?"
+                data-lang-en="Ready to invest in Barranquilla's future?">
+                ¿Listo para invertir en el futuro de Barranquilla?
+            </h2>
+            <p data-lang-es="Contáctanos y descubre los proyectos que te esperan en el Gran Malecón."
+                data-lang-en="Contact us and discover the projects waiting for you on the Gran Malecón.">
+                Contáctanos y descubre los proyectos que te esperan en el Gran Malecón.
             </p>
-            <a href="index.html#contact" class="btn btn-primary" data-lang-es="Solicitar Información"
-                data-lang-en="Request Information">Solicitar Información</a>
-            <a href="index.html#proyectos" class="btn btn-secondary" style="margin-left: 1rem;"
-                data-lang-es="Ver Proyectos" data-lang-en="View Projects">Ver Proyectos</a>
+            <div class="cta-buttons">
+                <a href="index.html#contact" class="btn btn-primary" data-lang-es="Solicitar Información"
+                    data-lang-en="Request Information">
+                    <i class="fas fa-info-circle"></i>
+                    Solicitar Información
+                </a>
+                <a href="index.html#proyectos" class="btn btn-secondary" data-lang-es="Ver Proyectos"
+                    data-lang-en="View Projects">
+                    <i class="fas fa-building"></i>
+                    Ver Proyectos
+                </a>
+            </div>
         </div>
     </section>
 
