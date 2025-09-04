@@ -44,19 +44,27 @@
 /* --- (El resto de tu archivo CSS existente va aquí) --- */
 /* --- Variables y Estilos Globales --- */
 :root {
-    --primary-color: #bfa08f;
-    --secondary-color: #bfa08f;
-    --tertiary-color: #bfa08f;
-    --accent-color: #b38b59;
+    --primary-color: #142334;
+    /* Tu color base */
+    --secondary-color: #1f3447;
+    /* Versión más clara */
+    --tertiary-color: #0d1a28;
+    /* Versión más oscura */
+    --accent-color: #2a4a63;
+    /* Color de acento derivado */
+
+    /* Mantener colores neutros existentes */
     --light-bg: #f4f8f7;
     --white-color: #ffffff;
-    --dark-text: #1a2e29;
+    --dark-text: #142334;
+    /* Usar tu color para texto oscuro */
     --light-text: #e8f3f1;
     --grey-text: #5f7a74;
     --border-color: #cfe2de;
-    --shadow-light: rgba(1, 63, 51, 0.08);
-    --shadow-medium: rgba(1, 63, 51, 0.12);
-    --shadow-dark: rgba(1, 63, 51, 0.2);
+    --shadow-light: rgba(20, 35, 52, 0.08);
+    /* Sombras con tu color */
+    --shadow-medium: rgba(20, 35, 52, 0.12);
+    --shadow-dark: rgba(20, 35, 52, 0.2);
     --font-primary: 'NewYorkFont', serif;
     --font-body: 'Poppins', sans-serif;
     --font-decorative: var(--font-primary);
@@ -1364,27 +1372,6 @@ body {
     background-color: var(--primary-color);
     /* Usar el color primario como base sólida */
 
-    /* Capas de Gradiente (la primera está arriba) */
-    background-image:
-        /* Capa 1: Ondas más rápidas y sutiles (más transparentes) */
-        linear-gradient(175deg,
-            /* Ángulo inclinado */
-            rgba(191, 160, 143, 0) 0%,
-            /* Transparente al inicio (#BFA08F) */
-            rgba(205, 176, 160, 0.3) 30%,
-            /* Un tono similar ligeramente más claro y semi-transparente */
-            rgba(191, 160, 143, 0.4) 70%,
-            /* El color base semi-transparente (#BFA08F) */
-            rgba(191, 160, 143, 0) 100%
-            /* Transparente al final */
-        ),
-        /* Puedes añadir más capas de gradiente aquí también */
-        linear-gradient(
-            /* Ejemplo de otra capa */
-            45deg,
-            rgba(150, 120, 100, 0.1) 0%,
-            transparent 50%,
-            rgba(150, 120, 100, 0.1) 100%);
 
     /* Tamaños diferentes para que se muevan a distintas velocidades relativas */
     background-size:
@@ -2050,7 +2037,7 @@ body {
     z-index: 5;
     padding-top: 10rem;
     padding-bottom: 10rem;
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     /* Fondo para la sección oscura */
 }
 
@@ -2147,8 +2134,8 @@ body {
 }
 
 #main-footer a {
-    color: var(--tertiary-color);
     font-weight: 500;
+    color: var(--grey-text);
 }
 
 #main-footer a:hover {
@@ -2801,5 +2788,292 @@ body.mobile-nav-active {
         opacity: 1;
         transform: translateY(0);
         max-height: 300px;
+    }
+}
+/* === CSS PARA GRID DE PROYECTOS === */
+/* Añadir al final de tu archivo style.css */
+
+.projects-showcase-section {
+    padding: 8rem 0;
+    background-color: var(--light-bg);
+}
+
+.projects-showcase-section h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: clamp(2.2rem, 4.5vw, 3rem);
+}
+
+.projects-showcase-section p.lead {
+    margin-bottom: 5rem;
+}
+
+/* Contenedor del Grid */
+.projects-grid-container {
+    position: relative;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Tarjetas de Proyectos */
+.project-card {
+    background: var(--white-color);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px var(--shadow-light);
+    transition: all var(--transition-main);
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px var(--shadow-medium);
+}
+
+/* Contenedor de Imagen */
+.project-card-image-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.project-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-main);
+}
+
+.project-card:hover .project-card-image {
+    transform: scale(1.08);
+}
+
+.project-card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 50%,
+        rgba(20, 35, 52, 0.2) 100%
+    );
+    transition: opacity var(--transition-main);
+}
+
+.project-card:hover .project-card-overlay {
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        transparent 40%,
+        rgba(20, 35, 52, 0.4) 100%
+    );
+}
+
+/* Contenido de la Tarjeta */
+.project-card-content {
+    padding: 2rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.project-card-content h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.project-card-content p {
+    color: var(--grey-text);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+    max-width: none;
+}
+
+/* Botón de Proyecto */
+.project-btn {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--secondary-color), var(--tertiary-color));
+    color: var(--white-color);
+    padding: 12px 25px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all var(--transition-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    align-self: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: left 0.5s;
+}
+
+.project-btn:hover::before {
+    left: 100%;
+}
+
+.project-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(31, 52, 71, 0.3);
+    color: var(--white-color);
+}
+
+.project-btn.disabled {
+    background: var(--grey-text);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.project-btn.disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Tarjeta "Próximamente" */
+.project-card.coming-soon {
+    opacity: 0.85;
+}
+
+.project-card.coming-soon .project-card-image-container {
+    position: relative;
+}
+
+.project-card.coming-soon .project-card-image {
+    filter: grayscale(0.3);
+}
+
+.coming-soon-badge {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+    padding: 8px 40px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transform: rotate(35deg);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    z-index: 10;
+}
+
+/* === RESPONSIVE DESIGN === */
+
+/* Tablets grandes */
+@media (max-width: 1200px) {
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .projects-showcase-section {
+        padding: 6rem 0;
+    }
+    
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 0 1.5rem;
+    }
+    
+    .project-card-image-container {
+        height: 200px;
+    }
+    
+    .project-card-content {
+        padding: 1.5rem;
+    }
+    
+    .project-card-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .project-card-content p {
+        font-size: 0.9rem;
+    }
+    
+    .coming-soon-badge {
+        font-size: 0.7rem;
+        padding: 6px 30px;
+    }
+}
+
+/* Móviles */
+@media (max-width: 576px) {
+    .projects-showcase-section {
+        padding: 5rem 0;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .project-card-image-container {
+        height: 220px;
+    }
+    
+    .project-card-content h3 {
+        font-size: 1.3rem;
+    }
+    
+    .project-card-content p {
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .project-btn {
+        padding: 14px 30px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 400px) {
+    .coming-soon-badge {
+        right: -25px;
+        font-size: 0.65rem;
+        padding: 5px 25px;
     }
 }
