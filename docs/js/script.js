@@ -248,6 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         zoomedImageEl.alt = images[currentIndex].alt || 'Imagen ampliada';
                         zoomedContainer.classList.add('active');
                         body.style.overflow = 'hidden'; // Evitar scroll del fondo
+                        header.classList.add('hidden-by-zoom');
                     }
                 });
             } else if (zoomBtn) {
@@ -263,7 +264,8 @@ document.addEventListener('DOMContentLoaded', () => {
         function closeZoom() {
             if (zoomedContainer) {
                 zoomedContainer.classList.remove('active');
-                body.style.overflow = ''; // Restaurar scroll del body
+                body.style.overflow = '';
+                header.classList.remove('hidden-by-zoom');// Restaurar scroll del body
             }
         }
 
@@ -356,5 +358,235 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+    });
+    // Funcionalidad de slider y zoom (agregar al script.js de Ciudad del Río)
+    document.addEventListener('DOMContentLoaded', function () {
+        // Inicializar sliders
+        initializeSliders();
+        // Inicializar zoom
+        initializeZoom();
+    });
+
+    function initializeSliders() {
+        const sliders = document.querySelectorAll('.slider-container');
+
+        sliders.forEach(slider => {
+            const images = slider.querySelector('.slider-images');
+            const prevBtn = slider.querySelector('.prev-btn');
+            const nextBtn = slider.querySelector('.next-btn');
+            const indicators = slider.querySelector('.slider-indicators');
+
+            if (!images || images.children.length <= 1) return;
+
+            let currentIndex = 0;
+            const totalImages = images.children.length;
+
+            // Crear indicadores
+            for (let i = 0; i < totalImages; i++) {
+                const indicator = document.createElement('span');
+                if (i === 0) indicator.classList.add('active');
+                indicators.appendChild(indicator);
+            }
+
+            function updateSlider() {
+                images.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                indicators.querySelectorAll('span').forEach((span, index) => {
+                    span.classList.toggle('active', index === currentIndex);
+                });
+            }
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    currentIndex = currentIndex > 0 ? currentIndex - 1 : totalImages - 1;
+                    updateSlider();
+                });
+            }
+
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    currentIndex = currentIndex < totalImages - 1 ? currentIndex + 1 : 0;
+                    updateSlider();
+                });
+            }
+
+            indicators.addEventListener('click', (e) => {
+                if (e.target.tagName === 'SPAN') {
+                    currentIndex = Array.from(indicators.children).indexOf(e.target);
+                    updateSlider();
+                }
+            });
+        });
+    }
+
+    function initializeZoom() {
+        const zoomBtns = document.querySelectorAll('.zoom-btn');
+        const zoomedContainer = document.querySelector('.zoomed-container');
+        const zoomedImage = document.querySelector('.zoomed-image');
+        const closeZoom = document.querySelector('.close-zoom');
+
+        zoomBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const sliderContainer = btn.closest('.slider-container');
+                const activeImage = sliderContainer.querySelector('.slider-images img');
+
+                zoomedImage.src = activeImage.src;
+                zoomedImage.alt = activeImage.alt;
+                zoomedContainer.classList.add('active');
+            });
+        });
+
+        if (closeZoom) {
+            closeZoom.addEventListener('click', () => {
+                zoomedContainer.classList.remove('active');
+            });
+        }
+
+        if (zoomedContainer) {
+            zoomedContainer.addEventListener('click', (e) => {
+                if (e.target === zoomedContainer) {
+                    zoomedContainer.classList.remove('active');
+                }
+            });
+        }
+    }
+    // === VERSIÓN CORREGIDA Y SIMPLIFICADA DEL CARRUSEL ==
+    function initializeDevelopmentCarousel() {
+        console.log('Inicializando carrusel...'); // Para debug
+
+        const track = document.querySelector('.carousel-track');
+        const slides = document.querySelectorAll('.carousel-slide');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+        const dots = document.querySelectorAll('.dot');
+
+        // Debug: verificar que se encuentren los elementos
+        console.log('Track:', track);
+        console.log('Slides:', slides.length);
+        console.log('Prev button:', prevBtn);
+        console.log('Next button:', nextBtn);
+        console.log('Dots:', dots.length);
+
+        if (!track || !slides.length || !prevBtn || !nextBtn) {
+            console.error('Elementos del carrusel no encontrados');
+            return;
+        }
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        // Función para actualizar el carrusel
+        function updateCarousel() {
+            console.log('Actualizando carrusel, slide actual:', currentIndex);
+
+            const translateX = -currentIndex * 100;
+            track.style.transform = `translateX(${translateX}%)`;
+
+            // Actualizar dots
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+
+            // Actualizar slides
+            slides.forEach((slide, index) => {
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+        }
+
+        // Función para ir al siguiente slide
+        function nextSlide() {
+            console.log('Siguiente slide');
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        // Función para ir al slide anterior
+        function prevSlide() {
+            console.log('Slide anterior');
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        // Función para ir a un slide específico
+        function goToSlide(index) {
+            console.log('Ir al slide:', index);
+            currentIndex = index;
+            updateCarousel();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Click en botón anterior');
+            prevSlide();
+        });
+
+        nextBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('Click en botón siguiente');
+            nextSlide();
+        });
+
+        // Event listeners para los dots
+        dots.forEach(function (dot, index) {
+            dot.addEventListener('click', function (e) {
+                e.preventDefault();
+                console.log('Click en dot:', index);
+                goToSlide(index);
+            });
+        });
+
+        // Auto-play cada 5 segundos (opcional)
+        setInterval(function () {
+            nextSlide();
+        }, 5000);
+
+        // Inicializar
+        updateCarousel();
+        console.log('Carrusel inicializado correctamente');
+    }
+
+    // === INICIALIZACIÓN ===
+    // Opción 1: Si ya tienes DOMContentLoaded, agrega solo esta línea:
+    // initializeDevelopmentCarousel();
+
+    // Opción 2: Si no tienes DOMContentLoaded, usa este bloque completo:
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('DOM cargado, inicializando carrusel...');
+
+        // Esperar un poco para asegurar que AOS y otros scripts hayan terminado
+        setTimeout(function () {
+            initializeDevelopmentCarousel();
+        }, 500);
+    });
+
+    // Opción 3: Como respaldo, también inicializar cuando la ventana cargue completamente
+    window.addEventListener('load', function () {
+        console.log('Ventana cargada completamente, verificando carrusel...');
+
+        // Solo inicializar si no se ha hecho ya
+        if (!document.querySelector('.carousel-track[data-initialized]')) {
+            initializeDevelopmentCarousel();
+
+            // Marcar como inicializado
+            const track = document.querySelector('.carousel-track');
+            if (track) {
+                track.setAttribute('data-initialized', 'true');
+            }
+        }
+    });
+
+    // Agregar al DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', function () {
+        initializeDevelopmentCarousel();
+        // ... resto de funciones
     });
 });
