@@ -3790,3 +3790,155 @@ body.mobile-nav-active {
 .text-center {
     text-align: center;
 }
+
+/* === BANNER SUPERPUESTO EN HERO === */
+.overlay-banner {
+    position: absolute;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 4rem);
+    max-width: 1200px;
+    z-index: 15;
+}
+
+.overlay-banner-content {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+
+
+.overlay-text {
+    flex: 1;
+    text-align: left;
+}
+
+.overlay-text h3 {
+    color: var(--white-color);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    font-family: 'NewYorkFont', serif;
+    /* Dream Glory */
+}
+
+.overlay-text p {
+    display: none;
+}
+
+.overlay-action {
+    flex: 0 0 auto;
+}
+
+.overlay-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.25);
+    color: var(--white-color);
+    padding: 10px 22px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    text-shadow: none;
+    font-family: var(--font-body);
+}
+
+.overlay-btn:hover {
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    color: var(--white-color);
+}
+
+/* Ajustar el contenido principal del hero para dar espacio */
+#pre-hero-banner .banner-content {
+    margin-top: 8rem;
+    /* Espacio para el banner superpuesto */
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .overlay-banner {
+        top: 1rem;
+        width: calc(100% - 2rem);
+    }
+
+    .overlay-banner-content {
+        flex-direction: row;
+        /* Mantener horizontal en tablet */
+        text-align: left;
+        gap: 1.5rem;
+        padding: 1.2rem 1.5rem;
+    }
+
+    .overlay-text {
+        text-align: left;
+    }
+
+    .overlay-text h3 {
+        font-size: clamp(1rem, 2.2vw, 1.4rem);
+        line-height: 1.15;
+    }
+
+
+    #pre-hero-banner .banner-content {
+        margin-top: 9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .overlay-banner {
+        top: 0.8rem;
+        width: calc(100% - 1.5rem);
+    }
+
+    .overlay-banner-content {
+        flex-direction: column;
+        /* VERTICAL en móvil pequeño */
+        text-align: center;
+        gap: 1rem;
+        padding: 1.2rem;
+    }
+
+    .overlay-text {
+        text-align: center;
+        order: 1;
+        /* Texto primero */
+    }
+
+
+    .overlay-action {
+        order: 3;
+        /* Botón tercero */
+    }
+
+    .overlay-text h3 {
+        font-size: clamp(0.95rem, 4vw, 1.2rem);
+        line-height: 1.1;
+        margin-bottom: 0.8rem;
+    }
+
+    .overlay-btn {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    #pre-hero-banner .banner-content {
+        margin-top: 10rem;
+        /* Más espacio en móvil */
+    }
+}
