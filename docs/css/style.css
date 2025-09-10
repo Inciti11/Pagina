@@ -842,7 +842,6 @@ section {
     position: absolute;
     top: -1px;
     left: 0;
-    width: 100%;
     line-height: 0;
     z-index: 10;
 }
@@ -3576,4 +3575,218 @@ body.mobile-nav-active {
         padding: 0 0.3rem;
         /* MÍNIMO: Padding para evitar cortes */
     }
+}
+
+.noticias-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.noticia-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color, #e0e0e0);
+}
+
+.noticia-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.noticia-media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.noticia-media img {
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.noticia-item:hover .noticia-media img {
+    transform: scale(1.05);
+}
+
+.noticia-media .video-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.noticia-media .video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.noticia-content {
+    padding: 2rem;
+}
+
+.noticia-category {
+    margin-bottom: 1rem;
+}
+
+.noticia-category span {
+    background: var(--primary-color, #007bff);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.video-noticia .noticia-category span {
+    background: var(--secondary-color, #28a745);
+}
+
+.article-noticia .noticia-category span {
+    background: var(--secondary-color, #28a745);
+}
+
+.noticia-content h3 {
+    color: var(--text-dark, #2c3e50);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.noticia-excerpt {
+    color: var(--text-light, #666);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.noticia-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color, #e0e0e0);
+    font-size: 0.85rem;
+    color: var(--text-light, #666);
+}
+
+.noticia-date {
+    font-weight: 600;
+}
+
+.noticia-source {
+    background: var(--light-bg, #f8f9fa);
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.btn-read-more {
+    display: inline-flex;
+    align-items: center;
+    background: var(--primary-color, #007bff);
+    color: white;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary-color, #007bff);
+}
+
+.btn-read-more:hover {
+    background: transparent;
+    color: var(--primary-color, #007bff);
+    transform: translateY(-2px);
+}
+
+.btn-read-more::after {
+    content: '→';
+    margin-left: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-read-more:hover::after {
+    transform: translateX(3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .noticias-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .noticia-content {
+        padding: 1.5rem;
+    }
+
+    .noticia-media {
+        height: 200px;
+    }
+
+    .noticia-media .video-container {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .noticias-grid {
+        gap: 1.5rem;
+    }
+
+    .noticia-content {
+        padding: 1.2rem;
+    }
+
+    .noticia-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .noticia-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* Integración con el tema existente del sitio */
+.section-bg {
+    background-color: var(--light-bg, #f8f9fa);
+    padding: 5rem 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+
+
+.lead {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: var(--text-light, #666);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.text-center {
+    text-align: center;
 }

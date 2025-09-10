@@ -36,6 +36,10 @@
             overflow: hidden;
         }
 
+        #main-nav ul li {
+            margin-left: 2rem;
+        }
+
         .blog-header h1 {
             font-size: clamp(2rem, 5vw, 3.5rem);
             margin-bottom: 1rem;
@@ -258,7 +262,8 @@
     <header id="main-header">
         <div class="container">
             <a href="index.html" class="logo">
-                <img src="./assets/imagenes/Logo/ciudad del rio propi_Mesa de trabajo 1-03.png" alt="Ciudad del Río Logo">
+                <img src="./assets/imagenes/Logo/ciudad del rio propi_Mesa de trabajo 1-03.png"
+                    alt="Ciudad del Río Logo">
             </a>
             <nav id="main-nav">
                 <ul>
@@ -268,7 +273,24 @@
                     <li><a href="index.html#our-team" data-lang-es="Nosotros" data-lang-en="About Us">Nosotros</a></li>
                     <li><a href="index.html#proyectos" data-lang-es="Proyectos" data-lang-en="Projects">Proyectos</a>
                     </li>
-                    <li><a href="index.html#blog" data-lang-es="Blog" data-lang-en="Blog">Blog</a></li>
+                    <li class="dropdown">
+                        <a href="#blog" class="dropdown-trigger">
+                            <span data-lang-es="Blog" data-lang-en="Blog">Blog</span>
+                            <i class="fas fa-chevron-down dropdown-arrow"></i>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="blog-proyectos-malecon.html"
+                                data-lang-es="Los 4 proyectos que transforman el Gran Malecón"
+                                data-lang-en="The 4 projects transforming the Gran Malecón">
+                                Los 4 proyectos que transforman el Gran Malecón
+                            </a>
+                            <a href="blog-invertir-barranquilla.html"
+                                data-lang-es="Por qué invertir en Barranquilla 2025"
+                                data-lang-en="Why invest in Barranquilla 2025">
+                                Por qué invertir en Barranquilla 2025
+                            </a>
+                        </div>
+                    </li>
                     <li><a href="index.html#contact" data-lang-es="Contacto" data-lang-en="Contact">Contacto</a></li>
                 </ul>
             </nav>
@@ -380,7 +402,8 @@
     <footer id="main-footer">
         <div class="container">
             <a href="index.html" class="footer-logo">
-                <img src="./assets/imagenes/Logo/ciudad del rio propi (negativo)_Mesa de trabajo 1-03_Mesa de trabajo 1-03.png" alt="Ciudad del Río Logo Footer">
+                <img src="./assets/imagenes/Logo/ciudad del rio propi (negativo)_Mesa de trabajo 1-03_Mesa de trabajo 1-03.png"
+                    alt="Ciudad del Río Logo Footer">
             </a>
             <div class="container-footer">
                 <p>© <span id="current-year"></span> <span data-lang-es="Ciudad del Río. Desarrollado por"
